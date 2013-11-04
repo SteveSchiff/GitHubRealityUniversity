@@ -421,7 +421,7 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements GuiIn
 								
 								ViewSurvey viewSurvey = new ViewSurvey(listOfSurveys.get(i));
 								imagePages[i] = viewSurvey.paperFrameSetUp();
-								viewSurvey.dispose();
+//								viewSurvey.dispose();
 								
 								System.out.println(listOfSurveys.get(i));
 							} // end for loop
