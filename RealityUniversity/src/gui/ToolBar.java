@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JToolBar;
 import javax.swing.text.DefaultEditorKit;
 
-import ctrl.Controller;
-
 public class ToolBar extends JToolBar implements GuiInterface {
 
 	
