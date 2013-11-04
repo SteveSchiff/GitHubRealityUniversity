@@ -560,7 +560,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	    System.out.println("---Entering " + methodName);
 		// end of debugging statement set - 4 lines in all
 		
-		ViewSurvey viewSurvey = ViewSurvey.getViewSurveyInstance(survey);
+		ViewSurvey viewSurvey = new ViewSurvey(survey);
 		viewSurvey.paperPrintOneSurvey(survey);
 		
 		// the next statement is for debugging purposes only

@@ -11,12 +11,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.print.Book;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import lib.print.PrintMultiplePages;
 import obj.Group;
 import obj.Survey;
 import ctrl.Controller;
@@ -291,8 +292,9 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements GuiIn
 						    
 						    // using the two statements below because they are the same as the
 						    // routines used in the other print option
-							ViewSurvey.getViewSurveyInstance(survey).paperPrintOneSurvey(survey);
-							ViewSurvey.getViewSurveyInstance(survey).dispose();
+						    ViewSurvey viewSurvey = new ViewSurvey(survey);
+							viewSurvey.paperPrintOneSurvey(survey);
+							viewSurvey.dispose();
 							
 							// the next statement is for debugging purposes only
 						    System.out.println("\n---Leaving " + methodName);
@@ -414,16 +416,18 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements GuiIn
 					    
 						if (listOfSurveys.size() > 0) {
 							
-							ViewSurvey.paperPrintSurveyList(listOfSurveys);
+							JFrame[] imagePages = new JFrame[listOfSurveys.size()];
+							for (int i = 0; i < listOfSurveys.size(); i++) {//								
+								
+								ViewSurvey viewSurvey = new ViewSurvey(listOfSurveys.get(i));
+								imagePages[i] = viewSurvey.paperFrameSetUp();
+								viewSurvey.dispose();
+								
+								System.out.println(listOfSurveys.get(i));
+							} // end for loop
 							
-//							ViewSurvey[] viewSurveys = new ViewSurvey[listOfSurveys.size()];
-//							
-//							for (int i = 0; i < listOfSurveys.size(); i++) {
-//								
-//								viewSurveys[i] = ViewSurvey.getViewSurveyInstance(listOfSurveys.get(i));
-//								
-//								System.out.println(listOfSurveys.get(i));
-//							} // end for loop
+							PrintMultiplePages.printComponent(imagePages);
+							
 						} // end if
 //						
 						// the next statement is for debugging purposes only

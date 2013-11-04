@@ -22,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import lib.print.PrintAllUtilities;
 import lib.print.PrintUtilities;
 import obj.Group;
 import obj.Job;
@@ -124,9 +123,9 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 	 ***********************/
 	
 	/************************
-	 * Constructor - 1 of 2
+	 * Constructor
 	 ***********************/
-	public ViewSurvey(Survey survey) {
+	public ViewSurvey(final Survey survey) {
 		// the next four statements are for debugging purposes only
 		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
 	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
@@ -637,7 +636,8 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 				// end of debugging statement set - 4 lines in all
 			    
 				if (ae.getSource() == printButton)
-				paperFrameSetUp();
+					paperPrintOneSurvey(survey);
+					dispose();
 			}
 		});
 
@@ -672,35 +672,15 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		// the next statement is for debugging purposes only
 	    System.out.println("\n---Leaving " + methodName);
 		// end of debugging statement set
-	} // -- end first Constructor
+	} // -- end Constructor
 	// end ViewSurvey constructor
-	
-	
-	/************************
-	 * Constructor - 2 of 2
-	 ***********************/	
-	public ViewSurvey(){		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("SECOND VIEWSURVEY CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-		new ViewSurvey(null);    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-	} // end second constructor
 	
 	/**
 	 * Gets the single instance of Controller.
 	 * 
 	 * @return single instance of Controller
 	 */
-	public static ViewSurvey getViewSurveyInstance(Survey survey) {
+	public ViewSurvey getViewSurveyInstance(Survey survey) {
 		// the next four statements are for debugging purposes only
 		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
 	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
@@ -710,9 +690,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 
 		// If we do not yet have an instance of this class
 		// create a new one. Otherwise, return the instance.
-		if (viewSurveyInstance == null) {
 			viewSurveyInstance = new ViewSurvey(survey);
-		}
 		
 		// the next statement is for debugging purposes only
 	    System.out.println("\n---Leaving " + methodName);
@@ -734,8 +712,8 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		PrintUtilities.printComponent(localPaperFrame);
 
 		// get rid of our new frame
-		localPaperFrame.dispose();
-		this.dispose();
+//		localPaperFrame.dispose();
+//		this.dispose();
 		
 		// the next statement is for debugging purposes only
 	    System.out.println("\n---Leaving " + methodName);
@@ -836,16 +814,13 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 
 
 	
-	public static void paperPrintSurveyList(List<Survey> listOfSurveys) {
+	public void paperPrintSurveyList(List<Survey> listOfSurveys) {
 		// TODO Auto-generated method stub
 		JFrame[] localPrintFrames = new JFrame[listOfSurveys.size()];
 		ViewSurvey[] viewSurveyInstances = null;
 		
 		for (int i = 0; i < listOfSurveys.size(); i++) {
 			
-			System.out.println(listOfSurveys.get(i));
-			viewSurveyInstances[i] = ViewSurvey.getViewSurveyInstance(listOfSurveys.get(i));
-//			localPrintFrames[i] = viewSurveyInstances[i].paperFrameSetUp();
 		} // end for loop
 		
 //		PrintAllUtilities.printComponent(localPrintFrames);
