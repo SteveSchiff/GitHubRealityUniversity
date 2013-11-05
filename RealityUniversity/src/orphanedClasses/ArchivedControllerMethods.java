@@ -1,4 +1,4 @@
-package ctrl;
+package orphanedClasses;
 
 import gui.ToolBar;
 import gui.GuiInterface;

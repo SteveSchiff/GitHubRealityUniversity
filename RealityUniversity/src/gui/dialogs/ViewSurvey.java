@@ -712,8 +712,8 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		PrintUtilities.printComponent(localPaperFrame);
 
 		// get rid of our new frame
-//		localPaperFrame.dispose();
-//		this.dispose();
+		localPaperFrame.dispose();
+		this.dispose();
 		
 		// the next statement is for debugging purposes only
 	    System.out.println("\n---Leaving " + methodName);

@@ -41,10 +41,30 @@ public class PrintUtilities implements Printable {
 		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
 	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
 	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+	    System.out.println("PRINTUTILITIES CONSTRUCTOR");
 	    System.out.println(methodName);
 		// end of debugging statement set - 4 lines in all
 	    
 		componentToBePrinted = localComponentToBePrinted;
+		
+		// the next statement is for debugging purposes only
+	    System.out.println("\n---Leaving " + methodName);
+		// end of debugging statement set
+	}
+
+	public static void printComponent(Component c) {		
+		// the next four statements are for debugging purposes only
+		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
+	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+	    System.out.println("---Entering " + methodName);
+		// end of debugging statement set - 4 lines in all
+	    
+		(new PrintUtilities(c)).print();
+
+		// the next statement is for debugging purposes only
+	    System.out.println("\n---Leaving " + methodName);
+		// end of debugging statement set
 	}
 
 	public void print() {		
@@ -106,21 +126,6 @@ public class PrintUtilities implements Printable {
 			return (PAGE_EXISTS);
 		}
 	} // end print() method of 3 parameters
-
-	public static void printComponent(Component c) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-		(new PrintUtilities(c)).print();
-
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName + " and PAGE_EXISTS.");
-		// end of debugging statement set
-	}
 
 	/**
 	 * The speed and quality of printing suffers dramatically if any of the

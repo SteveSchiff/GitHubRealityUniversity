@@ -287,11 +287,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements GuiIn
 						    System.out.println("---Entering " + methodName);
 							// end of debugging statement set - 4 lines in all
 						    
-//							ViewSurvey viewSurvey = new ViewSurvey(survey);
-//							viewSurvey.paperPrintSurvey(survey);
-						    
-						    // using the two statements below because they are the same as the
-						    // routines used in the other print option
 						    ViewSurvey viewSurvey = new ViewSurvey(survey);
 							viewSurvey.paperPrintOneSurvey(survey);
 							viewSurvey.dispose();
@@ -421,12 +416,16 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements GuiIn
 								
 								ViewSurvey viewSurvey = new ViewSurvey(listOfSurveys.get(i));
 								imagePages[i] = viewSurvey.paperFrameSetUp();
-//								viewSurvey.dispose();
+								viewSurvey.dispose();
 								
 								System.out.println(listOfSurveys.get(i));
 							} // end for loop
 							
 							PrintMultiplePages.printComponent(imagePages);
+							
+							for (int i = 0; i < imagePages.length; i++) {
+								imagePages[i].dispose();
+							}
 							
 						} // end if
 //						
