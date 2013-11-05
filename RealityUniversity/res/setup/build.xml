@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="FatJar RealityU Surveyor.jar (experimental)" default="main" basedir=".">
+    <!-- this file was created by Fat-Jar Eclipse Plug-in -->
+    <!-- the ANT-Export is in a very early stage, so this -->
+    <!-- is only experimental, ANT 1.6 or above is        -->
+    <!-- required, feedback is always welcome:            -->
+    <!--       http://sourceforge.net/projects/fjep       -->
+    <!-- uncomment the following lines if using ANT outside Eclipse -->
+    <!--
+        <property name="fjepPath" value="reference:file:plugins/net.sf.fjep.fatjar_0.0.31.jarfatjar.jar"/>
+        <taskdef name="fatjar.build" classname="net.sf.fjep.anttask.FJBuildTask" classpath="${fjepPath}"/>
+        <typedef name="fatjar.manifest" classname="net.sf.fjep.anttask.FJManifestType" classpath="${fjepPath}"/>
+        <typedef name="fatjar.exclude" classname="net.sf.fjep.anttask.FJExcludeType" classpath="${fjepPath}"/>
+        <typedef name="fatjar.jarsource" classname="net.sf.fjep.anttask.FJJarSourceType" classpath="${fjepPath}"/>
+        <typedef name="fatjar.filesource" classname="net.sf.fjep.anttask.FJFileSourceType" classpath="${fjepPath}"/>
+    -->
+    <!-- uncomment the above lines to use ANT outside of Eclipse -->
+    <target name="main">
+        <fatjar.build output="RealityU Surveyor.jar">
+            <fatjar.manifest mainclass="gui.GuiMain"/>
+            <fatjar.filesource path="C:\Development\Projects\RealityU Surveyor\bin" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\jna-3.5.1.jar" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\nbstubs.jar" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\sqlite-jdbc-3.7.2.jar" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\swing-layout-1.0.3.jar" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\swingx-all-1.6.3.jar" relpath=""/>
+            <fatjar.jarsource file="C:\Development\Projects\RealityU Surveyor\res\jar\ValidationAPI.jar" relpath=""/>
+        </fatjar.build>
+    </target>
+</project>

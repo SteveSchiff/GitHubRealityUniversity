@@ -93,12 +93,8 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 	// This was done to insert validation routines into the textboxes
 	private SwingValidationGroup surveyValidationPanelGroup = surveyValidationPanel.getValidationGroup();
 
-	/**
-	 * 
-	 * 
-	 * Constructor.
-	 * 
-	 * 
+	/** 
+	 * Constructor. 
 	 */
 	public NewSurveyPanel() {
 		// the next five statements are for debugging purposes only

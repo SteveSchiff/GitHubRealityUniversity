@@ -5,6 +5,7 @@ import gui.sidebars.GroupSurveysLowerRightSidePanel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BoxLayout;
@@ -121,26 +122,37 @@ public class GuiMain implements GuiInterface {
 		mainWindowPanel.setBackground(FRAME_BACKGROUND);
 		mainWindowPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainWindowPanel.setLayout(new BorderLayout(0, 0));
+//		mainWindowPanel.setLayout(new GridLayout(1, 2, 2, 2)); // Experimental
 
 		try {
 			JPanel sidebarPanel = new JPanel();
 			
 			// The two subpanels that go into sidebarPanel
 			JPanel groupInformationPanel = new GroupInfoUpperRightSidePanel(); // Instantiate instance
+			
 			 // This panel shows the list of surveys
 			JPanel groupSurveysListPanel = new GroupSurveysLowerRightSidePanel(); // Instantiate instance
-			groupSurveysListPanel.setLayout(new GridLayout(1, 0, 5, 5));
+			groupSurveysListPanel.setLayout(new GridLayout(1, 0, 1, 1));
 
-			sidebarPanel.setMaximumSize(new Dimension(SIDEBAR_WIDTH, 700));
+			sidebarPanel.setPreferredSize(new Dimension(SIDEBAR_WIDTH, 600));
 			sidebarPanel.setLayout(new BoxLayout(sidebarPanel, BoxLayout.Y_AXIS));
 			sidebarPanel.add(groupInformationPanel);
 			sidebarPanel.add(groupSurveysListPanel);
-
 			sidebarPanel.setBackground(FRAME_BACKGROUND);
+			
+			// allows left-side resizing
+//			mainWindowPanel.add(new NewSurveyPanel());
+//			mainWindowPanel.add(sidebarPanel, BorderLayout.EAST);
+			
+			// allows right-side resizing
 			mainWindowPanel.add(new NewSurveyPanel());
 			mainWindowPanel.add(sidebarPanel, BorderLayout.EAST);
+//			mainWindowPanel.add(sidebarPanel);
+//			mainWindowPanel.validate();
+//			mainWindowPanel.repaint();
 
 			bigDaddyFrame.getContentPane().add(mainWindowPanel);
+			bigDaddyFrame.pack();
 			mainWindowPanel.validate();
 			mainWindowPanel.repaint();
 

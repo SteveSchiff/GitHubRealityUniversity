@@ -618,7 +618,9 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 
 		// Buttons 
 		printButton = new JButton("Print");
+		printButton.setFont(FNT_BIG_AND_BOLD);
 		closeButton = new JButton("Close");
+		closeButton.setFont(FNT_BIG_AND_BOLD);
 
 		buttonPanel = new JPanel();
 		buttonPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);

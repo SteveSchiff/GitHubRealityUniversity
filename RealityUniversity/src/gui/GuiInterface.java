@@ -47,24 +47,25 @@ public interface GuiInterface {
 
 	// Miscellaneous
 	static final NumberFormat FMT_CURRENCY = NumberFormat.getCurrencyInstance();
-	static final String FRAME_TITLE = "RealityU Surveyor";
+	static final String FRAME_TITLE = "Reality University Surveyor";
 	
 	// Sizes
 	static final int EDIT_JOB_HEIGHT = 725;
 	static final int EDIT_JOB_WIDTH = 650;
-	static final int EDIT_SURVEY_HEIGHT = 800;
+	static final int EDIT_SURVEY_HEIGHT = 600;
 	static final int EDIT_SURVEY_WIDTH = 650;
-	static final int FRAME_HEIGHT = 850;
-	static final int FRAME_WIDTH = 900;
+	static final int FRAME_HEIGHT = 600;
+	static final int FRAME_WIDTH = 850;
 	static final int SETTINGS_HEIGHT = 600;
 	static final int SETTINGS_WIDTH = 800;
-	static final int SIDEBAR_HEIGHT = 775;
+//	static final int SIDEBAR_HEIGHT = 775; // original
+	static final int SIDEBAR_HEIGHT = 750;
 	static final int SIDEBAR_WIDTH = 275;
-	//static final int SIDEBAR_WIDTH = 300;
-	static final int SURVEY_HEIGHT = 680;
-	static final int SURVEY_WIDTH = 750;
+//	static final int SIDEBAR_WIDTH = 300; // original
+	static final int SURVEY_HEIGHT = 680; // no  references
+	static final int SURVEY_WIDTH = 750; // no references ( in plain English - it is not used anywhere in project)
 	static final int WELCOME_HEIGHT = 450;
-	static final int WELCOME_WIDTH = 750;
+	static final int WELCOME_WIDTH = 650;
 
 	// Images & Icons
 	static final Image LG_CAUTION = Toolkit.getDefaultToolkit().getImage(GuiInterface.class.getResource("/img/LG_caution.png"));

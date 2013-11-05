@@ -5,6 +5,7 @@ import gui.custom.RoundPanel;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 
 
 
+
 import obj.Group;
 import ctrl.Controller;
 
@@ -40,7 +42,7 @@ import ctrl.Controller;
 public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInterface {
 
 	/**
-	 * Conructor - it's the whole class pretty much.
+	 * Constructor - it's the whole class pretty much.
 	 */
 	public GroupInfoUpperRightSidePanel() {	
 		// the next four statements are for debugging purposes only
@@ -53,10 +55,11 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 
 		/*********************************
 		 * Declarations
-		 *********************************/
-		JScrollPane scrollPane = new JScrollPane();		
+		 *********************************/	
 		// This is the panel that contains the actual information that we actually see
 		JPanel groupInfoPanel = new JPanel();
+		JScrollPane scrollPane = new JScrollPane();	
+		
 		Group group;
 		SimpleDateFormat sdfDateFormat = new SimpleDateFormat("M/d/yyyy - hh:mm:ss a");
 		
@@ -73,6 +76,7 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		scrollPane.setBorder(new EmptyBorder(5, 7, 5, 10));
+		scrollPane.setPreferredSize(new Dimension(200, 200)); // experimental
 		scrollPane.setViewportView(groupInfoPanel);
 		groupInfoPanel.setBackground(TOPGROUPPANEL_BACKGROUND_YELLOW); // yellow - set by Steve for identification
 

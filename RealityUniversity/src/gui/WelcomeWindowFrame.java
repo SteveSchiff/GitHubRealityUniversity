@@ -71,7 +71,7 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 		contentPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 		contentPanel.setLayout(new GridLayout(2, 0));
 		headerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		buttonsPanel.setBackground(Color.white);
+		buttonsPanel.setBackground(Color.lightGray);
 
 		headerContainer.setLayout(headerGridLayout);
 		buttonsContainer.setLayout(buttonGridLayout);

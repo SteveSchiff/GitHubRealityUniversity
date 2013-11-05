@@ -29,20 +29,20 @@ public class ProcessChildren {
 	private Survey spouseSurvey;
 
 	/** Counters to track number of surveys with/without kids for testing/verification **/
-	double countKids;
-	double countNoKids;
+	private int countKids;
+	private int countNoKids;
 
 	/** Married with children requirement. */
 	private double marriedWithChildrenLimitRatio = .5; //target is 50% or .5
 
 	/** Used to calculate %'s of women with/without kids **/
-	private double actualChildren;
-	private double actualNoChildren;
+	private double actualChildrenRatio;
+	private double actualNoChildrenRatio;
 
 	/** Random generators for selecting random surveys and number of children to add to survey **/
-	Random randomGenerator = new Random();
-	int randomInteger; 
-	int randomKids;
+	private Random randomGenerator = new Random();
+	private int randomInteger; 
+	private int randomKids;
 
 	public List<Survey> doProcess() {
 		// the next four statements are for debugging purposes only
@@ -97,20 +97,20 @@ public class ProcessChildren {
 		System.out.println("with NO kids " +countNoKids);
 
 		//Get percentages of married women with and without children
-		actualChildren = (double)marriedFemalesWithChildrenList.size()/marriedFemalesList.size() ;
-		actualNoChildren = (double)marriedFemalesWithNoChildrenList.size()/marriedFemalesList.size() ;
+		actualChildrenRatio = (double)marriedFemalesWithChildrenList.size()/marriedFemalesList.size() ;
+		actualNoChildrenRatio = (double)marriedFemalesWithNoChildrenList.size()/marriedFemalesList.size() ;
 
-		System.out.println("% with children " +actualChildren);
-		System.out.println("% withOUt children " +actualNoChildren);
+		System.out.println("% with children " +actualChildrenRatio);
+		System.out.println("% withOUt children " +actualNoChildrenRatio);
 
 		//If more than 50% of women have children we need to adjust down
-		if (actualChildren > marriedWithChildrenLimitRatio){
+		if (actualChildrenRatio > marriedWithChildrenLimitRatio){
 			System.out.println("too many kids");
 			adjustChildrenDown();
 		}
 		//If more than 50% of women have NO children we need to adjust up
 		else{
-			if (actualNoChildren > marriedWithChildrenLimitRatio){
+			if (actualNoChildrenRatio > marriedWithChildrenLimitRatio){
 				System.out.println("need MORE kids");
 				adjustChildrenUp();
 			}
@@ -131,8 +131,8 @@ public class ProcessChildren {
 		// end of debugging statement set - 4 lines in all
 
 
-		/*While our percentage of married WITH kids is to high we randomly select
-		 * a married women with kids and take her children away */
+		/* While our percentage of married WITH kids is too high we randomly select
+		 * married women with kids and take her children away */
 
 
 		while ((double)marriedFemalesWithChildrenList.size()/marriedFemalesList.size() > marriedWithChildrenLimitRatio ){
