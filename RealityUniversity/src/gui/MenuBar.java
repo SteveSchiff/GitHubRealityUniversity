@@ -24,38 +24,35 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 	 *********************************/
 
 	private static MenuBar menuBarInstance = null;
-	
+
 	// Menus and their MenuItems
 	private JMenu fileMenu = new JMenu("File");
 	private JMenuItem newGroupMenuItem = new JMenuItem("New Group");
 	private JMenuItem openGroupMenuItem = new JMenuItem("Open Group");
 	private JMenuItem deleteGroupMenuItem = new JMenuItem("Delete Group");
 	private JMenuItem exitMenuItem = new JMenuItem("Exit");
-//	private JMenuItem mnuitmSelectDB = new JMenuItem("Select Database");
+	// private JMenuItem mnuitmSelectDB = new JMenuItem("Select Database");
 
 	private JMenu editMenu = new JMenu("Edit");
-	private JMenuItem cutMenuItem = new JMenuItem(new DefaultEditorKit.CutAction());
-	private JMenuItem copyMenuItem = new JMenuItem(new DefaultEditorKit.CopyAction());
-	private JMenuItem pasteMenuItem = new JMenuItem(new DefaultEditorKit.PasteAction());
+	private JMenuItem cutMenuItem = new JMenuItem(
+			new DefaultEditorKit.CutAction());
+	private JMenuItem copyMenuItem = new JMenuItem(
+			new DefaultEditorKit.CopyAction());
+	private JMenuItem pasteMenuItem = new JMenuItem(
+			new DefaultEditorKit.PasteAction());
 	private JMenuItem editJobsMenuItem = new JMenuItem("Settings");
 
 	private JMenu viewMenu = new JMenu("View");
 
 	private JMenu helpMenu = new JMenu("Help");
 	private JMenuItem helpMenuItem = new JMenuItem("Help");
-//	private JMenuItem mnuitmAbout = new JMenuItem("About");
-	
+
+	// private JMenuItem mnuitmAbout = new JMenuItem("About");
+
 	/**
-	 * Constructor	
+	 * Constructor
 	 */
-	public MenuBar() {		
-		// the next five statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("BEGIN MENU BAR CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 5 lines in all
+	public MenuBar() {
 
 		/*******************************
 		 * Configurations
@@ -136,12 +133,12 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 		// File
 		exitMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 			    
 //				Controller.getControllerInstance().closeApplication();
 			    
@@ -156,50 +153,50 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 
 				if (response == JOptionPane.YES_OPTION)	    
 					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+					
+				    
+					
 					System.exit(0);
 			}
 		});
 		newGroupMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 				new NewGroup();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		openGroupMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 				new OpenGroup();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		deleteGroupMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 			    
 			    int result = JOptionPane.showConfirmDialog(null,
 			    				new String("Are you sure you want to delete group "
@@ -211,24 +208,24 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 					Controller.getControllerInstance().deleteSQLGroup();
 				}
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		editJobsMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 				ManageJobs.getManageJobsInstance();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 //		mnuitmAbout.addActionListener(new ActionListener() {
@@ -238,23 +235,23 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 //		});
 		helpMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+				
+				
+			    
+			    
+			    
+				
 				Controller.getControllerInstance().openHelp();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		
+	    
+		
 	} // end constructor
 
 	/**
@@ -262,50 +259,29 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 	 * 
 	 * @return single instance of MenuBar
 	 */
-	public static MenuBar getMenuBarInstance() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public static MenuBar getMenuBarInstance() {
 
 		// If we have an instance of this class, simply return it.
 		// Otherwise, return a new one.
 		if (menuBarInstance != null) {
 			// debugging statement
 			System.out.println("SAME OLD SAME OLD MENU BAR INSTANCE");
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return menuBarInstance;
-		}
-		else {
+		} else {
 			// debugging statement set
-		    System.out.println("");
-		    System.out.println("****NEW MENU BAR INSTANCE****");
-		    // end of debugging statement set
+			System.out.println("");
+			System.out.println("****NEW MENU BAR INSTANCE****");
+
 			menuBarInstance = new MenuBar();
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return menuBarInstance;
 		}
 	} // end of getMenuBarInstance method
 
-	public void setDeleteGroup(boolean enabled) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public void setDeleteGroup(boolean enabled) {
+
 		deleteGroupMenuItem.setEnabled(enabled);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end setDeletGroup() method
 } // end MenuBar class

@@ -32,21 +32,17 @@ public class StatusTip extends JDialog implements GuiInterface {
 	protected Timer timer;
 	protected int st_width;
 	protected int st_height;
-	
+
 	/**
 	 * Instantiates a new fade box.
 	 * 
 	 * @param message
 	 *            (string) : the message you want to display <br>
 	 */
-	public StatusTip(final String message, final Image icon) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public StatusTip(final String message, final Image icon) {
+
+		System.out.println(methodName);
+
 		this.message = message;
 
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -57,14 +53,10 @@ public class StatusTip extends JDialog implements GuiInterface {
 		timer = new Timer(8, null);
 
 		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println(methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void run() {
+
+				System.out.println(methodName);
+
 				RoundPanel pnlMain = new RoundPanel();
 				JPanel pnlMessage = new JPanel();
 				JPanel pnlClickToClose = new JPanel();
@@ -113,34 +105,32 @@ public class StatusTip extends JDialog implements GuiInterface {
 				// Increment the opacity down
 				timer.start();
 				timer.setRepeats(true);
-				
+
 				// Resize the DialogBox
 				pack();
 
 				// Reset Location
-				int width = Controller.getControllerInstance().getFrame().getX()
+				int width = Controller.getControllerInstance().getFrame()
+						.getX()
 						+ FRAME_WIDTH - pnlMain.getWidth() - 10;
-				int height = Controller.getControllerInstance().getFrame().getY()
+				int height = Controller.getControllerInstance().getFrame()
+						.getY()
 						+ FRAME_HEIGHT - pnlMain.getHeight() - 10;
 
 				setLocation(width, height);
 
 				// Set Visibility
 				setVisible(true);
-				
+
 				// Every time the timer ticks, decrease the opacity
 				timer.addActionListener(new ActionListener() {
 					private float opacity = 1;
 
 					@Override
-					public void actionPerformed(ActionEvent e) {		
-						// the next four statements are for debugging purposes only
-						StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-					    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-					    String methodName = tre.getClassName() + "." + tre.getMethodName();
-					    System.out.println(methodName);
-						// end of debugging statement set - 4 lines in all
-					    
+					public void actionPerformed(ActionEvent e) {
+
+						System.out.println(methodName);
+
 						opacity -= 0.0015f;
 						setOpacity(Math.max(opacity, 0));
 						if (opacity <= 0) {
@@ -178,5 +168,5 @@ public class StatusTip extends JDialog implements GuiInterface {
 
 		});
 	}
-	
+
 }

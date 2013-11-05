@@ -6,12 +6,10 @@ import java.util.Date;
  * The Class Group.
  */
 public class Group {
-	
+
 	/*********************************
-	 * A very simple class that has four
-	 * attributes and one toString() method.
-	 * The get and set methods are not counted
-	 * as real 'methods'.
+	 * A very simple class that has four attributes and one toString() method.
+	 * The get and set methods are not counted as real 'methods'.
 	 */
 
 	/*********************************
@@ -27,12 +25,12 @@ public class Group {
 	 */
 	public Group() {		
 		// the next five statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+		
+	    
+	    
 	    System.out.println("GROUP CONSTRUCTOR");
 	    System.out.println(methodName);
-		// end of debugging statement set - 5 lines in all
+		 - 5 lines in all
 	    
 		this.id = 0;
 		this.name = "";
@@ -120,14 +118,10 @@ public class Group {
 	}
 
 	@Override
-	public String toString() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public String toString() {
+
+		System.out.println(methodName);
+
 		return "Group [id=" + id + ", name=" + name + ", created=" + created
 				+ ", modified=" + modified + "]";
 	}

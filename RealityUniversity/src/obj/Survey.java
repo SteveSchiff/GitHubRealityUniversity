@@ -6,73 +6,67 @@ package obj;
 public class Survey {
 
 	/*********************************
-	 * A very simple class that has 22
-	 * attributes and one toString() method.
-	 * The get and set methods are not counted
-	 * as real 'methods'.
+	 * A very simple class that has 22 attributes and one toString() method. The
+	 * get and set methods are not counted as real 'methods'.
 	 */
-	
+
 	/*********************************
 	 * Fields
 	 ********************************/
-	private int id;					// 01
-	private String firstName;		// 02
-	private String lastName;		// 03
-	private int gpa;				// 04
-	private int gender;				// 05
-	private int classPeriod;		// 06
-	private String teacher;			// 07
-	private int groupID;			// 08
-	private int education;			// 09
-	private int preferredJob;		// 10
-	private int assignedJob;		// 11
-	private int married;			// 12
-	private int spouse;				// 13
-	private int children;			// 14
-	private int creditCards;		// 15
-	private int creditCardUses;		// 16
-	private String groceries;		// 17
-	private String clothing;		// 18
-	private String home;			// 19
-	private String vehicle;			// 20
-	private double childSupport;	// 22
-	private int creditScore;		// 23
+	private int id; // 01
+	private String firstName; // 02
+	private String lastName; // 03
+	private int gpa; // 04
+	private int gender; // 05
+	private int classPeriod; // 06
+	private String teacher; // 07
+	private int groupID; // 08
+	private int education; // 09
+	private int preferredJob; // 10
+	private int assignedJob; // 11
+	private int married; // 12
+	private int spouse; // 13
+	private int children; // 14
+	private int creditCards; // 15
+	private int creditCardUses; // 16
+	private String groceries; // 17
+	private String clothing; // 18
+	private String home; // 19
+	private String vehicle; // 20
+	private double childSupport; // 22
+	private int creditScore; // 23
 
 	/**
 	 * Constructor
 	 */
-	public Survey() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("EMPTY SURVEY CONSTRUCTOR");
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-		this.id = 0;				// 01
-		this.firstName = "";		// 02
-		this.lastName = "";			// 03
-		this.gpa = 0;				// 04
-		this.gender = 0;			// 05
-		this.classPeriod = 0;		// 06
-		this.teacher = "";			// 07
-		this.groupID = 0;			// 08
-		this.education = 0;			// 09
-		this.preferredJob = 0;		// 10
-		this.assignedJob = 0;		// 11
-		this.married = 0;			// 12
-		this.spouse = 0;			// 13
-		this.children = 0;			// 14
-		this.creditCards = 0;		// 15
-		this.creditCardUses = 0;	// 16
-		this.groceries = "";		// 17
-		this.clothing = "";			// 18
-		this.home = "";				// 19
-		this.vehicle = "";			// 20
-		this.childSupport = 0;		// 21
-		this.creditScore = 0;		// 22
-		this.assignedJob = 1;		// 23
+	public Survey() {
+
+		System.out.println("EMPTY SURVEY CONSTRUCTOR");
+		System.out.println(methodName);
+
+		this.id = 0; // 01
+		this.firstName = ""; // 02
+		this.lastName = ""; // 03
+		this.gpa = 0; // 04
+		this.gender = 0; // 05
+		this.classPeriod = 0; // 06
+		this.teacher = ""; // 07
+		this.groupID = 0; // 08
+		this.education = 0; // 09
+		this.preferredJob = 0; // 10
+		this.assignedJob = 0; // 11
+		this.married = 0; // 12
+		this.spouse = 0; // 13
+		this.children = 0; // 14
+		this.creditCards = 0; // 15
+		this.creditCardUses = 0; // 16
+		this.groceries = ""; // 17
+		this.clothing = ""; // 18
+		this.home = ""; // 19
+		this.vehicle = ""; // 20
+		this.childSupport = 0; // 21
+		this.creditScore = 0; // 22
+		this.assignedJob = 1; // 23
 	}
 
 	/*********************************
@@ -315,7 +309,7 @@ public class Survey {
 	public int getChildren() {
 		return children;
 	}
-	
+
 	/**
 	 * Gets the spouse of the survey.
 	 * 
@@ -501,25 +495,21 @@ public class Survey {
 	}
 
 	@Override
-	public String toString() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-		return "Survey [id=" + id + ", fName=" + firstName + ", lName=" + lastName
-				+ ", gpa=" + gpa + ", gender=" + gender + ", cPeriod="
-				+ classPeriod + ", teacher=" + teacher + ", groupID=" + groupID
-				+ ", education=" + education + ", prefJob=" + preferredJob
-				+ ", assignedJob=" + assignedJob + ", married=" + married
-				+ ", spouse=" + spouse + ", children=" + children + ", cCards="
-				+ creditCards + ", cCardUses=" + creditCardUses + ", groceries="
-				+ groceries + ", clothing=" + clothing + ", home=" + home
-				+ ", vehicle=" + vehicle + ", entertainment=" + childSupport
-				+ ", savings=" + creditScore + "]";
-	}	
+	public String toString() {
 
-	
+		System.out.println(methodName);
+
+		return "Survey [id=" + id + ", fName=" + firstName + ", lName="
+				+ lastName + ", gpa=" + gpa + ", gender=" + gender
+				+ ", cPeriod=" + classPeriod + ", teacher=" + teacher
+				+ ", groupID=" + groupID + ", education=" + education
+				+ ", prefJob=" + preferredJob + ", assignedJob=" + assignedJob
+				+ ", married=" + married + ", spouse=" + spouse + ", children="
+				+ children + ", cCards=" + creditCards + ", cCardUses="
+				+ creditCardUses + ", groceries=" + groceries + ", clothing="
+				+ clothing + ", home=" + home + ", vehicle=" + vehicle
+				+ ", entertainment=" + childSupport + ", savings="
+				+ creditScore + "]";
+	}
+
 }

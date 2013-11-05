@@ -20,11 +20,11 @@ import obj.Job;
  */
 public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 
-
 	private Map<String, List<Job>> mapJobsByCategory = new HashMap<>();
 
-	private List<Job> jobsList = new ArrayList<>(); // List of objects being returned
-												
+	private List<Job> jobsList = new ArrayList<>(); // List of objects being
+													// returned
+
 	private List<Job> jobCategoryList = new ArrayList<>();
 
 	/**
@@ -33,18 +33,8 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return A Map of Job objects.
 	 */
 	public Map<String, List<Job>> getJobsByCategory() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-	    
-	    return mapJobsByCategory;
+
+		return mapJobsByCategory;
 	} // end findJobsByCategory method
 
 	/**
@@ -58,12 +48,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return Returns a List of Job objects.
 	 */
 	public List<Job> select(String where, Object criteria) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -108,17 +92,19 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				jobObject.setSinAfterTax(rs.getDouble("sinAfterTax"));
 				jobObject.setGPA(rs.getInt("gpa"));
 				jobObject.setLoan(rs.getDouble("loan"));
-	
+
 				// If the current job's category matches current key
 				if (mapJobsByCategory.containsKey(jobObject.getCategory()))
 					// Add it to the current ArrayList
-					jobCategoryList = mapJobsByCategory.get(jobObject.getCategory());
+					jobCategoryList = mapJobsByCategory.get(jobObject
+							.getCategory());
 				else
 					// Otherwise, start a new ArrayList
 					jobCategoryList = new ArrayList<>();
-	
-				jobCategoryList.add(jobObject); // Add this job to the List of jobs
-	
+
+				jobCategoryList.add(jobObject); // Add this job to the List of
+												// jobs
+
 				// Add the job to the map with the category as the key
 				mapJobsByCategory.put(jobObject.getCategory(), jobCategoryList);
 
@@ -148,10 +134,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return jobsList;
 	} // -- end select() method
@@ -165,12 +147,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 *         1: Success
 	 */
 	public int update(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -233,10 +209,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end update() method
@@ -251,12 +223,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 *         1: Success
 	 */
 	public int insert(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -329,10 +295,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end insert() method
@@ -346,12 +308,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 *         1: Success
 	 */
 	public int delete(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -395,21 +351,11 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end delete() method
 
 	public boolean doesJobsTableExist() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -430,10 +376,7 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 			while (rs.next()) {
 				String tName = rs.getString("name");
 				if (tName.equals("jobs")) {
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+
 					return true;
 				}
 			}
@@ -459,21 +402,11 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return false;
 	} // -- end doesJobsTableExist() method
 
 	public int createTable() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		if (!doesJobsTableExist()) {
 			JOptionPane
@@ -493,21 +426,20 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				conn = DriverManager.getConnection(DATABASE, USER, PASS);
 
 				// Create SQL Statement
-				String sql = "CREATE TABLE IF NOT EXISTS 'jobs' (" +
-						"'id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , " +
-						"'name' VARCHAR NOT NULL , 'type' VARCHAR NOT NULL , " +
-						"'industry' VARCHAR NOT NULL , " +
-						"'category' VARCHAR NOT NULL , " +
-						"'annGrossSal' DOUBLE NOT NULL , " +
-						"'monGrossSal' DOUBLE NOT NULL , " +
-						"'marAnnualTax' DOUBLE NOT NULL , " +
-						"'marMonthlyTax' DOUBLE NOT NULL , " +
-						"'marAfterTax' DOUBLE NOT NULL , " +
-						"'sinAnnualTax' DOUBLE NOT NULL , " +
-						"'sinMonthlyTax' DOUBLE NOT NULL , " +
-						"'sinAfterTax' DOUBLE NOT NULL , " +
-						"'gpa' INTEGER" +
-						"'loan' DOUBLE NOT NULL);";
+				String sql = "CREATE TABLE IF NOT EXISTS 'jobs' ("
+						+ "'id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , "
+						+ "'name' VARCHAR NOT NULL , 'type' VARCHAR NOT NULL , "
+						+ "'industry' VARCHAR NOT NULL , "
+						+ "'category' VARCHAR NOT NULL , "
+						+ "'annGrossSal' DOUBLE NOT NULL , "
+						+ "'monGrossSal' DOUBLE NOT NULL , "
+						+ "'marAnnualTax' DOUBLE NOT NULL , "
+						+ "'marMonthlyTax' DOUBLE NOT NULL , "
+						+ "'marAfterTax' DOUBLE NOT NULL , "
+						+ "'sinAnnualTax' DOUBLE NOT NULL , "
+						+ "'sinMonthlyTax' DOUBLE NOT NULL , "
+						+ "'sinAfterTax' DOUBLE NOT NULL , " + "'gpa' INTEGER"
+						+ "'loan' DOUBLE NOT NULL);";
 
 				stmt = conn.prepareStatement(sql);
 				rows = stmt.executeUpdate();
@@ -527,32 +459,21 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 
 			// populate table with the default set of jobs information
 			insertDefaultJobs();
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
 
 			return rows;
 		} else {
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return 0;
 		}
 	}
+
 	// end of checkTable method
 
 	public int insertDefaultJobs() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("");
-	    System.out.println("DEFAULT JOBS");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println("");
+		System.out.println("DEFAULT JOBS");
+
 		List<Job> jobsList = new ArrayList<>();
 
 		jobsList.add(new Job(1, "Architect", "Production", "Engineering",
@@ -576,18 +497,18 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(7, "Graphic artist", "Service", "Entertainment",
 				"Art/Media/Entertainment ", 46000, 3833, 12420, 1045, 2798,
 				14720, 1227, 2606, 5, 20000));
-		jobsList.add(new Job(8, "Interior designer", "Service", "Entertainment",
-				"Art/Media/Entertainment ", 36600, 3050, 9882, 824, 2226,
-				11712, 976, 2074, 4, 10000));
+		jobsList.add(new Job(8, "Interior designer", "Service",
+				"Entertainment", "Art/Media/Entertainment ", 36600, 3050, 9882,
+				824, 2226, 11712, 976, 2074, 4, 10000));
 		jobsList.add(new Job(9, "Multi-media artist/animator", "Service",
 				"Entertainment", "Art/Media/Entertainment ", 45900, 3825,
 				12393, 1033, 2792, 14688, 1224, 2601, 5, 15000));
 		jobsList.add(new Job(10, "Photographer", "Service", "Entertainment",
 				"Art/Media/Entertainment ", 51200, 4267, 13824, 1152, 3115,
 				16384, 1365, 1902, 5, 15000));
-		jobsList.add(new Job(11, "Public relations", "Service", "Entertainment",
-				"Art/Media/Entertainment ", 45500, 3792, 12286, 1023, 2769,
-				17280, 1440, 2353, 5, 15000));
+		jobsList.add(new Job(11, "Public relations", "Service",
+				"Entertainment", "Art/Media/Entertainment ", 45500, 3792,
+				12286, 1023, 2769, 17280, 1440, 2353, 5, 15000));
 		jobsList.add(new Job(12, "Reporter", "Service", "Entertainment",
 				"Art/Media/Entertainment ", 31000, 2583, 8369, 697, 1886, 9918,
 				826, 1757, 3, 10000));
@@ -623,9 +544,9 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(23, "Groundskeeper/Landscaper", "Service", "",
 				"Cleaning", 25000, 2083, 6750, 5625, 1235, 5130, 427, 1156, 3,
 				0));
-		jobsList.add(new Job(24, "Computer repair", "Production", "Engineering",
-				"Computers", 44000, 3666, 11880, 990, 2676, 14080, 1173, 2493,
-				5, 10000));
+		jobsList.add(new Job(24, "Computer repair", "Production",
+				"Engineering", "Computers", 44000, 3666, 11880, 990, 2676,
+				14080, 1173, 2493, 5, 10000));
 		jobsList.add(new Job(25, "Network Administrator", "Production",
 				"Engineering", "Computers", 69000, 5583, 18090, 1508, 4075,
 				21440, 1787, 3796, 5, 20000));
@@ -646,9 +567,9 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(31, "Food service managment", "Service", "Food",
 				"Food Service", 49000, 4083, 13230, 1103, 2980, 15680, 1303,
 				2780, 5, 5000));
-		jobsList.add(new Job(32, "Waiter/waitress/bartender", "Service", "Food",
-				"Food Service", 18000, 1500, 4860, 405, 1095, 5760, 480, 1020,
-				1, 0));
+		jobsList.add(new Job(32, "Waiter/waitress/bartender", "Service",
+				"Food", "Food Service", 18000, 1500, 4860, 405, 1095, 5760,
+				480, 1020, 1, 0));
 		jobsList.add(new Job(33, "Chiropractor", "Service", "Medical",
 				"Healthcare/Research Sciences ", 106000, 8833, 28620, 2385,
 				6448, 33920, 2827, 6006, 5, 30000));
@@ -688,9 +609,9 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(45, "Physical therapist", "Service", "Medical",
 				"Healthcare/Research Sciences ", 81000, 6750, 21870, 1823,
 				4927, 25920, 2160, 4590, 5, 25000));
-		jobsList.add(new Job(46, "Recreational therapist", "Service", "Medical",
-				"Healthcare/Research Sciences ", 51000, 4250, 13770, 1148,
-				3102, 16320, 1360, 2890, 5, 15000));
+		jobsList.add(new Job(46, "Recreational therapist", "Service",
+				"Medical", "Healthcare/Research Sciences ", 51000, 4250, 13770,
+				1148, 3102, 16320, 1360, 2890, 5, 15000));
 		jobsList.add(new Job(47, "Registered nurse", "Service", "Medical",
 				"Healthcare/Research Sciences ", 73000, 6083, 19710, 1643,
 				4440, 23368, 1947, 4136, 5, 25000));
@@ -742,8 +663,9 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(63, "Law clerk", "Service", "Public Safety",
 				"Legal ", 31000, 2583, 8370, 698, 1885, 9920, 827, 1756, 3,
 				5000));
-		jobsList.add(new Job(64, "Lawyer", "Service", "Public Safety", "Legal ",
-				100000, 8333, 27000, 2250, 6083, 32000, 2667, 5666, 5, 40000));
+		jobsList.add(new Job(64, "Lawyer", "Service", "Public Safety",
+				"Legal ", 100000, 8333, 27000, 2250, 6083, 32000, 2667, 5666,
+				5, 40000));
 		jobsList.add(new Job(65, "Paralegal/legal secretary", "Service",
 				"Public Safety", "Legal ", 42000, 3500, 11340, 945, 2555,
 				13440, 1170, 2330, 5, 10000));
@@ -861,9 +783,9 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 		jobsList.add(new Job(103, "Coaches", "Service", "Entertainment",
 				"Sports/Athletics ", 35000, 2916, 9450, 788, 2128, 11200, 933,
 				1983, 4, 5000));
-		jobsList.add(new Job(104, "Fitness trainer", "Service", "Entertainment",
-				"Sports/Athletics ", 31000, 2583, 8370, 698, 1885, 9920, 827,
-				1756, 3, 5000));
+		jobsList.add(new Job(104, "Fitness trainer", "Service",
+				"Entertainment", "Sports/Athletics ", 31000, 2583, 8370, 698,
+				1885, 9920, 827, 1756, 3, 5000));
 		jobsList.add(new Job(105, "Umpire/offical", "Service", "Entertainment",
 				"Sports/Athletics ", 32000, 2666, 8640, 720, 1946, 10240, 853,
 				1813, 3, 5000));
@@ -874,10 +796,6 @@ public class JobsTableDatabaseAccessor implements DatabaseAccessorInterface {
 			insert(job);
 			rows += 1;
 		}
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end insertDefaultJobs() method

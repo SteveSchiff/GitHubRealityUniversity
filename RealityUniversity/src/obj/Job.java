@@ -6,48 +6,45 @@ package obj;
 public class Job {
 
 	/*********************************
-	 * A very simple class that has 15
-	 * attributes and one toString() method.
-	 * The get and set methods are not counted
-	 * as real 'methods'.
-	 */	
-	
+	 * A very simple class that has 15 attributes and one toString() method. The
+	 * get and set methods are not counted as real 'methods'.
+	 */
+
 	/*******************************
 	 * Fields
 	 ******************************/
 
-	private int id;					// 01
-	private String name;			// 02
-	private String type;			// 03
-	private String industry;		// 04
-	private String category;		// 05
-	private double annGrossSal;		// 06
-	private double monGrossSal;		// 07
-	private double marAnnualTax;	// 08
-	private double marMonthlyTax;	// 09
-	private double marAfterTax;		// 10
-	private double sinAnnualTax;	// 11
-	private double sinMonthlyTax;	// 12
-	private double sinAfterTax;		// 13
-	private int gpa;				// 14
-	private double loan;			// 15
-	
+	private int id; // 01
+	private String name; // 02
+	private String type; // 03
+	private String industry; // 04
+	private String category; // 05
+	private double annGrossSal; // 06
+	private double monGrossSal; // 07
+	private double marAnnualTax; // 08
+	private double marMonthlyTax; // 09
+	private double marAfterTax; // 10
+	private double sinAnnualTax; // 11
+	private double sinMonthlyTax; // 12
+	private double sinAfterTax; // 13
+	private int gpa; // 14
+	private double loan; // 15
+
 	// debug constant made for counting job
 	// constructor calls
-	//private static int count = 0;
-
+	// private static int count = 0;
 
 	/**
 	 * Constructor 1 of 2
 	 */
 	public Job() {
 		// the next seven statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+		
+	    
+	    
 	    System.out.print("==EMPTY JOB CONSTRUCTOR==  ");
 	    System.out.println(methodName);
-		// end of debugging statement set - 7 lines in all
+		 - 7 lines in all
 	    
 		this.id = 0;
 		this.name = "";
@@ -78,13 +75,13 @@ public class Job {
 		super();	
 		
 		// the next six statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+		
+	    
+	    
 	    System.out.println("");
 	    System.out.println("JOB CONSTRUCTOR");
 	    System.out.println(methodName);
-		// end of debugging statement set - 6 lines in all
+		 - 6 lines in all
 	    
 		this.id = id;
 		this.name = name;
@@ -102,7 +99,7 @@ public class Job {
 		this.gpa = gpa;
 		this.loan = loan;
 	}
-	
+
 	/*********************************
 	 * Getters/Setters
 	 * 
@@ -385,6 +382,7 @@ public class Job {
 	public void setSinAfterTax(double sinAfterTax) {
 		this.sinAfterTax = sinAfterTax;
 	}
+
 	/**
 	 * Gets the job loan amount.
 	 * 
@@ -405,21 +403,18 @@ public class Job {
 	}
 
 	@Override
-	public String toString() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-		return "Job [id=" + id + ", name=" + name + ", type=" + type + ", industry=" + industry
-				+ ", category=" + category + ", annGrossSal=" + annGrossSal
-				+ ", monGrossSal=" + monGrossSal + ", marAnnualTax="
-				+ marAnnualTax + ", marMonthlyTax=" + marMonthlyTax
-				+ ", marAfterTax=" + marAfterTax + ", sinAnnualTax="
-				+ sinAnnualTax + ", sinMonthlyTax=" + sinMonthlyTax
-				+ ", sinAfterTax=" + sinAfterTax + ", gpa=" + gpa + ", loan=" + loan + "]";
+	public String toString() {
+
+		System.out.println(methodName);
+
+		return "Job [id=" + id + ", name=" + name + ", type=" + type
+				+ ", industry=" + industry + ", category=" + category
+				+ ", annGrossSal=" + annGrossSal + ", monGrossSal="
+				+ monGrossSal + ", marAnnualTax=" + marAnnualTax
+				+ ", marMonthlyTax=" + marMonthlyTax + ", marAfterTax="
+				+ marAfterTax + ", sinAnnualTax=" + sinAnnualTax
+				+ ", sinMonthlyTax=" + sinMonthlyTax + ", sinAfterTax="
+				+ sinAfterTax + ", gpa=" + gpa + ", loan=" + loan + "]";
 	}
 
 }

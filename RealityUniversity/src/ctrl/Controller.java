@@ -41,9 +41,9 @@ import databaseAccessors.SurveysTableDatabaseAccessor;
 public class Controller implements GuiInterface {
 
 	/*******************************
-	 *    Fields
+	 * Fields
 	 *******************************/
-	
+
 	/** An instance of the Controller. */
 	private static Controller controllerInstance = null;
 
@@ -91,26 +91,12 @@ public class Controller implements GuiInterface {
 
 	/** The processed boolean to tell if it should be processed or not. */
 	private boolean shouldItBeProcessed;
-	
+
 	/**
 	 * Instantiates a new controller.
 	 */
 	public Controller() {
-		// the next five statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("BEGIN CONTROLLER CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 5 lines in all
-	    
-	    //checkExistenceOfTables(); // decomment after commit 10/10/2013
-		// setGroupsList(); // comment out after commit 10/01/2013
-		// setJobsList(); // comment out after commit 10/01/2013	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // ****end constructor****
 
 	/**
@@ -119,67 +105,23 @@ public class Controller implements GuiInterface {
 	 * @return single instance of Controller
 	 */
 	public static Controller getControllerInstance() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		// If we do have an instance of this controller, simply return it.
 		// Otherwise, create one.
 		if (controllerInstance != null) {
-			// debugging statement
-			System.out.println("SAME OLD SAME OLD CONTROLLER INSTANCE");	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
 			return controllerInstance;
-		}
-		else {
-			// debugging statement set
-		    System.out.println("");
-			System.out.println("******NEW CONTROLLER INSTANCE******");
-			// end of debugging statement set
-			controllerInstance = new Controller();	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		} else {
+			controllerInstance = new Controller();
 			return controllerInstance;
 		}
 	} // end of Controller static method
-	
+
 	/**
 	 * Refresh screen.
 	 */
 	public void refreshScreen() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-
-		// debug statement
-		System.out.println("\nThe list of surveys from inside refreshSreen method has "
-				+ listOfSurveys.size() + " surveys.");
-		
 		listOfSurveys.clear();
-		
-		// debug statement
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("\nThe list of surveys from inside refreshSreen method has "
-				+ " after clearing the list "+ listOfSurveys.size() + " surveys.");
-		System.out.println("====================================================================");
-		
-//		setSQLselectWhereSurveysList(group); // might be unnecessary - will test - so far so good! 10/15/13 Tuesday
 		GuiMain.getGUIMainInstance().drawWindow();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 	} // -- end of refreshScreen() method
 
 	/**
@@ -188,33 +130,15 @@ public class Controller implements GuiInterface {
 	 * @return the frame
 	 */
 	public JFrame getFrame() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-		
 		return GuiMain.getGUIMainInstance().getBigDaddyFrame();
 	} // end getFrame() method
-	
-	
+
 	/**
 	 * Gets the teacher names.
 	 * 
 	 * @return a List of Strings (Teacher Names)
 	 */
 	public List<String> getTeacherNamesList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		// Get All Surveys
 		List<Survey> surveysList = getSurveysList();
@@ -227,45 +151,22 @@ public class Controller implements GuiInterface {
 				if (!teachersList.contains(survey.getTeacher())) {
 					teachersList.add(survey.getTeacher());
 				}
-			}
-			else {
+			} else {
 				// First entry
 				teachersList.add("none");
 				teachersList.add(survey.getTeacher());
 			}
-		} // end for loop	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		} // end for loop
 		return teachersList;
-	} // -- getTeacherNamesList() method 
+	} // -- getTeacherNamesList() method
 
 	public void openHelp() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		try {
-			Desktop.getDesktop().open(new File("help/index.html"));    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " from try block");
-			// end of debugging statement set
-		} catch (IOException eio) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " from catch block");
-			// end of debugging statement set
+			Desktop.getDesktop().open(new File("help/index.html"));
+		} catch (IOException eio) {
 			eio.printStackTrace();
-		}    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		}
 	} // -- end openHelp() method
 
 	/**
@@ -275,73 +176,35 @@ public class Controller implements GuiInterface {
 	 *            the job
 	 */
 	public void addJob(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
 		listOfNewJobs.add(job);
-		ManageJobs.getManageJobsInstance().addJobToTable(job);	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		ManageJobs.getManageJobsInstance().addJobToTable(job);
 	} // -- end addJob() method
 
 	/**
 	 * Destroy the delJobs list.
 	 */
 	public void destroyListOfDeletedJobs() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		listOfDeletedJobs.clear();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		listOfDeletedJobs.clear();
+
 	} // -- end destroyListOfDeletedJobs() method
 
 	/**
 	 * Destroy the newJobs list.
 	 */
 	public void destroyListOfNewJobs() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		listOfNewJobs.clear();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		listOfNewJobs.clear();
+
 	} // -- end destroyListOfNewJobs() method
 
 	/**
 	 * Destroy updated jobs.
 	 */
 	public void destroyListOfUpdatedJobs() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		listOfUpdatedJobs.clear();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		listOfUpdatedJobs.clear();
+
 	} // -- end destroyListOfUpdatedJobs() method
 
 	/**
@@ -351,13 +214,7 @@ public class Controller implements GuiInterface {
 	 *            the job
 	 */
 	public void removeJobFromListOfNewJobs(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		if (listOfNewJobs.contains(job)) {
 			listOfNewJobs.remove(job);
 		}
@@ -365,10 +222,7 @@ public class Controller implements GuiInterface {
 		listOfDeletedJobs.add(job);
 		listOfJobs.remove(job);
 		refreshScreen();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end removeJobFromListOfNewJobs() method
 
 	/**
@@ -377,19 +231,9 @@ public class Controller implements GuiInterface {
 	 * @return a List of Strings containing job categories
 	 */
 	public List<String> getJobCategoriesList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all			
 
 		List<String> lstCategories = new ArrayList<>();
-		lstCategories.addAll(mapJobs.keySet());	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		lstCategories.addAll(mapJobs.keySet());
 
 		return lstCategories;
 	} // end getJobCategoriesList() method
@@ -400,12 +244,6 @@ public class Controller implements GuiInterface {
 	 * @return a List of Strings (Job Industries)
 	 */
 	public List<String> getJobIndustriesList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		// Get All Jobs
 		List<Job> lstJobs = getJobsList();
@@ -437,19 +275,13 @@ public class Controller implements GuiInterface {
 			}
 		}
 
-		if (lstIndustries.size() > 0) {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (lstIndustries.size() > 0) {
+
 			return lstIndustries;
 		} else {
 			List<String> emptyList = new ArrayList<>();
-			emptyList.add("");	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+			emptyList.add("");
+
 			return emptyList;
 		}
 
@@ -461,12 +293,6 @@ public class Controller implements GuiInterface {
 	 * @return a List of Strings (Job Types)
 	 */
 	public List<String> getJobTypesList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		// Get All Jobs
 		List<Job> lstJobs = getJobsList();
@@ -498,19 +324,13 @@ public class Controller implements GuiInterface {
 			}
 		}
 
-		if (lstTypes.size() > 0) {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (lstTypes.size() > 0) {
+
 			return lstTypes;
 		} else {
 			List<String> emptyList = new ArrayList<>();
-			emptyList.add("");	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+			emptyList.add("");
+
 			return emptyList;
 		}
 
@@ -524,23 +344,13 @@ public class Controller implements GuiInterface {
 	 * @return a List of Strings (Job Names)
 	 */
 	public List<String> getJobsByCategoryList(String category) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		List<Job> lstJobs = mapJobs.get(category);
 		List<String> lstJobNames = new ArrayList<>();
 
 		for (Job job : lstJobs) {
 			lstJobNames.add(job.getName());
-		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		}
 
 		return lstJobNames;
 	} // end getJobsListInCategory() method
@@ -549,12 +359,7 @@ public class Controller implements GuiInterface {
 	 * Save jobs.
 	 */
 	public void saveJobs(boolean save) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
+
 		String message = "";
 
 		if (save) { // the big if statement - the outer if
@@ -577,7 +382,8 @@ public class Controller implements GuiInterface {
 				message += "\n Updated " + listOfUpdatedJobs.size() + " job(s)";
 			}
 
-			if (listOfNewJobs.size() > 0 || listOfDeletedJobs.size() > 0 || listOfUpdatedJobs.size() > 0)
+			if (listOfNewJobs.size() > 0 || listOfDeletedJobs.size() > 0
+					|| listOfUpdatedJobs.size() > 0)
 				new StatusTip(message, LG_SUCCESS);
 
 			// Reload Jobs
@@ -596,13 +402,9 @@ public class Controller implements GuiInterface {
 		destroyListOfNewJobs();
 		destroyListOfUpdatedJobs();
 		refreshScreen();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // end saveJobs method
-	
-	
+
 	/**
 	 * Get a job from memory.
 	 * 
@@ -618,14 +420,9 @@ public class Controller implements GuiInterface {
 	 *            : The term to look for in the table.
 	 * @return a Job object.
 	 */
-	public Job getJob(String search, String criteria) { // ending brace on line 374
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+	public Job getJob(String search, String criteria) { // ending brace on line
+														// 374
+
 		Job job = new Job();
 
 		if (!this.listOfJobs.isEmpty()) {
@@ -635,39 +432,26 @@ public class Controller implements GuiInterface {
 					switch (search) {
 					case "ID":
 					case "id":
-						if (job.getID() == Integer.parseInt(criteria)) {	    
-							
-							// the next statement is for debugging purposes only
-						    System.out.println("\n---Leaving " + methodName);
-							// end of debugging statement set
+						if (job.getID() == Integer.parseInt(criteria)) {
+
 							return job;
 						}
 						break;
 					case "Name":
 					case "name":
-						if (job.getName().equalsIgnoreCase(criteria)) {	    
-							
-							// the next statement is for debugging purposes only
-						    System.out.println("\n---Leaving " + methodName);
-							// end of debugging statement set
+						if (job.getName().equalsIgnoreCase(criteria)) {
+
 							return job;
 						}
 						break;
 					}
 
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			} catch (NullPointerException npe) {
+
 				return job;
 			}
-		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		}
 
 		return job;
 	} // -- end getJob() method ******************************
@@ -678,17 +462,7 @@ public class Controller implements GuiInterface {
 	 * @return the jobs
 	 */
 	public List<Job> getJobsList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-		
+
 		return listOfJobs;
 	} // -- end getJobsList() method
 
@@ -712,12 +486,6 @@ public class Controller implements GuiInterface {
 	 * @return a list of Job objects.
 	 */
 	public List<Job> searchJobsList(String search, String criteria) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		List<Job> matchingCriteriaJobsList = new ArrayList<>();
 
@@ -730,8 +498,10 @@ public class Controller implements GuiInterface {
 					case "id":
 						if (job.getID() == Integer.parseInt(criteria)) {
 							matchingCriteriaJobsList.add(job);
-							System.out.println("inside searchJobsList(x,y) method and matchingCriteriaJobsList has "
-												+ matchingCriteriaJobsList.size() + " elements.");
+							System.out
+									.println("inside searchJobsList(x,y) method and matchingCriteriaJobsList has "
+											+ matchingCriteriaJobsList.size()
+											+ " elements.");
 						}
 						break;
 					case "Name":
@@ -769,20 +539,13 @@ public class Controller implements GuiInterface {
 				if (matchingCriteriaJobsList.size() > 0) {
 					return matchingCriteriaJobsList;
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
-			    
-			    // Hopefully this value will never be returned
+			} catch (NullPointerException npe) {
+
+				// Hopefully this value will never be returned
 				return listOfJobs;
 			}
 		} // end if statement
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return listOfJobs;
 	} // -- end searchJobsList() method
 
@@ -796,22 +559,13 @@ public class Controller implements GuiInterface {
 	 * 
 	 */
 	public void updateJob(Job job, Job nJob) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
 		listOfUpdatedJobs.add(nJob);
 		listOfJobs.remove(job);
 		listOfJobs.add(nJob);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end updateJob() method
-	
+
 	/**
 	 * Open edit job.
 	 * 
@@ -819,48 +573,28 @@ public class Controller implements GuiInterface {
 	 *            : the job being edited
 	 */
 	public void openEditJob(Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		new EditJob(job);    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		new EditJob(job);
+
 	} // -- end openEditJob() method
 
 	/**
 	 * Save the group.
 	 */
-	//TODO Give this a thorough review, it may be a problem method
+	// TODO Give this a thorough review, it may be a problem method
 	public void processGroup() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
 
 		// disabled these statements until the problems with them are solved
-//		listOfSurveys = new ProcessMarried().doProcess();
-//		listOfSurveys = new ProcessCreditScore().doProcess();
+		// listOfSurveys = new ProcessMarried().doProcess();
+		// listOfSurveys = new ProcessCreditScore().doProcess();
 		listOfSurveys = new ProcessJobs().doProcess();
-//		listOfSurveys = new ProcessChildren().doProcess();
-//		listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
-//		listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
-//		listOfSurveys = new ProcessCustodyChildSupport().doProcess();
-
+		// listOfSurveys = new ProcessChildren().doProcess();
+		// listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
+		// listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
+		// listOfSurveys = new ProcessCustodyChildSupport().doProcess();
 
 		refreshScreen();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // end saveGroup method
 
 	/**
@@ -869,17 +603,7 @@ public class Controller implements GuiInterface {
 	 * @return the current Group object.
 	 */
 	public Group getGroup() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-		
+
 		return group;
 	}
 
@@ -897,17 +621,11 @@ public class Controller implements GuiInterface {
 	 *            <li>ID</li>
 	 *            <li>Name</li>
 	 *            </ul>
-	 * @return 
+	 * @return
 	 * @return Returns a Group object.
 	 */
 	public Group getGroup(String search, String criteria) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		Group group = new Group();
 
 		if (!this.listOfGroups.isEmpty()) {
@@ -930,18 +648,11 @@ public class Controller implements GuiInterface {
 					}
 
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			} catch (NullPointerException npe) {
+
 				return group;
 			}
-		} // end if	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		} // end if
 
 		return group;
 	} // end getGroup method
@@ -952,23 +663,14 @@ public class Controller implements GuiInterface {
 	 * @return all of the groups
 	 */
 	public List<Group> getGroupsList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-//		try {
-//			listOfGroups.size();
-//		} catch (NullPointerException npe) {
-			// If it doesn't exist, create it
-			setSQLselectGroupsList();
-//		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		// try {
+		// listOfGroups.size();
+		// } catch (NullPointerException npe) {
+		// If it doesn't exist, create it
+		setSQLselectGroupsList();
+		// }
+
 		return listOfGroups;
 	} // end getGroupsList() method
 
@@ -979,39 +681,29 @@ public class Controller implements GuiInterface {
 	 *            the new group
 	 */
 	public void setGroup(Group group) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
-//		if (isGroupChanged()) {
-//			int response = JOptionPane.showConfirmDialog(null, new String(
-//					"Would you like to save your changes to the group: "
-//							+ this.group.getName() + "?"), "Unsaved Changes",
-//					JOptionPane.YES_NO_OPTION, 0, new ImageIcon(LG_CAUTION));
-//
-//			if (response == JOptionPane.YES_OPTION) {
-//				saveGroup();
-//				this.group = group;
-//			} // end inner if
-//		} // end outer if
-//		else {
-			this.group = group;
-//		}
-		
-//		destroyListOfNewSurveys(); // these 3 statements may  be unnecessary
-//		destroyListOfDeletedSurveys();
-//		destroyListOfUpdatedSurveys();
-		setSQLselectWhereSurveysList(group);	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		// if (isGroupChanged()) {
+		// int response = JOptionPane.showConfirmDialog(null, new String(
+		// "Would you like to save your changes to the group: "
+		// + this.group.getName() + "?"), "Unsaved Changes",
+		// JOptionPane.YES_NO_OPTION, 0, new ImageIcon(LG_CAUTION));
+		//
+		// if (response == JOptionPane.YES_OPTION) {
+		// saveGroup();
+		// this.group = group;
+		// } // end inner if
+		// } // end outer if
+		// else {
+		this.group = group;
+		// }
+
+		// destroyListOfNewSurveys(); // these 3 statements may be unnecessary
+		// destroyListOfDeletedSurveys();
+		// destroyListOfUpdatedSurveys();
+		setSQLselectWhereSurveysList(group);
+
 	} // end setGroup method
-	
-	
+
 	/**
 	 * Adds the group in memory.
 	 * 
@@ -1021,14 +713,10 @@ public class Controller implements GuiInterface {
 	 *         0: Failure<br>
 	 *         1: Success
 	 */
-	public int addGroup(String groupName) { // checks uniqueness of group name and writes to database if name is unique
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+	public int addGroup(String groupName) { // checks uniqueness of group name
+											// and writes to database if name is
+											// unique
+
 		boolean exists = false;
 
 		for (Group group : listOfGroups) {
@@ -1036,21 +724,15 @@ public class Controller implements GuiInterface {
 				exists = true;
 			}
 		}
-		
+
 		if (!exists) {
-			insertSQLGroup(groupName); // writes the new group to database
-			setSQLselectGroupsList(); // refreshes the group list directly from database after the previous write
-//			listOfGroups.add(group);	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " and returning 1.");
-			// end of debugging statement set
+			// writes the new group to database
+			insertSQLGroup(groupName);
+			// refreshes the group list directly from database after the
+			// previous write
+			setSQLselectGroupsList();
 			return 1;
-		} else {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " and returning 0.");
-			// end of debugging statement set
+		} else {
 			return 0;
 		}
 	} // -- end addGroup() method
@@ -1061,52 +743,29 @@ public class Controller implements GuiInterface {
 	 * @return a List of surveys
 	 */
 
-
 	/**
 	 * Checks if group has been modified.
 	 * 
 	 * @return true, if is group changed
 	 */
 	public boolean isGroupChanged() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		if (listOfNewSurveys.size() > 0) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
-			return true;
-		}			
-		if (listOfDeletedSurveys.size() > 0) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
+		if (listOfNewSurveys.size() > 0) {
+
 			return true;
 		}
-		if (listOfUpdatedSurveys.size() > 0) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (listOfDeletedSurveys.size() > 0) {
+
 			return true;
 		}
-		if (shouldItBeProcessed) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (listOfUpdatedSurveys.size() > 0) {
+
 			return true;
-		}    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		}
+		if (shouldItBeProcessed) {
+
+			return true;
+		}
 
 		return false;
 	} // -- end isGroupChanged() method
@@ -1128,13 +787,7 @@ public class Controller implements GuiInterface {
 	 * @return a Survey object.
 	 */
 	public Survey getSurvey(String column, String search) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		Survey survey = new Survey();
 
 		if (!this.listOfSurveys.isEmpty()) {
@@ -1144,50 +797,28 @@ public class Controller implements GuiInterface {
 					switch (column) {
 					case "ID":
 					case "id":
-						if (survey.getID() == Integer.parseInt(search)) {	    
-							
-							// the next statement is for debugging purposes only
-						    System.out.println("\n---Leaving " + methodName);
-							// end of debugging statement set
+						if (survey.getID() == Integer.parseInt(search)) {
 							return survey;
 						}
 						break;
 					case "LName":
 					case "lname":
-						if (survey.getLName().equalsIgnoreCase(search)) {	    
-							
-							// the next statement is for debugging purposes only
-						    System.out.println("\n---Leaving " + methodName);
-							// end of debugging statement set
+						if (survey.getLName().equalsIgnoreCase(search)) {
 							return survey;
 						}
 						break;
 					case "FName":
 					case "fname":
-						if (survey.getLName().equalsIgnoreCase(search)) {	    
-							
-							// the next statement is for debugging purposes only
-						    System.out.println("\n---Leaving " + methodName);
-							// end of debugging statement set
+						if (survey.getLName().equalsIgnoreCase(search)) {
 							return survey;
 						}
 						break;
 					}
-
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			} catch (NullPointerException npe) {
 				return survey;
 			}
-		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-
+		}
 		return survey;
 	} // -- end getSurvey() method
 
@@ -1197,26 +828,11 @@ public class Controller implements GuiInterface {
 	 * @return a List of Survey objects for the current group
 	 */
 	public List<Survey> getSurveysList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		if (listOfSurveys.size() > 0) {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (listOfSurveys.size() > 0) {
 			return listOfSurveys;
 		}
-		
-		List<Survey> lstBlank = new ArrayList<>();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		List<Survey> lstBlank = new ArrayList<>();
+
 		return lstBlank;
 	} // -- end getSurveysList() method
 
@@ -1237,13 +853,6 @@ public class Controller implements GuiInterface {
 	 * @return a List of Survey objects.
 	 */
 	public List<Survey> getSurveysList(String column, String search) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
 
 		List<Survey> lstRSurveys = new ArrayList<>();
 
@@ -1278,90 +887,51 @@ public class Controller implements GuiInterface {
 						break;
 					}
 				}
-				if (lstRSurveys.size() > 0) {	    
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+				if (lstRSurveys.size() > 0) {
 					return lstRSurveys;
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			} catch (NullPointerException npe) {
 				return listOfSurveys;
-			}
-		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+			} // end try-catch block
+		}
 		return listOfSurveys;
 	} // end getSurveys method
+
 	/**
 	 * Sets the groups list.
 	 */
 	public void setSQLselectGroupsList() { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
 		listOfGroups = groupsTableDatabaseAccessor.select(null, null);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 	} // -- end setSQLselectGroupsList() method
 
 	/**
 	 * Sets the jobs list.
 	 */
 	public void setSQLselectAllJobsList() { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("Gets ALL of the jobs in the database!!");
-	    System.out.println("--Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		listOfJobs = jobsTableDatabaseAccessor.select(null, null); // gives a list of all jobs in the database
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		// gives a list of all jobs in the database
+		listOfJobs = jobsTableDatabaseAccessor.select(null, null);
 	} // -- end setSQLselectJobsList() method
-	
+
 	/**
 	 * Sets the surveys list.
 	 * 
 	 * @param group
 	 *            : the group containing the surveys
 	 */
-	public void setSQLselectWhereSurveysList(Group group) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+	public void setSQLselectWhereSurveysList(Group group) { // SQL accessor
+															// caller method
+
 		if (group != null) {
-			listOfSurveys = surveysTableDatabaseAccessor.select("groupID", String.valueOf(group.getID()), null);
+			listOfSurveys = surveysTableDatabaseAccessor.select("groupID",
+					String.valueOf(group.getID()), null);
 		}
 		// debugging statement
-		System.out.println("\nlistOfSurveys set from setSQLselectWhereSurveysListGroup method has "
-				+ listOfSurveys.size() + " surveys.");
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		System.out
+				.println("\nlistOfSurveys set from setSQLselectWhereSurveysListGroup method has "
+						+ listOfSurveys.size() + " surveys.");
+
 	} // -- end seSQLselectWhereSurveysList() method
-	
+
 	/**
 	 * Updates current Group<br>
 	 * .
@@ -1374,32 +944,21 @@ public class Controller implements GuiInterface {
 	 *         1: Success
 	 */
 	public int updateSQLGroup(Group uGroup) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		Group group;
 		if (uGroup == null) {
 			group = getGroup();
 		} else {
 			group = uGroup;
 		}
-	
+
 		group.setModified(new Date());
-	
+
 		int success = groupsTableDatabaseAccessor.update(group);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-	
+
 		return success;
 	} // -- end updateSQLGroup() method
-	
-	
+
 	/**
 	 * Alter a job in the DataAccessor.
 	 * 
@@ -1408,22 +967,13 @@ public class Controller implements GuiInterface {
 	 * @return whether or not altering the job was successful
 	 */
 	public int updateSQLJob(Job job) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		result = jobsTableDatabaseAccessor.update(job);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end updateSQLJob() method
-	
+
 	/**
 	 * Alter a survey in the DAO.
 	 * 
@@ -1432,22 +982,13 @@ public class Controller implements GuiInterface {
 	 * @return whether or not altering the survey was successful
 	 */
 	public int updateSQLSurvey(Survey survey) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		result = surveysTableDatabaseAccessor.update(survey);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end updateSQLSurvey() method
-	
+
 	/**
 	 * Adds a Group in the databaseAccessors.
 	 * 
@@ -1458,24 +999,14 @@ public class Controller implements GuiInterface {
 	 *         1: Success
 	 */
 	public int insertSQLGroup(String groupName) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-	
+
 		int success = groupsTableDatabaseAccessor.insert(groupName);
-		listOfGroups.add(groupsTableDatabaseAccessor.select("name", "'" + groupName + "'").get(0));
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-	
+		listOfGroups.add(groupsTableDatabaseAccessor.select("name",
+				"'" + groupName + "'").get(0));
+
 		return success;
 	} // -- end insertGroup() method
-	
+
 	/**
 	 * Adds a new job in the DAO.
 	 * 
@@ -1485,22 +1016,13 @@ public class Controller implements GuiInterface {
 	 *         1: Success
 	 */
 	public int insertSQLJob(Job job) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		jobsTableDatabaseAccessor.insert(job);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end insertJob() method
-	
+
 	/**
 	 * Adds a new survey to the Group in the DAO.
 	 * 
@@ -1510,22 +1032,13 @@ public class Controller implements GuiInterface {
 	 *         1: Success
 	 */
 	public int insertSQLSurvey(Survey survey) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		surveysTableDatabaseAccessor.insert(survey);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end insertSurvey() method
-	
+
 	/**
 	 * Remove group from database.
 	 * 
@@ -1533,26 +1046,13 @@ public class Controller implements GuiInterface {
 	 *            the group being removed
 	 */
 	public void deleteSQLGroup() { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		groupsTableDatabaseAccessor.delete(group);
 		setSQLselectGroupsList();
 		setGroup(null);
-//		Controller.getControllerInstance().refreshScreen();
 		refreshScreen();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 	} // -- end deleteSQLGroup() method
-	
-	
-	
+
 	/**
 	 * Delete a job in the databaseAccessors.
 	 * 
@@ -1561,22 +1061,13 @@ public class Controller implements GuiInterface {
 	 * @return whether or not deleted the job was successful
 	 */
 	public int deleteSQLJob(Job job) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		jobsTableDatabaseAccessor.delete(job);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end deleteSQLJob() method
-	
+
 	/**
 	 * Delete a survey using the databaseAccessors methods
 	 * 
@@ -1585,50 +1076,32 @@ public class Controller implements GuiInterface {
 	 * @return whether or not deleted the survey was successful
 	 */
 	public int deleteSQLSurvey(Survey survey) { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		int result = 0;
 		surveysTableDatabaseAccessor.delete(survey);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return result;
 	} // -- end deleteSQLSurvey() method
-	
-	
+
 	/**
 	 * Check tables.
 	 */
 	public void checkExistenceOfSQLTables() { // SQL accessor caller method
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		if (!groupsTableDatabaseAccessor.doesGroupsTableExist())
 			groupsTableDatabaseAccessor.createTable();
 		else
 			setSQLselectGroupsList(); // decomment after commit 10/01/2013
 		if (!jobsTableDatabaseAccessor.doesJobsTableExist())
 			jobsTableDatabaseAccessor.createTable();
-		else //{} // eliminate these brackets after commit 10/01/2013
+		else
+			// {} // eliminate these brackets after commit 10/01/2013
 			setSQLselectAllJobsList(); // decomment after commit 10/01/2013
 		if (!surveysTableDatabaseAccessor.doesSurveysTableExist())
-			surveysTableDatabaseAccessor.createTable();	
-		
+			surveysTableDatabaseAccessor.createTable();
+
 		mapJobs = jobsTableDatabaseAccessor.getJobsByCategory();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end checkExistenceOfTables() method
 } // end Controller class
 

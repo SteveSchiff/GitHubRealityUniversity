@@ -56,17 +56,23 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 	private JTextField lastNameTextField = new JTextField(11);
 
 	// Combo Boxes
-	private List<String> jobCategoriesList = Controller.getControllerInstance().getJobCategoriesList();
-	private List<String> listOfJobsInCategory = Controller.getControllerInstance().getJobsByCategoryList(jobCategoriesList.get(0));
+	private List<String> jobCategoriesList = Controller.getControllerInstance()
+			.getJobCategoriesList();
+	private List<String> listOfJobsInCategory = Controller
+			.getControllerInstance().getJobsByCategoryList(
+					jobCategoriesList.get(0));
 
 	private JComboBox periodComboBox = new JComboBox(ARR_PERIOD);
 	private JComboBox educationComboBox = new JComboBox(ARR_EDUCATION);
 	private JComboBox GPAComboBox = new JComboBox(ARR_GPA);
 	private JComboBox childrenCountComboBox = new JComboBox(ARR_CHILDREN_COUNT);
 	private JComboBox creditCardUsesComboBox = new JComboBox(ARR_CCARD_USES);
-	private JComboBox teacherComboBox = new JComboBox(new DefaultComboBoxModel(Controller.getControllerInstance().getTeacherNamesList().toArray()));
-	private JComboBox preferredJobCategoryComboBox = new JComboBox(new DefaultComboBoxModel(jobCategoriesList.toArray()));
-	private JComboBox preferredJobComboBox = new JComboBox(new DefaultComboBoxModel(listOfJobsInCategory.toArray()));
+	private JComboBox teacherComboBox = new JComboBox(new DefaultComboBoxModel(
+			Controller.getControllerInstance().getTeacherNamesList().toArray()));
+	private JComboBox preferredJobCategoryComboBox = new JComboBox(
+			new DefaultComboBoxModel(jobCategoriesList.toArray()));
+	private JComboBox preferredJobComboBox = new JComboBox(
+			new DefaultComboBoxModel(listOfJobsInCategory.toArray()));
 
 	// Radio Buttons
 	private JRadioButton maleGenderRadioButton = new JRadioButton("Male");
@@ -86,24 +92,18 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 
 	private RoundPanel contentPanel = new RoundPanel();
 	private JPanel footerPanel = new JPanel();
-	private JButton saveSurveyButton = new JButton(); // The "Save Survey" button at lower right
+	private JButton saveSurveyButton = new JButton(); // The "Save Survey"
+														// button at lower right
 	private JButton resetButton = new JButton();
-	
 
 	// This was done to insert validation routines into the textboxes
-	private SwingValidationGroup surveyValidationPanelGroup = surveyValidationPanel.getValidationGroup();
+	private SwingValidationGroup surveyValidationPanelGroup = surveyValidationPanel
+			.getValidationGroup();
 
-	/** 
-	 * Constructor. 
+	/**
+	 * Constructor.
 	 */
 	public NewSurveyPanel() {
-		// the next five statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("BEGIN NEWSURVEYPANEL CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 5 lines in all
 	    
 		setBackground(FRAME_BACKGROUND);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -172,19 +172,8 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 			resetButton.setText("Clear");
 			resetButton.setFont(FNT_BIG_AND_BOLD);
 			resetButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {	
-					// the next four statements are for debugging purposes only
-					StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-				    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-				    String methodName = tre.getClassName() + "." + tre.getMethodName();
-				    System.out.println("---Entering " + methodName);
-					// end of debugging statement set - 4 lines in all
-				    
-					Controller.getControllerInstance().refreshScreen();
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+			public void actionPerformed(ActionEvent e) {				    
+					Controller.getControllerInstance().refreshScreen();					
 				} // -- end actionPerformed() method
 			});
 			
@@ -197,12 +186,12 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 			saveSurveyButton.setFont(FNT_BIG_AND_BOLD);
 			saveSurveyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {	
-					// the next four statements are for debugging purposes only
-					StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-				    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-				    String methodName = tre.getClassName() + "." + tre.getMethodName();
-				    System.out.println("---Entering " + methodName);
-					// end of debugging statement set - 4 lines in all
+					
+					
+				    
+				    
+				    
+					
 				    
 					if (surveyValidationPanel.isFatalProblem()) {
 						new StatusTip(
@@ -217,35 +206,16 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 						} else {
 							new StatusTip("Error: Enter GPA", LG_EXCEPTION);
 						}
-
-					}
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+					}					
 				} // -- end actionPerformed() method
 			});
 			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " from try block");
-			// end of debugging statement set
 		} catch (NullPointerException npe) {
 			}
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-
 	} // end constructor *******************
 
-	public JPanel drawHeaderPanel() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public JPanel drawHeaderPanel() {
+
 		JPanel headerPanel = new JPanel();
 
 		JLabel logoLabel = new JLabel("Logo");
@@ -263,32 +233,26 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		groupLabel.setBorder(new EmptyBorder(5, 5, 5, 25));
 
 		headerPanel.add(groupLabel);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return headerPanel;
 	} // -- end drawHeader(0 method
 
-	public JPanel drawSurveyPanel() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public JPanel drawSurveyPanel() {
+
 		JPanel surveyPanel = new JPanel();
 
 		// Main Panel
 		GridBagLayout gbl_pnlSurvey = new GridBagLayout();
 		surveyPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		surveyPanel.setBorder(new TitledBorder(null, "New Survey", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		surveyPanel.setBorder(new TitledBorder(null, "New Survey",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		gbl_pnlSurvey.columnWidths = new int[] { 78, 31, 49, 94, 53, 0, 0 };
-		gbl_pnlSurvey.rowHeights = new int[] { 23, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0 };
-		gbl_pnlSurvey.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnlSurvey.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,	0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnlSurvey.rowHeights = new int[] { 23, 0, 0, 0, 30, 0, 0, 0, 0, 0,
+				0 };
+		gbl_pnlSurvey.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, Double.MIN_VALUE };
+		gbl_pnlSurvey.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		surveyPanel.setLayout(gbl_pnlSurvey);
 
 		// Class Period
@@ -328,7 +292,6 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		gbc_cboTeacher.gridx = 4;
 		gbc_cboTeacher.gridy = 0;
 		surveyPanel.add(teacherComboBox, gbc_cboTeacher);
-		
 
 		// First Name
 		JLabel firstNameLabel = new JLabel("First Name: ", SwingConstants.RIGHT);
@@ -348,7 +311,6 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		gbc_txtFName.gridx = 1;
 		gbc_txtFName.gridy = 1;
 		surveyPanel.add(firstNameTextField, gbc_txtFName);
-		
 
 		// Last Name
 		JLabel lblLName = new JLabel("Last Name: ", SwingConstants.RIGHT);
@@ -577,114 +539,61 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 
 		// Events
 		noCreditCardsRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void itemStateChanged(ItemEvent arg0) {
+
 				creditCardUsesComboBox.setEnabled(false);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			}
 		});
 
 		yesCreditCardsRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
+			public void itemStateChanged(ItemEvent arg0) {
+
 				creditCardUsesComboBox.setEnabled(true);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			}
 		});
 
 		noChildrenRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void itemStateChanged(ItemEvent arg0) {
+
 				childrenCountComboBox.setEnabled(false);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			}
 		});
 
 		yesChildrenRadioButton.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void itemStateChanged(ItemEvent arg0) {
+
 				childrenCountComboBox.setEnabled(true);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			}
 		});
 
 		preferredJobCategoryComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+
 				// Get Job Names from Controller
 				List<String> lstJobNames = Controller.getControllerInstance()
 						.getJobsByCategoryList(
-						// Cast Current Selected Category as String
-								(String) preferredJobCategoryComboBox.getSelectedItem());
+								// Cast Current Selected Category as String
+								(String) preferredJobCategoryComboBox
+										.getSelectedItem());
 				// Create Model of Job Names
 				DefaultComboBoxModel<?> model = new DefaultComboBoxModel<>(
 						lstJobNames.toArray());
 
 				// Populate Jobs ComboBox
 				preferredJobComboBox.setModel((ComboBoxModel<?>) model);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			}
 		});
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return surveyPanel;
 	} // -- end drawSurvey() method
 
 	public void defaultValues() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
 		periodComboBox.setSelectedIndex(0);
 		teacherComboBox.setSelectedItem("none");
 		maleGenderRadioButton.setSelected(false);
@@ -705,10 +614,7 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		noCreditCardsRadioButton.setSelected(false);
 		creditCardUsesComboBox.setSelectedIndex(0);
 		creditCardUsesComboBox.setEnabled(false);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // end defaultValues() method
 
 	/**
@@ -718,12 +624,6 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 	 *         1: Success
 	 */
 	public Survey addSurvey() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		Survey survey = new Survey();
 
@@ -736,11 +636,14 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		survey.setGPA(GPAComboBox.getSelectedIndex());
 		survey.setEducation(educationComboBox.getSelectedIndex());
 
-		int intJobID = Controller.getControllerInstance()
-				.searchJobsList("name", preferredJobComboBox.getSelectedItem().toString()).get(0).getID();
+		int intJobID = Controller
+				.getControllerInstance()
+				.searchJobsList("name",
+						preferredJobComboBox.getSelectedItem().toString())
+				.get(0).getID();
 
 		survey.setPreferredJob(intJobID);
-		
+
 		// default values - can be changed in statements after this 4-line block
 		survey.setGender(1);
 		survey.setMarried(0);
@@ -763,33 +666,18 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 			survey.setCreditCards(1);
 			survey.setCreditCardUses(creditCardUsesComboBox.getSelectedIndex());
 		}
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return survey;
 	} // -- end addSurvey() method
 
-	public boolean validateSurvey() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public boolean validateSurvey() {
+
 		// Validate GPA
 		if (GPAComboBox.getSelectedIndex() == 0) {
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return false;
 		}
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return true;
 	} // -- end validateSurvey() method
 } // end NewSurveyPanel class

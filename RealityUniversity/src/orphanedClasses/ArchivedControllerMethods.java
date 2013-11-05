@@ -18,16 +18,13 @@ import obj.Job;
 import obj.Survey;
 
 public class ArchivedControllerMethods implements GuiInterface {
-	
-	/**
-	 * *******************************************
-	 * This class was made merely to mothball
-	 * unneeded methods from the Controller class.
-	 * *******************************************
-	 *
-	 **/
-	
 
+	/**
+	 * ******************************************* This class was made merely to
+	 * mothball unneeded methods from the Controller class.
+	 * *******************************************
+	 * 
+	 **/
 
 	private List<Survey> listOfNewSurveys;
 	private List<Survey> listOfDeletedSurveys;
@@ -45,79 +42,49 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 *            the survey
 	 */
 	public void addToListOfNewSurveys(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		// lstSurveys.add(survey);
 		listOfNewSurveys.add(survey);
 		ToolBar.getToolBarInstance().setSaveEnabled(true);
-		refreshScreen();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		refreshScreen();
+
 	} // -- end addToListOfNewSurveys() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
 	//
-	
+
 	public List<Survey> getDeletedSurveysList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all	
-		
-		if (listOfDeletedSurveys.size() > 0) {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
+		if (listOfDeletedSurveys.size() > 0) {
+
 			return listOfDeletedSurveys;
 		}
-		List<Survey> lstBlank = new ArrayList<>();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		List<Survey> lstBlank = new ArrayList<>();
+
 		return lstBlank;
 	}
-	
+
 	//
 	// ==============================================
 	// ==============================================
 	//
-	
+
 	/**
 	 * Gets jobs that have been added, but not yet saved
 	 * 
 	 * @return a List of jobs
 	 */
 	public List<Job> getNewJobsList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		if (listOfNewJobs.size() > 0)
 			return listOfNewJobs;
-		List<Job> lstBlank = new ArrayList<>();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		List<Job> lstBlank = new ArrayList<>();
+
 		return lstBlank;
 	} // -- end getNewJobsList() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -129,28 +96,16 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * @return a List of surveys
 	 */
 	public List<Survey> getNewSurveysList() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		if (listOfNewSurveys.size() > 0) {	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
+		if (listOfNewSurveys.size() > 0) {
+
 			return listOfNewSurveys;
 		}
-		List<Survey> lstBlank = new ArrayList<>();	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		List<Survey> lstBlank = new ArrayList<>();
+
 		return lstBlank;
 	} // -- end getNewSurveysList() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -173,13 +128,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * @return Returns a list of Group objects.
 	 */
 	public List<Group> getGroupsList(String search, String criteria) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		List<Group> lstSearchedGroups = new ArrayList<>();
 
 		if (!this.listOfGroups.isEmpty()) {
@@ -200,45 +149,32 @@ public class ArchivedControllerMethods implements GuiInterface {
 						break;
 					}
 				}
-				if (lstSearchedGroups.size() > 0) {	    
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+				if (lstSearchedGroups.size() > 0) {
+
 					return lstSearchedGroups;
 				}
-			} catch (NullPointerException npe) {	    
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			} catch (NullPointerException npe) {
+
 				return listOfGroups;
 			}
-		}	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName + "\nThis is a BAD return!");
-		// end of debugging statement set
+		}
+
+		System.out.println("\n---Leaving " + methodName
+				+ "\nThis is a BAD return!");
 
 		// Should not reach this EVER
 		return null;
 	} // -- end getGroupsList() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
 	//
-	
+
 	/**
 	 * Close the application and removes it from memory.
 	 */
 	public void closeApplication() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all		
 
 		int response = JOptionPane
 				.showConfirmDialog(
@@ -248,14 +184,11 @@ public class ArchivedControllerMethods implements GuiInterface {
 						"Exit Application", JOptionPane.YES_NO_OPTION, 0,
 						new ImageIcon(LG_EXIT));
 
-		if (response == JOptionPane.YES_OPTION)	    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (response == JOptionPane.YES_OPTION)
+
 			System.exit(0);
 	} // -- end closeApplication() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -267,35 +200,19 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * @return true, if is job changed
 	 */
 	public boolean isJobChanged() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		if (listOfNewJobs.size() > 0) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
+		if (listOfNewJobs.size() > 0) {
+
 			return true;
 		}
-		if (listOfDeletedJobs.size() > 0) {    
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+		if (listOfDeletedJobs.size() > 0) {
+
 			return true;
-		}    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		}
 
 		return false;
 	} // -- end isJobChanged() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -308,20 +225,11 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 *            : the survey being edited
 	 */
 	public void openEditSurvey(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-		new EditSurvey(survey);    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
+		new EditSurvey(survey);
+
 	} // -- end openEditSurvey() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -334,21 +242,12 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 *            : the survey being opened
 	 */
 	public void openViewSurvey(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		ViewSurvey vSurvey = new ViewSurvey(survey);
-		vSurvey.setVisible(true);    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		vSurvey.setVisible(true);
+
 	} // -- end openViewSurvey() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -361,13 +260,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 *            the survey
 	 */
 	public void removeSurveyFromListOfNewSurveys(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		if (listOfNewSurveys.contains(survey)) {
 			listOfNewSurveys.remove(survey);
 		}
@@ -376,37 +269,25 @@ public class ArchivedControllerMethods implements GuiInterface {
 		listOfSurveys.remove(survey);
 		gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
 		refreshScreen();
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end removeSurveyFromListOfNewSurveys() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
 	//
-	
+
 	/**
 	 * Destroy the listOfDeletedSurveys list.
 	 */
 	public void destroyListOfDeletedSurveys() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		listOfDeletedSurveys.clear();
 		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		//isGroupChanged(); // possibly unneeded	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		// isGroupChanged(); // possibly unneeded
+
 	} // -- end destroyListOfDeletedSurveys() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -416,22 +297,13 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * Destroy the newSurveys list.
 	 */
 	public void destroyListOfNewSurveys() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		listOfNewSurveys.clear();
 		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		//isGroupChanged(); // possibly unneeded	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		// isGroupChanged(); // possibly unneeded
+
 	} // -- end destroyListOfNewSurveys() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -441,22 +313,13 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * Destroy updated surveys.
 	 */
 	public void destroyListOfUpdatedSurveys() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		listOfUpdatedSurveys.clear();
 		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		//isGroupChanged(); // possibly unneeded	    
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+		// isGroupChanged(); // possibly unneeded
+
 	} // -- end destroyListOfUpdatedSurveys() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -474,7 +337,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	// lstJobs.remove(group);
 	// Controller.getInstance().refreshScreen();
 	// }
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -489,7 +352,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	// lstJobs.remove(job);
 	// Controller.getInstance().refreshScreen();
 	// }
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -505,24 +368,15 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 * 
 	 */
 	public void updateSurvey(Survey oldSurvey, Survey newSurvey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
 		listOfUpdatedSurveys.add(newSurvey);
 		listOfSurveys.remove(oldSurvey);
 		listOfSurveys.add(newSurvey);
 
 		gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end of updateSurvey() method
-	
+
 	//
 	// ==============================================
 	// ==============================================
@@ -531,50 +385,30 @@ public class ArchivedControllerMethods implements GuiInterface {
 	/**
 	 * Process group.
 	 */
-	//TODO processGroup method - part of problem chain method call
+	// TODO processGroup method - part of problem chain method call
 	// <<< lblProcess.addMouseListener(new MouseListener() {
-	//     public void mouseClicked(MouseEvent arg0) >>>
+	// public void mouseClicked(MouseEvent arg0) >>>
 	// in the GroupInfoUpperRightSidePanel class.
 	// method
 	public void processGroup() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
-//		gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
+
+		System.out.println("Entering " + methodName);
+
+		// gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
 		shouldItBeProcessed = true;
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end processGroup() method
 
 	public void printSurvey(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-		
+
 		ViewSurvey viewSurvey = new ViewSurvey(survey);
 		viewSurvey.paperPrintOneSurvey(survey);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end printSurvey() method
- 
-
-
 
 	private void refreshScreen() {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }

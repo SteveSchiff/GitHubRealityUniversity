@@ -18,7 +18,6 @@ import ctrl.Controller;
  */
 public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 
-
 	/**
 	 * Search for Surveys
 	 * 
@@ -34,13 +33,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 	// where could be "id", "fname", "lname", "gpa", "gender", "cperiod",
 	// "teacher", "groupID", "education", "
 	public List<Survey> select(String where, String criteria, String groupBy) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
 		// Variable Declarations
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -120,10 +113,6 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return surveysList;
 	} // -- end select() method
@@ -136,13 +125,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return 0: Failure<br>
 	 *         1: Success
 	 */
-	public int update(Survey survey) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public int update(Survey survey) {
 
 		// Variable Declarations
 		Connection conn = null;
@@ -156,14 +139,14 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 
 			// Create SQL Statement
 			String sql = "UPDATE surveys SET "
-					+ /*"id=?,*/ "fName=?, lName=?, gpa=?, gender=?, " // 1-4
+					+ /* "id=?, */"fName=?, lName=?, gpa=?, gender=?, " // 1-4
 					+ "cPeriod=?, teacher=?, groupID=?, education=?, prefJob=?, job=?, married=?, " // 5-11
 					+ "spouse=?, children=?, cCards=?, cCardUses=?, groceries=?, clothing=?, home=?," // 12-18
 					+ "vehicle=?, childSupport=?, creditScore=? WHERE id=?"; // 19-22
 
 			stmt = conn.prepareStatement(sql);
 
-//			stmt.setInt(1, survey.getID());
+			// stmt.setInt(1, survey.getID());
 			stmt.setString(1, survey.getFName());
 			stmt.setString(2, survey.getLName());
 			stmt.setInt(3, survey.getGPA());
@@ -179,7 +162,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 			stmt.setInt(13, survey.getChildren());
 			stmt.setInt(14, survey.getCreditCards());
 
-			if (survey.getCreditCards() == 0){
+			if (survey.getCreditCards() == 0) {
 				stmt.setString(15, null);
 			}
 
@@ -223,10 +206,6 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end update() method
@@ -239,13 +218,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return 0: Failure<br>
 	 *         1: Success
 	 */
-	public int insert(Survey survey) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public int insert(Survey survey) {
 
 		// Variable Declarations
 		Connection conn = null;
@@ -326,10 +299,6 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end insert() method
@@ -342,13 +311,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return 0: Failure<br>
 	 *         1: Success
 	 */
-	public int delete(Survey survey) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public int delete(Survey survey) {
 
 		// Variable Declarations
 		Connection conn = null;
@@ -393,21 +356,11 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	} // -- end delete() method
 
-	public int createTable() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public int createTable() {
 
 		if (!doesSurveysTableExist()) {
 			JOptionPane
@@ -437,18 +390,14 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 						+ "'teacher' VARCHAR NOT NULL ,"
 						+ "'groupID' INTEGER NOT NULL ,"
 						+ "'education' INTEGER  NOT NULL ,"
-						+ "'prefJob' INTEGER NOT NULL ,"
-						+ "'job' INTEGER ,"
+						+ "'prefJob' INTEGER NOT NULL ," + "'job' INTEGER ,"
 						+ "'married' INTEGER NOT NULL ,"
 						+ "'spouse' INTEGER NOT NULL, "
 						+ "'children' INTEGER NOT NULL ,"
 						+ "'cCards' INTEGER NOT NULL ,"
-						+ "'cCardUses' INTEGER ,"
-						+ "'groceries' DOUBLE ,"
-						+ "'clothing' DOUBLE ,"
-						+ "'home' DOUBLE ,"
-						+ "'vehicle' DOUBLE ,"
-						+ "'childSupport' DOUBLE ,"
+						+ "'cCardUses' INTEGER ," + "'groceries' DOUBLE ,"
+						+ "'clothing' DOUBLE ," + "'home' DOUBLE ,"
+						+ "'vehicle' DOUBLE ," + "'childSupport' DOUBLE ,"
 						+ "'creditScore' INTEGER)";
 
 				stmt = conn.prepareStatement(sql);
@@ -479,28 +428,15 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 					se.printStackTrace();
 				} // End Finally Try/Catch
 			} // End Try/Catch
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
 
 			return rows;
 		} else {
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return 0;
 		}
 	} // -- end createTable() method
 
-	public boolean doesSurveysTableExist() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public boolean doesSurveysTableExist() {
 
 		// Variable Declarations
 		Connection conn = null;
@@ -521,10 +457,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 			while (rs.next()) {
 				String tName = rs.getString("name");
 				if (tName.equals("surveys")) {
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+
 					return true;
 				}
 			}
@@ -550,10 +483,6 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return false;
 	} // -- end doesSurveystableExist() method

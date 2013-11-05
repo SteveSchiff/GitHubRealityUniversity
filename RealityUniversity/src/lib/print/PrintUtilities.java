@@ -33,85 +33,55 @@ import javax.swing.RepaintManager;
  */
 
 public class PrintUtilities implements Printable {
-	
+
 	private Component componentToBePrinted = null;
 
-	public PrintUtilities(Component localComponentToBePrinted) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("PRINTUTILITIES CONSTRUCTOR");
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public PrintUtilities(Component localComponentToBePrinted) {
+
+		System.out.println("PRINTUTILITIES CONSTRUCTOR");
+		System.out.println(methodName);
+
 		componentToBePrinted = localComponentToBePrinted;
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	}
 
-	public static void printComponent(Component c) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public static void printComponent(Component c) {
+
 		(new PrintUtilities(c)).print();
 
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 	}
 
-	public void print() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-	    System.out.println("No parameters.");
-		// end of debugging statement set - 4 lines in all
-	    
+	public void print() {
+
+		System.out.println("No parameters.");
+
 		PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
-		
-			if (printJob.printDialog()) {
-				try {
-					printJob.print();
-				} catch (PrinterException pe) {
-					System.out.println("Error printing: " + pe);
-				}
-			} // end inner if
-		
-		
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-	    System.out.println("No parameters.");
-		// end of debugging statement set
-		
+
+		if (printJob.printDialog()) {
+			try {
+				printJob.print();
+			} catch (PrinterException pe) {
+				System.out.println("Error printing: " + pe);
+			}
+		} // end inner if
+
+		System.out.println("No parameters.");
+
 	} // end print() method
 
 	// this has to be put in because it's required by the Printable interface
-	public int print(Graphics g, PageFormat pageFormat, int pageIndex) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-	    System.out.println("Three parameter method.");
-		// end of debugging statement set - 4 lines in all
-	    
+	public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
+
+		System.out.println("Three parameter method.");
+
 		if (pageIndex > 0) {
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName + " and NO_SUCH_PAGE.");
-			    System.out.println("Three parameter method.");
-				// end of debugging statement set
-				return (NO_SUCH_PAGE);
+
+			System.out.println("\n---Leaving " + methodName
+					+ " and NO_SUCH_PAGE.");
+			System.out.println("Three parameter method.");
+
+			return (NO_SUCH_PAGE);
 		} else {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.translate(pageFormat.getImageableX(),
@@ -119,10 +89,10 @@ public class PrintUtilities implements Printable {
 			disableDoubleBuffering(componentToBePrinted);
 			componentToBePrinted.paint(g2d);
 			enableDoubleBuffering(componentToBePrinted);
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName + " and PAGE_EXISTS.");
-			// end of debugging statement set
+
+			System.out.println("\n---Leaving " + methodName
+					+ " and PAGE_EXISTS.");
+
 			return (PAGE_EXISTS);
 		}
 	} // end print() method of 3 parameters
@@ -134,37 +104,19 @@ public class PrintUtilities implements Printable {
 	 * 
 	 * @see enableDoubleBuffering
 	 */
-	public static void disableDoubleBuffering(Component c) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public static void disableDoubleBuffering(Component c) {
+
 		RepaintManager currentManager = RepaintManager.currentManager(c);
 		currentManager.setDoubleBufferingEnabled(false);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	}
 
 	/** Re-enables double buffering globally. */
 
-	public static void enableDoubleBuffering(Component c) {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public static void enableDoubleBuffering(Component c) {
+
 		RepaintManager currentManager = RepaintManager.currentManager(c);
 		currentManager.setDoubleBufferingEnabled(true);
 
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 	}
 } // end class PrintUtilities

@@ -7,15 +7,12 @@ import ctrl.Controller;
 
 public class ProcessCreditScore {
 
-	private List<Survey> lstSurveys = Controller.getControllerInstance().getSurveysList();
+	private List<Survey> lstSurveys = Controller.getControllerInstance()
+			.getSurveysList();
 
 	public List<Survey> doProcess() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
+
+		System.out.println(methodName);
 
 		for (Survey survey : lstSurveys) {
 			// for surveys that do not have credit cards

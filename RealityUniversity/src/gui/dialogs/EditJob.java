@@ -54,7 +54,8 @@ public class EditJob extends JDialog implements GuiInterface {
 	private JTextField txtSinAfterTax;
 	private JTextField txtLoan;
 
-	private List<String> lstTypes = Controller.getControllerInstance().getJobTypesList();
+	private List<String> lstTypes = Controller.getControllerInstance()
+			.getJobTypesList();
 	private List<String> lstIndustries = Controller.getControllerInstance()
 			.getJobIndustriesList();
 	private List<String> lstCategories = Controller.getControllerInstance()
@@ -69,13 +70,8 @@ public class EditJob extends JDialog implements GuiInterface {
 	private JComboBox<String> cboGPA = new JComboBox<>(ARR_GPA);
 
 	public EditJob(final Job job) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("BEGIN EDITJOB CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+
+		System.out.println("BEGIN EDITJOB CONSTRUCTOR");
 
 		try {
 			job.getID();
@@ -117,14 +113,8 @@ public class EditJob extends JDialog implements GuiInterface {
 		btnOK.setToolTipText("Confirm Changes");
 
 		btnOK.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void actionPerformed(ActionEvent e) {
+
 				if (vpnlSurvey.isFatalProblem()) {
 					new StatusTip("Error: Please check form values.",
 							LG_EXCEPTION);
@@ -132,18 +122,15 @@ public class EditJob extends JDialog implements GuiInterface {
 					Job nJob = getJobForm();
 					if (action.equals("update")) {
 						Controller.getControllerInstance().updateJob(job, nJob);
-					}
-					else {
+					} else {
 						Controller.getControllerInstance().addJob(nJob);
 					}
 					ManageJobs.getManageJobsInstance().setVisible(true);
-					ManageJobs.getManageJobsInstance().btnApply.setEnabled(true);
+					ManageJobs.getManageJobsInstance().btnApply
+							.setEnabled(true);
 					dispose();
 				}
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end actionPerformed method
 		});
 
@@ -157,51 +144,24 @@ public class EditJob extends JDialog implements GuiInterface {
 		setJobForm();
 
 		addWindowListener(new WindowAdapter() {
-			public void windowClosed(WindowEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void windowClosed(WindowEvent e) {
+
 				dispose();
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end windowClosed() method event
 
-			public void windowClosing(WindowEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void windowClosing(WindowEvent e) {
+
 				dispose();
 				ManageJobs.getManageJobsInstance().setVisible(true);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // end windowClosing() method event
 		});
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end constructor
 
-	public JPanel drawHeader() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public JPanel drawHeader() {
+
 		JPanel pnlHeader = new JPanel();
 		JLabel lblLogo = new JLabel("Logo");
 
@@ -219,22 +179,12 @@ public class EditJob extends JDialog implements GuiInterface {
 
 		pnlHeader.add(lblLogo);
 		pnlHeader.add(lblTitle);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return pnlHeader;
 	} // -- end drawHeader() method
 
-	public JPanel drawJob() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public JPanel drawJob() {
+
 		JPanel pnlJob = new JPanel();
 
 		// Main Panel
@@ -510,26 +460,11 @@ public class EditJob extends JDialog implements GuiInterface {
 
 		txtAnnGrossSal.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			};
 
-			public void focusLost(FocusEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void focusLost(FocusEvent e) {
+
 				if (!e.isTemporary()) {
 					Double annualSalary = Double.parseDouble(txtAnnGrossSal
 							.getText());
@@ -613,42 +548,28 @@ public class EditJob extends JDialog implements GuiInterface {
 					txtMarAnnualTax.setText(String
 							.valueOf((stateTaxMarried + fedTaxMarried) * 12));
 					txtMarAfterTax.setText(String.valueOf(marriedAfterTaxes));
-					
+
 					txtSinMonthlyTax.setText(String.valueOf(stateTaxSingle
 							+ fedTaxSingle));
 					txtSinAnnualTax.setText(String
 							.valueOf((stateTaxSingle + fedTaxSingle) * 12));
 					txtSinAfterTax.setText(String.valueOf(singleAfterTaxes));
 				}
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end focusLost() method
 		});
 
 		txtMarAnnualTax.addFocusListener(new FocusListener() {
-			public void focusGained(FocusEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("--Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			public void focusGained(FocusEvent e) {
+
+				System.out.println("--Entering " + methodName);
+
 			};
 
-			public void focusLost(FocusEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println(methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void focusLost(FocusEvent e) {
+
+				System.out.println(methodName);
+
 				if (!e.isTemporary()) {
 					Double annualTax = Double.parseDouble(txtMarAnnualTax
 							.getText());
@@ -656,35 +577,17 @@ public class EditJob extends JDialog implements GuiInterface {
 
 					txtMarMonthlyTax.setText(String.valueOf(monthlyTax));
 				}
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end focusLost() method
 		});
 
 		txtSinAnnualTax.addFocusListener(new FocusListener() {
-			public void focusGained(FocusEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+			public void focusGained(FocusEvent e) {
+
 			};
 
-			public void focusLost(FocusEvent e) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void focusLost(FocusEvent e) {
+
 				if (!e.isTemporary()) {
 					Double annualTax = Double.parseDouble(txtSinAnnualTax
 							.getText());
@@ -692,16 +595,9 @@ public class EditJob extends JDialog implements GuiInterface {
 
 					txtSinMonthlyTax.setText(String.valueOf(monthlyTax));
 				}
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end focusLost() method
 		});
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return pnlJob;
 	} // -- end drawJob() method
@@ -709,14 +605,8 @@ public class EditJob extends JDialog implements GuiInterface {
 	/**
 	 * Set the form fields to the job
 	 */
-	public void setJobForm() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public void setJobForm() {
+
 		try {
 			txtName.setText(job.getName());
 			cboType.setSelectedItem(job.getType());
@@ -740,10 +630,6 @@ public class EditJob extends JDialog implements GuiInterface {
 			cboCategory.setSelectedItem("Select Category");
 			cboGPA.setSelectedIndex(0);
 		}
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 	} // -- end jobForm() method
 
@@ -753,13 +639,7 @@ public class EditJob extends JDialog implements GuiInterface {
 	 * @return a Job object
 	 * @throws NullPointerException
 	 */
-	public Job getJobForm() throws NullPointerException {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public Job getJobForm() throws NullPointerException {
 
 		Job newJob = new Job();
 
@@ -780,10 +660,6 @@ public class EditJob extends JDialog implements GuiInterface {
 		newJob.setSinMonthlyTax(Double.parseDouble(txtSinMonthlyTax.getText()));
 		newJob.setSinAfterTax(Double.parseDouble(txtSinAfterTax.getText()));
 		newJob.setLoan(Double.parseDouble(txtLoan.getText()));
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return newJob;
 	} // -- end getJobForm() method

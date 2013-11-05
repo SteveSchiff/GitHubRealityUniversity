@@ -22,16 +22,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 //import javax.swing.plaf.metal.MetalBorders.Flush3DBorder;
 
-
-
-
-
-
-
-
-
-
-
 import obj.Group;
 import ctrl.Controller;
 
@@ -39,30 +29,26 @@ import ctrl.Controller;
  * The Class GroupInfo extends from a JPanel to create a display of the current
  * group's information.
  */
-public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInterface {
+public class GroupInfoUpperRightSidePanel extends RoundPanel implements
+		GuiInterface {
 
 	/**
 	 * Constructor - it's the whole class pretty much.
 	 */
-	public GroupInfoUpperRightSidePanel() {	
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("GROUPINFOUPPERRIGHTSIDEPANEL CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	public GroupInfoUpperRightSidePanel() {
 
 		/*********************************
 		 * Declarations
-		 *********************************/	
-		// This is the panel that contains the actual information that we actually see
+		 *********************************/
+		// This is the panel that contains the actual information that we
+		// actually see
 		JPanel groupInfoPanel = new JPanel();
-		JScrollPane scrollPane = new JScrollPane();	
-		
+		JScrollPane scrollPane = new JScrollPane();
+
 		Group group;
-		SimpleDateFormat sdfDateFormat = new SimpleDateFormat("M/d/yyyy - hh:mm:ss a");
-		
+		SimpleDateFormat sdfDateFormat = new SimpleDateFormat(
+				"M/d/yyyy - hh:mm:ss a");
+
 		if (Controller.getControllerInstance().getGroup() == null) {
 			group = new Group();
 		} else {
@@ -72,18 +58,24 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		/*********************************
 		 * Configurations
 		 *********************************/
-		setBackground(TOPGROUPPANEL_BACKGROUND_YELLOW); // Not sure if this matters
+		setBackground(TOPGROUPPANEL_BACKGROUND_YELLOW); // Not sure if this
+														// matters
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 
 		scrollPane.setBorder(new EmptyBorder(5, 7, 5, 10));
 		scrollPane.setPreferredSize(new Dimension(200, 200)); // experimental
 		scrollPane.setViewportView(groupInfoPanel);
-		groupInfoPanel.setBackground(TOPGROUPPANEL_BACKGROUND_YELLOW); // yellow - set by Steve for identification
+		groupInfoPanel.setBackground(TOPGROUPPANEL_BACKGROUND_YELLOW); // yellow
+																		// - set
+																		// by
+																		// Steve
+																		// for
+																		// identification
 
 		/*********************************
 		 * Assembly
 		 *********************************/
-		
+
 		// GridBagLayout declaration
 		GridBagLayout gbl_pnlSummary = new GridBagLayout();
 		gbl_pnlSummary.columnWidths = new int[] { 32, 34, 0 };
@@ -102,7 +94,7 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		gbc_lblName.gridx = 0;
 		gbc_lblName.gridy = 0;
 		groupInfoPanel.add(lblName, gbc_lblName);
-		
+
 		// second GridBagConstraints declaration
 		JLabel strName = new JLabel(group.getName());
 		GridBagConstraints gbc_strName = new GridBagConstraints();
@@ -122,9 +114,11 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		gbc_lblNoOfSurveys.gridx = 0;
 		gbc_lblNoOfSurveys.gridy = 1;
 		groupInfoPanel.add(lblNoOfSurveys, gbc_lblNoOfSurveys);
-		
+
 		// fourth GridBagConstraints declaration
-		int groupSize = Controller.getControllerInstance().getSurveysList("GroupID", Integer.toString(group.getID())).size();
+		int groupSize = Controller.getControllerInstance()
+				.getSurveysList("GroupID", Integer.toString(group.getID()))
+				.size();
 		JLabel strNoOfSurveys = new JLabel("" + groupSize);
 		GridBagConstraints gbc_strNoOfSurveys = new GridBagConstraints();
 		gbc_lblNoOfSurveys.fill = GridBagConstraints.BOTH;
@@ -143,7 +137,7 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		gbc_lblCreated.gridx = 0;
 		gbc_lblCreated.gridy = 2;
 		groupInfoPanel.add(lblCreated, gbc_lblCreated);
-		
+
 		// sixth GridBagConstraints declaration
 		JLabel strCreated = new JLabel(""
 				+ sdfDateFormat.format(group.getCreated()));
@@ -164,7 +158,7 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		gbc_lblModified.gridx = 0;
 		gbc_lblModified.gridy = 3;
 		groupInfoPanel.add(lblModified, gbc_lblModified);
-		
+
 		// eighth GridBagConstraints declaration
 		JLabel strModified = new JLabel("Never");
 		GridBagConstraints gbc_strModified = new GridBagConstraints();
@@ -178,7 +172,7 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		// ninth GridBagConstraints declaration
 		final JButton processSurveysButton = new JButton("Process Surveys");
 		processSurveysButton.setFont(FNT_BIG_AND_BOLD);
-		//ImageIcon imgIcon = new ImageIcon("../img/MD_PROCESS");
+		// ImageIcon imgIcon = new ImageIcon("../img/MD_PROCESS");
 		processSurveysButton.setIcon(new ImageIcon(SM_PROCESS));
 		processSurveysButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		GridBagConstraints gbc_lblProcess = new GridBagConstraints();
@@ -191,59 +185,35 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		groupInfoPanel.add(processSurveysButton, gbc_lblProcess);
 
 		processSurveysButton.addMouseListener(new MouseListener() {
-			public void mouseClicked(MouseEvent arg0) {	
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("************************************************************************************************");
-			    System.out.println("*   Process Surveys Button Clicked  *");
-			    System.out.println("************************************************************************************************");
-			    System.out.println("************************************************************************************************");
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
-				//TODO Figure out why this part uses up so much CPU power!
+			public void mouseClicked(MouseEvent arg0) {
+
+				System.out
+						.println("************************************************************************************************");
+				System.out.println("*   Process Surveys Button Clicked  *");
+				System.out
+						.println("************************************************************************************************");
+				System.out
+						.println("************************************************************************************************");
+
+				// TODO Figure out why this part uses up so much CPU power!
 				/**************************************
-				 * This is the place where the problems
-				 * start and make the program use almost 30%
-				 * of my Ivy bridge processor!  Wow!
+				 * This is the place where the problems start and make the
+				 * program use almost 30% of my Ivy bridge processor! Wow!
 				 **************************************/
 				Controller.getControllerInstance().processGroup();
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end mouseClicked() method
 
-			public void mouseEntered(MouseEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void mouseEntered(MouseEvent arg0) {
+
 				processSurveysButton.setForeground(HOVER_COLOR);
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end mouseEntered() method
 
-			public void mouseExited(MouseEvent arg0) {		
-				// the next four statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 4 lines in all
-			    
+			public void mouseExited(MouseEvent arg0) {
+
 				processSurveysButton.setForeground(new Color(0, 0, 0));
-				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+
 			} // -- end mouseExited() method
 
 			public void mousePressed(MouseEvent arg0) {
@@ -258,9 +228,6 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements GuiInter
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		add(scrollPane);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // end constructor
 } // end GroupInfoUpperRightSidePanel class

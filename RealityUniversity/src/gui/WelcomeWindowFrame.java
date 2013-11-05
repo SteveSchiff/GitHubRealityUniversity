@@ -26,17 +26,18 @@ import ctrl.Controller;
 public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 
 	private static WelcomeWindowFrame welcomeWindowFrameInstance = null;
+
 	/**
 	 * Instantiates a new welcome screen.
 	 */
 	public WelcomeWindowFrame() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
+		
+		
+	    
+	    
 	    System.out.println("BEGIN WELCOMEWINDOWFRAME CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+	    
+		
 
 		/*********************************
 		 * Declarations
@@ -114,118 +115,106 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 		newGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				// the next five statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
+				
+			    
+			    
 			    System.out.println("*************************************");
 			    System.out.println("*    -- New Group Button Clicked--  *");
 			    System.out.println("*************************************");
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 5 lines in all
+			    
+				 - 5 lines in all
 			    
 				new NewGroup();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 
 		openGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				// the next five statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
+				
+			    
+			    
 			    System.out.println("*************************************");
 			    System.out.println("*   -- Open Group Button Clicked--  *");
 			    System.out.println("*************************************");
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 5 lines in all
+			    
+				 - 5 lines in all
 			    
 				new OpenGroup();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 
 		editJobsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				// the next five statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
+				
+			    
+			    
 			    System.out.println("*************************************");
 			    System.out.println("*   -- Edit Jobs Button Clicked--   *");
 			    System.out.println("*************************************");
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 5 lines in all
+			    
+				 - 5 lines in all
 			    
 				new ManageJobs();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				// the next five statements are for debugging purposes only
-				StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-			    String methodName = tre.getClassName() + "." + tre.getMethodName();
+				
+			    
+			    
 			    System.out.println("*************************************");
 			    System.out.println("*     -- Help Button Clicked--      *");
 			    System.out.println("*************************************");
-			    System.out.println("---Entering " + methodName);
-				// end of debugging statement set - 5 lines in all
+			    
+				 - 5 lines in all
 			    
 				Controller.getControllerInstance().openHelp();
 				
-				// the next statement is for debugging purposes only
-			    System.out.println("\n---Leaving " + methodName);
-				// end of debugging statement set
+				
+			    
+				
 			}
 		});
 		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-	} // end constructor
-	
-	public static WelcomeWindowFrame getWelcomeWindowFrameInstance() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+		
 	    
-	    if(welcomeWindowFrameInstance != null){
+		
+	} // end constructor
+
+	public static WelcomeWindowFrame getWelcomeWindowFrameInstance() {
+
+		if (welcomeWindowFrameInstance != null) {
 			// debugging statement
-			System.out.println("SAME OLD SAME OLD WELCOME WINDOW FRAME INSTANCE");
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
-	    	return welcomeWindowFrameInstance;
-	    }
-	    else {
+			System.out
+					.println("SAME OLD SAME OLD WELCOME WINDOW FRAME INSTANCE");
+
+			return welcomeWindowFrameInstance;
+		} else {
 			// debugging statement set
-		    System.out.println("");
+			System.out.println("");
 			System.out.println("******NEW WELCOME WINDOW FRAME INSTANCE******");
-			// end of debugging statement set
+
 			welcomeWindowFrameInstance = new WelcomeWindowFrame();
 			Controller.getControllerInstance().checkExistenceOfSQLTables();
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
-			return welcomeWindowFrameInstance;	    	
-	    }
-		
+
+			return welcomeWindowFrameInstance;
+		}
+
 	} // end getWelcomeWindowFrameInstance method
 } // end WelcomeWindowFrame class

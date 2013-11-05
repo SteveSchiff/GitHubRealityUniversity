@@ -15,15 +15,10 @@ import ctrl.Controller;
 
 public class About extends JDialog implements GuiInterface {
 
-	public About() {		
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement tre = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = tre.getClassName() + "." + tre.getMethodName();
-	    System.out.println("BEGIN ABOUT CONSTRUCTOR");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+	public About() {
+
+		System.out.println("BEGIN ABOUT CONSTRUCTOR");
+
 		JPanel pnlContent = new JPanel();
 		JPanel pnlHeader = new JPanel();
 
@@ -44,9 +39,6 @@ public class About extends JDialog implements GuiInterface {
 		setLocationRelativeTo(Controller.getControllerInstance().getFrame());
 		pack();
 		setVisible(true);
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 	} // -- end About constructor
 } // end About class

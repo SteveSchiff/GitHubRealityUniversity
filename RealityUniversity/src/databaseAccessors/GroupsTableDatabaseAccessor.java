@@ -30,12 +30,6 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * @return Returns a List of Group objects.
 	 */
 	public List<Group> select(String column, String search) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -98,15 +92,12 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return lstGroups;
 	}
+
 	// end of select method
-	
+
 	/**
 	 * Update.
 	 * 
@@ -117,12 +108,6 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 *         1: Success
 	 */
 	public int update(Group group) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -141,7 +126,7 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 
 			stmt.setString(1, group.getName());
 			stmt.setDouble(2, currentDateTime.getTime());
-//			stmt.setDate(2, (java.sql.Date) group.getModified());
+			// stmt.setDate(2, (java.sql.Date) group.getModified());
 			stmt.setInt(3, group.getID());
 
 			rows = stmt.executeUpdate();
@@ -173,17 +158,14 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return rows;
 	}
+
 	// end of update method
-	
+
 	// end of update method
-	
+
 	/**
 	 * Insert a new Group.
 	 * 
@@ -194,39 +176,33 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 *         1: Success
 	 */
 	public int insert(String groupName) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
-	
+
 		// Variable Declarations
 		Connection conn = null;
 		PreparedStatement stmt = null;
-	
+
 		int rows = 0;
-	
+
 		try {
-	
+
 			// Connect to Database
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DATABASE, USER, PASS);
-	
+
 			// Create SQL Statement
 			String sql = "INSERT INTO groups (name, created)" + "VALUES (?,?)";
-	
+
 			stmt = conn.prepareStatement(sql);
-	
+
 			stmt.setString(1, groupName);
 			stmt.setDouble(2, currentDateTime.getTime());
-	
+
 			rows = stmt.executeUpdate();
-	
+
 			// Close Query and Database Connection
 			stmt.close();
 			conn.close();
-	
+
 		} catch (SQLException se) {
 			// Handle Errors for JDBC
 			se.printStackTrace();
@@ -234,7 +210,7 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 			// Handle Errors for Class
 			ex.printStackTrace();
 		} finally {
-	
+
 			// Close Resources
 			try {
 				if (stmt != null)
@@ -242,7 +218,7 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 			} catch (SQLException se2) {
 				se2.printStackTrace();
 			}
-	
+
 			try {
 				if (conn != null)
 					conn.close();
@@ -250,22 +226,11 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
-		return rows;	
+
+		return rows;
 	} // -- end insert() method
-	
-	
 
 	public int delete(Group group) { // also deletes surveys that are in group
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
 
 		// Variable Declarations
 		Connection conn = null;
@@ -284,7 +249,7 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 
 			// Execute SQL Statement
 			rows = stmt.executeUpdate();
-			
+
 			stmt.close();
 
 			// Create SQL Statement
@@ -320,23 +285,16 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
+
 		return rows;
 	} // end of delete method
-	
+
 	@Override
 	public int createTable() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("--This method returns an integer containing the number of rows");
-	    System.out.println("--that were created.");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set - 4 lines in all
+
+		System.out
+				.println("--This method returns an integer containing the number of rows");
+		System.out.println("--that were created.");
 
 		if (!doesGroupsTableExist()) {
 			JOptionPane
@@ -392,30 +350,20 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 					se.printStackTrace();
 				} // End Finally Try/Catch
 			} // End Try/Catch
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
 
 			return rows;
 		} else {
-			
-			// the next statement is for debugging purposes only
-		    System.out.println("\n---Leaving " + methodName);
-			// end of debugging statement set
+
 			return 0;
 		}
 	} // end of createTable method
-	
+
 	public boolean doesGroupsTableExist() {
 		// the next few statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println("--This method returns a boolean and ONLY checks existence of groups table");
-	    System.out.println("---Entering " + methodName);
-		// end of debugging statement set
-	    
+
+		System.out
+				.println("--This method returns a boolean and ONLY checks existence of groups table");
+
 		// Variable Declarations
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -435,10 +383,7 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 			while (rs.next()) {
 				String tName = rs.getString("name");
 				if (tName.equals("groups")) {
-					
-					// the next statement is for debugging purposes only
-				    System.out.println("\n---Leaving " + methodName);
-					// end of debugging statement set
+
 					return true;
 				}
 			}
@@ -464,10 +409,6 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 				se.printStackTrace();
 			} // End Finally Try/Catch
 		} // End Try/Catch
-		
-		// the next statement is for debugging purposes only
-	    System.out.println("\n---Leaving " + methodName);
-		// end of debugging statement set
 
 		return false;
 	}

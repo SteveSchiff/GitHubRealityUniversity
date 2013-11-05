@@ -14,7 +14,8 @@ import obj.Survey;
 public class ProcessMarried {
 
 	/** The list of surveys. */
-	private List<Survey> listOfSurveys = Controller.getControllerInstance().getSurveysList();
+	private List<Survey> listOfSurveys = Controller.getControllerInstance()
+			.getSurveysList();
 
 	/** The list of males. */
 	private List<Survey> listOfMales = new ArrayList<>();
@@ -35,12 +36,11 @@ public class ProcessMarried {
 	private List<Survey> listOfDivorcedFemales = new ArrayList<>();
 
 	/** The married requirement. */
-//	private double marriedRequirementRatio = .4 * 100f; // 40%
+	// private double marriedRequirementRatio = .4 * 100f; // 40%
 	private double marriedRequirementRatio = .4f; // 40%
-	
 
 	/** The divorced requirement. */
-//	private double divorcedRequirementRatio = .35 * 100f; // 35%
+	// private double divorcedRequirementRatio = .35 * 100f; // 35%
 	private double divorcedRequirementRatio = .35f; // 35%
 
 	/** The actual number of married surveys. */
@@ -55,12 +55,8 @@ public class ProcessMarried {
 	 * @return the list of surveys after being processed
 	 */
 	public List<Survey> doProcess() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
+
+		System.out.println(methodName);
 
 		for (Survey survey : listOfSurveys) {
 
@@ -90,11 +86,11 @@ public class ProcessMarried {
 		}
 
 		// Make sure we have 40% of the group married
-		setActualMarried((listOfMarriedMales.size() + listOfMarriedFemales.size())
-				* (100f / listOfSurveys.size()));
+		setActualMarried((listOfMarriedMales.size() + listOfMarriedFemales
+				.size()) * (100f / listOfSurveys.size()));
 		// Make sure we have 35% of the group divorced
-		setActualDivorced((listOfDivorcedMales.size() + listOfDivorcedFemales.size())
-				* (100f / listOfSurveys.size()));
+		setActualDivorced((listOfDivorcedMales.size() + listOfDivorcedFemales
+				.size()) * (100f / listOfSurveys.size()));
 
 		// Remove this block to randomize married regardless of preferred
 		setMarriedMales();
@@ -119,13 +115,9 @@ public class ProcessMarried {
 	 * @return true, if has spouse
 	 */
 	public boolean checkSpouse(Survey survey) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		if (survey.getSpouse() > 0)
 			return true;
 		return false;
@@ -134,34 +126,36 @@ public class ProcessMarried {
 	/**
 	 * Loop through males and make some married.
 	 */
-	//TODO This is where the application was freezing up
+	// TODO This is where the application was freezing up
 	// based on the method tracers I inserted into the code.
 	public void setMarriedMales() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
-	    // debug sysout statement
-	    System.out.println("married RequirementRatio is " + marriedRequirementRatio);
-	    
+
+		System.out.println(methodName);
+
+		// debug sysout statement
+		System.out.println("married RequirementRatio is "
+				+ marriedRequirementRatio);
+
 		Random rndMarMale = new Random();
 		// debug sysout statement
-		System.out.println("Generated Random() number and assigned to rndMarMale variable.\n");
+		System.out
+				.println("Generated Random() number and assigned to rndMarMale variable.\n");
 		float actualMarriedMales = listOfMarriedMales.size()
 				* (100f / listOfSurveys.size());
-		//XXX Main debugging to unfreeze app
+		// XXX Main debugging to unfreeze app
 		// debug sysout statement set
 		System.out.println("");
-		System.out.println("Generated actualMarriedMales variable. It is " + actualMarriedMales);
-		System.out.println("rndMarMale from new Random() is a number type of " + rndMarMale);
-		System.out.println("marriedRequirementRatio is " + marriedRequirementRatio);
+		System.out.println("Generated actualMarriedMales variable. It is "
+				+ actualMarriedMales);
+		System.out.println("rndMarMale from new Random() is a number type of "
+				+ rndMarMale);
+		System.out.println("marriedRequirementRatio is "
+				+ marriedRequirementRatio);
 		// end of debug statements
 
 		while (actualMarriedMales < (marriedRequirementRatio / 2)) {
-			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales.size()));
+			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales
+					.size()));
 			if (survey.getMarried() == 0) {
 				survey.setMarried(1);
 				listOfMarriedMales.add(survey);
@@ -169,18 +163,22 @@ public class ProcessMarried {
 				actualMarriedMales = listOfMarriedMales.size()
 						* (100f / listOfSurveys.size());
 			} // end if
-			// debug sysout statement
-			//System.out.println("actualMarriedMales < (marriedRequirementRatio / 2)");
+				// debug sysout statement
+				// System.out.println("actualMarriedMales < (marriedRequirementRatio / 2)");
 		} // end while
-		// debug sysout statement set
+			// debug sysout statement set
 		System.out.println("");
-		System.out.println("Generated actualMarriedMales variable. It is " + actualMarriedMales);
-		System.out.println("rndMarMale from new Random() is a number type of " + rndMarMale);
-		System.out.println("marriedRequirementRatio is " + marriedRequirementRatio);
+		System.out.println("Generated actualMarriedMales variable. It is "
+				+ actualMarriedMales);
+		System.out.println("rndMarMale from new Random() is a number type of "
+				+ rndMarMale);
+		System.out.println("marriedRequirementRatio is "
+				+ marriedRequirementRatio);
 		// end of debug statements
-		
+
 		while (actualMarriedMales > (marriedRequirementRatio / 2)) {
-			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales.size()));
+			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales
+					.size()));
 			if (survey.getMarried() == 1) {
 				survey.setMarried(0);
 				listOfMarriedMales.remove(survey);
@@ -188,8 +186,8 @@ public class ProcessMarried {
 				actualMarriedMales = listOfMarriedMales.size()
 						* (100f / listOfSurveys.size());
 			} // end if
-			// debug sysout statement
-			//System.out.println("actualMarriedMales > (marriedRequirementRatio / 2)");
+				// debug sysout statement
+				// System.out.println("actualMarriedMales > (marriedRequirementRatio / 2)");
 		} // end while
 
 	} // end of setMarriedMales method
@@ -198,20 +196,16 @@ public class ProcessMarried {
 	 * Loop through females and make some married.
 	 */
 	public void setMarriedFemales() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		Random rndMarFemale = new Random();
 		float actualMarriedFemales = listOfMarriedFemales.size()
 				* (100f / listOfSurveys.size());
 
 		while (actualMarriedFemales < (marriedRequirementRatio / 2)) {
-			Survey survey = listOfFemales.get(rndMarFemale.nextInt(listOfFemales
-					.size()));
+			Survey survey = listOfFemales.get(rndMarFemale
+					.nextInt(listOfFemales.size()));
 			if (survey.getMarried() == 0) {
 				survey.setMarried(1);
 				listOfMarriedFemales.add(survey);
@@ -221,8 +215,8 @@ public class ProcessMarried {
 			}
 		}
 		while (actualMarriedFemales > (marriedRequirementRatio / 2)) {
-			Survey survey = listOfFemales.get(rndMarFemale.nextInt(listOfFemales
-					.size()));
+			Survey survey = listOfFemales.get(rndMarFemale
+					.nextInt(listOfFemales.size()));
 			if (survey.getMarried() == 1) {
 				survey.setMarried(0);
 				listOfMarriedFemales.remove(survey);
@@ -237,19 +231,16 @@ public class ProcessMarried {
 	 * Loop through males and make some divorced.
 	 */
 	public void setDivorcedMales() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		Random rndDivMale = new Random();
 		float actualDivorcedMales = listOfDivorcedMales.size()
 				* (100f / listOfSurveys.size());
 
 		while (actualDivorcedMales < (divorcedRequirementRatio / 2)) {
-			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales.size()));
+			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales
+					.size()));
 			if (survey.getMarried() == 0) {
 				survey.setMarried(2);
 				listOfDivorcedMales.add(survey);
@@ -259,7 +250,8 @@ public class ProcessMarried {
 			}
 		}
 		while (actualDivorcedMales > (divorcedRequirementRatio / 2)) {
-			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales.size()));
+			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales
+					.size()));
 			if (survey.getMarried() == 2) {
 				survey.setMarried(0);
 				listOfDivorcedMales.remove(survey);
@@ -274,20 +266,16 @@ public class ProcessMarried {
 	 * Loop through females and make some divorced.
 	 */
 	public void setDivorcedFemales() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		Random rndDivFemale = new Random();
 		float actualDivorcedFemales = listOfDivorcedFemales.size()
 				* (100f / listOfSurveys.size());
 
 		while (actualDivorcedFemales < (divorcedRequirementRatio / 2)) {
-			Survey survey = listOfFemales.get(rndDivFemale.nextInt(listOfFemales
-					.size()));
+			Survey survey = listOfFemales.get(rndDivFemale
+					.nextInt(listOfFemales.size()));
 			if (survey.getMarried() == 0) {
 				survey.setMarried(2);
 				listOfDivorcedFemales.add(survey);
@@ -297,8 +285,8 @@ public class ProcessMarried {
 			}
 		}
 		while (actualDivorcedFemales > (divorcedRequirementRatio / 2)) {
-			Survey survey = listOfFemales.get(rndDivFemale.nextInt(listOfFemales
-					.size()));
+			Survey survey = listOfFemales.get(rndDivFemale
+					.nextInt(listOfFemales.size()));
 			if (survey.getMarried() == 2) {
 				survey.setMarried(0);
 				listOfDivorcedFemales.remove(survey);
@@ -313,13 +301,9 @@ public class ProcessMarried {
 	 * Sets the spouses for the group.
 	 */
 	public void setSpouses() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		Random rndSpouse = new Random();
 		// TODO: Try to match similar income
 
@@ -336,7 +320,8 @@ public class ProcessMarried {
 
 		for (int i = 0; i < surveys.size(); i++) {
 
-			if (listOfMarriedMales.size() > 0 && listOfMarriedFemales.size() > 0) {
+			if (listOfMarriedMales.size() > 0
+					&& listOfMarriedFemales.size() > 0) {
 
 				Survey survey = surveys.get(i);
 				if (!checkSpouse(survey) && survey.getMarried() != 2) {
@@ -383,46 +368,30 @@ public class ProcessMarried {
 	}
 
 	public float getActualMarried() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		return actualMarried;
 	}
 
 	public void setActualMarried(float actualMarried) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		this.actualMarried = actualMarried;
 	}
 
 	public float getActualDivorced() {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		return actualDivorced;
 	}
 
 	public void setActualDivorced(float actualDivorced) {
-		// the next four statements are for debugging purposes only
-		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[1];//coz 0th will be getStackTrace so 1st
-	    String methodName = e.getClassName() + "." + e.getMethodName();
-	    System.out.println(methodName);
-		// end of debugging statement set - 4 lines in all
-	    
+
+		System.out.println(methodName);
+
 		this.actualDivorced = actualDivorced;
 	}
 }
