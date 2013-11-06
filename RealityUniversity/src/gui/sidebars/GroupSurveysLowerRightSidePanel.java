@@ -47,8 +47,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 	 */
 	public GroupSurveysLowerRightSidePanel() {
 
-		System.out.println("GROUPSURVEYSLOWERRIGHTSIDEPANEL CONSTRUCTOR");
-
 		setBackground(FOOTPANEL_BACKGROUND_INDIANRED); // Indian Red by Steve
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setSize(new Dimension(SIDEBAR_WIDTH, SIDEBAR_HEIGHT - 125));
