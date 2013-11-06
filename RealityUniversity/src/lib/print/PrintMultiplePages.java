@@ -3,7 +3,6 @@ package lib.print;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
@@ -20,27 +19,13 @@ public class PrintMultiplePages implements Printable {
 
 	// constructor
 	public PrintMultiplePages(JFrame[] jFrames) {
-		// TODO Auto-generated constructor stub
-
-		System.out.println("PRINTMULTIPLEPAGES CONSTRUCTOR");
 
 		bufferedImages = new BufferedImage[jFrames.length];
 
 		pageFrames = jFrames;
-
-		// for (int i = 0; i < jFrames.length; i++) {
-		// System.out.println("pageFrames[" + i + "].toString() is " +
-		// jFrames[i].toString());
-		// bufferedImages[i] = getImage(jFrames[i]);
-		// System.out.println("bufferedImages[" + i +"].toString is" +
-		// bufferedImages[i]);
-		// }
-
 	} // end constructor
 
 	public void print() {
-
-		System.out.println("No parameters.");
 
 		PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
@@ -52,46 +37,18 @@ public class PrintMultiplePages implements Printable {
 				System.out.println("Error printing: " + pe);
 			}
 		} // end inner if
-
-		System.out.println("No parameters.");
-
 	} // end print() method
 
 	@Override
 	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
 			throws PrinterException {
 
-		System.out.println("Three parameter method.");
-
-		// TODO Auto-generated method stub
-
 		if (pageIndex < bufferedImages.length) {
 
 			bufferedImages[pageIndex] = this.getImage(pageFrames[pageIndex]);
-			// graphics = bufferedImages[pageIndex].createGraphics();
-			// Graphics2D g2d = (Graphics2D) graphics;
-			// g2d.translate(pageFormat.getImageableX(),
-			// pageFormat.getImageableY());
-			// disableDoubleBuffering(componentToBePrinted);
-			// componentToBePrinted.paint(g2d);
-			// enableDoubleBuffering(componentToBePrinted);
-
-			// g2d.drawImage(bufferedImages[pageIndex], 0, 0, null);
-			// Made the third parameter to be an offset to get rid of the
-			// ink depleting black band at the top of the image frame.
-			// TODO Maybe fix this little "black band" problem in the future.
-			graphics.drawImage(bufferedImages[pageIndex], 10, -23, null);
-
-			System.out.println("\n---Leaving " + methodName
-					+ " and PAGE_EXISTS.");
 
 			return PAGE_EXISTS;
 		} else {
-
-			System.out.println("\n---Leaving " + methodName
-					+ " and NO_SUCH_PAGE.");
-			System.out.println("Three parameter method.");
-
 			return NO_SUCH_PAGE;
 		}
 	} // end three parameter print() method

@@ -562,13 +562,9 @@ public class EditJob extends JDialog implements GuiInterface {
 		txtMarAnnualTax.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 
-				System.out.println("--Entering " + methodName);
-
 			};
 
 			public void focusLost(FocusEvent e) {
-
-				System.out.println(methodName);
 
 				if (!e.isTemporary()) {
 					Double annualTax = Double.parseDouble(txtMarAnnualTax

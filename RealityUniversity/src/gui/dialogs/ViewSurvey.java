@@ -4,15 +4,12 @@ import gui.GuiInterface;
 import gui.custom.RoundPanel;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -703,8 +700,6 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		printButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 
-				System.out.println(methodName);
-
 				if (ae.getSource() == printButton)
 					paperPrintOneSurvey(survey);
 				dispose();
@@ -714,8 +709,6 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		// add functionality to close button
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-
-				System.out.println(methodName);
 
 				if (ae.getSource() == closeButton)
 					dispose();
@@ -847,18 +840,6 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 			gender = "Female";
 		}
 		return gender;
-	}
-
-	public void paperPrintSurveyList(List<Survey> listOfSurveys) {
-		// TODO Auto-generated method stub
-		JFrame[] localPrintFrames = new JFrame[listOfSurveys.size()];
-		ViewSurvey[] viewSurveyInstances = null;
-
-		for (int i = 0; i < listOfSurveys.size(); i++) {
-
-		} // end for loop
-
-		// PrintAllUtilities.printComponent(localPrintFrames);
 	}
 
 } // end class

@@ -52,8 +52,6 @@ public class ProcessChildrenDivorcedFemales {
 
 	public List<Survey> doProcess() {
 
-		System.out.println(methodName);
-
 		// Clear out our list and counters
 		lstDivorcedFemales.clear();
 		countKids = 0;
@@ -115,13 +113,10 @@ public class ProcessChildrenDivorcedFemales {
 
 	public void adjustChildrenDown() {
 
-		System.out.println(methodName);
-
 		/*
 		 * While our percentage of divorced WITH kids is too high we randomly
 		 * select a divorced woman with kids and take her children away
 		 */
-
 		while ((double) lstDivWithChild.size() / lstDivorcedFemales.size() > divWithChildrenLimit) {
 
 			randomInt = randomGenerator.nextInt(lstDivWithChild.size());
@@ -141,13 +136,10 @@ public class ProcessChildrenDivorcedFemales {
 
 	public void adjustChildrenUp() {
 
-		System.out.println(methodName);
-
 		/*
 		 * While our percentage of divorced with NO kids is too high we randomly
 		 * select a divorced woman with NO kids and give her children
 		 */
-
 		while ((double) lstDivNoChild.size() / lstDivorcedFemales.size() > divWithOutChildrenLimit) {
 			System.out.println(countNoKids / lstDivorcedFemales.size());
 			randomInt = randomGenerator.nextInt(lstDivNoChild.size());

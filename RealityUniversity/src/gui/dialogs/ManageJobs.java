@@ -287,12 +287,9 @@ public class ManageJobs extends JDialog implements GuiInterface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				System.out.println("Entering " + methodName);
-
 				Controller.getControllerInstance().saveJobs(true);
 				mdlJobs.fireTableDataChanged();
 				dispose();
-
 			} // -- end actionPerformed() method
 		});
 

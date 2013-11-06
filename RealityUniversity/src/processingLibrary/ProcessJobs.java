@@ -116,8 +116,6 @@ public class ProcessJobs {
 	 */
 	private List<Job> getJobsInCategory(Survey survey) {
 
-		System.out.println(methodName);
-
 		String category = surveyPreferredJob.getCategory();
 
 		List<Job> preferredJobsList = checkGPA(Controller
@@ -136,8 +134,6 @@ public class ProcessJobs {
 	 */
 	private List<Job> getJobsInIndustry(Survey survey) {
 
-		System.out.println(methodName);
-
 		String industry = surveyPreferredJob.getIndustry();
 
 		List<Job> lstPrefJobs = checkGPA(Controller.getControllerInstance()
@@ -154,8 +150,6 @@ public class ProcessJobs {
 	 * @return list of eligible jobs
 	 */
 	private List<Job> getJobsInType(Survey survey) {
-
-		System.out.println(methodName);
 
 		String type = surveyPreferredJob.getType();
 
@@ -174,8 +168,6 @@ public class ProcessJobs {
 	 */
 	private List<Job> getJobsInGPA(Survey survey) {
 
-		System.out.println(methodName);
-
 		int gpa = surveyPreferredJob.getGPA();
 
 		List<Job> lstPrefJobs = checkGPA(Controller.getControllerInstance()
@@ -193,8 +185,6 @@ public class ProcessJobs {
 	 */
 	private List<Job> getLowestGPAJobs(Survey survey) {
 
-		System.out.println(methodName);
-
 		List<Job> lowestGPAJobsList = Controller.getControllerInstance()
 				.searchJobsList("gpa", Integer.toString(2));
 
@@ -211,8 +201,6 @@ public class ProcessJobs {
 	 * @return list of checked jobs
 	 */
 	private List<Job> checkGPA(List<Job> jobsList, Survey survey) {
-
-		System.out.println(methodName);
 
 		List<Job> matchedJobsList = new ArrayList<>();
 

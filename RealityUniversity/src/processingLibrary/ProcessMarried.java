@@ -56,8 +56,6 @@ public class ProcessMarried {
 	 */
 	public List<Survey> doProcess() {
 
-		System.out.println(methodName);
-
 		for (Survey survey : listOfSurveys) {
 
 			// Populate gender lists
@@ -116,8 +114,6 @@ public class ProcessMarried {
 	 */
 	public boolean checkSpouse(Survey survey) {
 
-		System.out.println(methodName);
-
 		if (survey.getSpouse() > 0)
 			return true;
 		return false;
@@ -129,8 +125,6 @@ public class ProcessMarried {
 	// TODO This is where the application was freezing up
 	// based on the method tracers I inserted into the code.
 	public void setMarriedMales() {
-
-		System.out.println(methodName);
 
 		// debug sysout statement
 		System.out.println("married RequirementRatio is "
@@ -197,8 +191,6 @@ public class ProcessMarried {
 	 */
 	public void setMarriedFemales() {
 
-		System.out.println(methodName);
-
 		Random rndMarFemale = new Random();
 		float actualMarriedFemales = listOfMarriedFemales.size()
 				* (100f / listOfSurveys.size());
@@ -231,8 +223,6 @@ public class ProcessMarried {
 	 * Loop through males and make some divorced.
 	 */
 	public void setDivorcedMales() {
-
-		System.out.println(methodName);
 
 		Random rndDivMale = new Random();
 		float actualDivorcedMales = listOfDivorcedMales.size()
@@ -267,8 +257,6 @@ public class ProcessMarried {
 	 */
 	public void setDivorcedFemales() {
 
-		System.out.println(methodName);
-
 		Random rndDivFemale = new Random();
 		float actualDivorcedFemales = listOfDivorcedFemales.size()
 				* (100f / listOfSurveys.size());
@@ -301,8 +289,6 @@ public class ProcessMarried {
 	 * Sets the spouses for the group.
 	 */
 	public void setSpouses() {
-
-		System.out.println(methodName);
 
 		Random rndSpouse = new Random();
 		// TODO: Try to match similar income
@@ -369,28 +355,20 @@ public class ProcessMarried {
 
 	public float getActualMarried() {
 
-		System.out.println(methodName);
-
 		return actualMarried;
 	}
 
 	public void setActualMarried(float actualMarried) {
-
-		System.out.println(methodName);
 
 		this.actualMarried = actualMarried;
 	}
 
 	public float getActualDivorced() {
 
-		System.out.println(methodName);
-
 		return actualDivorced;
 	}
 
 	public void setActualDivorced(float actualDivorced) {
-
-		System.out.println(methodName);
 
 		this.actualDivorced = actualDivorced;
 	}

@@ -2,13 +2,9 @@ package ctrl;
 
 import gui.GuiInterface;
 import gui.GuiMain;
-import gui.ToolBar;
 import gui.custom.StatusTip;
 import gui.dialogs.EditJob;
-import gui.dialogs.EditSurvey;
 import gui.dialogs.ManageJobs;
-import gui.dialogs.ViewSurvey;
-
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -17,20 +13,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import obj.Group;
 import obj.Job;
 import obj.Survey;
-import processingLibrary.ProcessChildren;
-import processingLibrary.ProcessChildrenDivorcedFemales;
-import processingLibrary.ProcessChildrenDivorcedMales;
-import processingLibrary.ProcessCreditScore;
-import processingLibrary.ProcessCustodyChildSupport;
 import processingLibrary.ProcessJobs;
-import processingLibrary.ProcessMarried;
 import databaseAccessors.GroupsTableDatabaseAccessor;
 import databaseAccessors.JobsTableDatabaseAccessor;
 import databaseAccessors.SurveysTableDatabaseAccessor;

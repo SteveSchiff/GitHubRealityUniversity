@@ -21,8 +21,6 @@ public class DrawingPanel extends JPanel {
 
 	public DrawingPanel() {
 
-		System.out.println(methodName);
-
 		setBackground(Color.white);
 		Font font = new Font("Serif", Font.PLAIN, fontSize);
 		setFont(font);
@@ -38,8 +36,6 @@ public class DrawingPanel extends JPanel {
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		System.out.println(methodName);
 
 		Graphics2D g2d = (Graphics2D) g;
 		int x = messageWidth / 10;

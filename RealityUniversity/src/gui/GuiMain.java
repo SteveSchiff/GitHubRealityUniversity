@@ -25,11 +25,6 @@ public class GuiMain implements GuiInterface {
 
 	/* Main class constructor */
 	public GuiMain() {
-		// the next few statements are for debugging purposes only
-
-		System.out.println("BEGIN GUI_MAIN CONSTRUCTOR");
-		System.out.println("-- Sets up MenuBar and ToolBar --");
-		System.out.println("And invokes the drawWindow() method");
 
 		bigDaddyFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		bigDaddyFrame.setBackground(FRAME_BACKGROUND);
@@ -58,17 +53,12 @@ public class GuiMain implements GuiInterface {
 
 	public static GuiMain getGUIMainInstance() {
 
-		System.out.println("-- Does nothing but return a GUIMain instance --");
-
 		// If we already have an instance of this GuiMain object, return it.
 		// Otherwise, create a new one..
 		if (guiMainInstance != null) {
-			System.out.println("SAME OLD SAME OLD GUIMAIN INSTANCE");
 
 			return guiMainInstance;
 		} else {
-			System.out.println("");
-			System.out.println("******NEW GUIMAIN INSTANCE******");
 			guiMainInstance = new GuiMain();
 
 			return guiMainInstance;

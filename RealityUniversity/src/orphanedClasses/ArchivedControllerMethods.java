@@ -1,12 +1,10 @@
 package orphanedClasses;
 
-import gui.ToolBar;
 import gui.GuiInterface;
+import gui.ToolBar;
 import gui.dialogs.EditSurvey;
 import gui.dialogs.ViewSurvey;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +31,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	private List<Job> listOfDeletedJobs;
 	private List<Survey> listOfSurveys;
 	private List<Survey> listOfUpdatedSurveys;
-	private boolean shouldItBeProcessed;
-
+	
 	/**
 	 * Adds the survey in memory.
 	 * 
@@ -158,10 +155,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 				return listOfGroups;
 			}
 		}
-
-		System.out.println("\n---Leaving " + methodName
-				+ "\nThis is a BAD return!");
-
 		// Should not reach this EVER
 		return null;
 	} // -- end getGroupsList() method
@@ -391,11 +384,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 	// in the GroupInfoUpperRightSidePanel class.
 	// method
 	public void processGroup() {
-
-		System.out.println("Entering " + methodName);
-
-		// gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
-		shouldItBeProcessed = true;
 
 	} // -- end processGroup() method
 

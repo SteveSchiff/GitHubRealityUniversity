@@ -12,8 +12,6 @@ public class ProcessCreditScore {
 
 	public List<Survey> doProcess() {
 
-		System.out.println(methodName);
-
 		for (Survey survey : lstSurveys) {
 			// for surveys that do not have credit cards
 			if (survey.getCreditCards() == 0) {
@@ -94,12 +92,8 @@ public class ProcessCreditScore {
 				if (survey.getGPA() == 6) {
 					survey.setCreditScore(650);
 				}
-
-				System.out.println(lstSurveys);
-
-			}
-		}
+			} // end else block
+		} // end big for loop
 		return lstSurveys;
-	}
-
-}
+	} // end doProcess() method
+} // end ProcessCreditScore class

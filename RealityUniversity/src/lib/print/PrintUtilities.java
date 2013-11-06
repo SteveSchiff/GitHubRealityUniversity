@@ -3,7 +3,6 @@ package lib.print;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.print.Book;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
@@ -38,9 +37,6 @@ public class PrintUtilities implements Printable {
 
 	public PrintUtilities(Component localComponentToBePrinted) {
 
-		System.out.println("PRINTUTILITIES CONSTRUCTOR");
-		System.out.println(methodName);
-
 		componentToBePrinted = localComponentToBePrinted;
 
 	}
@@ -53,8 +49,6 @@ public class PrintUtilities implements Printable {
 
 	public void print() {
 
-		System.out.println("No parameters.");
-
 		PrinterJob printJob = PrinterJob.getPrinterJob();
 		printJob.setPrintable(this);
 
@@ -65,22 +59,12 @@ public class PrintUtilities implements Printable {
 				System.out.println("Error printing: " + pe);
 			}
 		} // end inner if
-
-		System.out.println("No parameters.");
-
 	} // end print() method
 
 	// this has to be put in because it's required by the Printable interface
 	public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
 
-		System.out.println("Three parameter method.");
-
 		if (pageIndex > 0) {
-
-			System.out.println("\n---Leaving " + methodName
-					+ " and NO_SUCH_PAGE.");
-			System.out.println("Three parameter method.");
-
 			return (NO_SUCH_PAGE);
 		} else {
 			Graphics2D g2d = (Graphics2D) g;
@@ -89,10 +73,6 @@ public class PrintUtilities implements Printable {
 			disableDoubleBuffering(componentToBePrinted);
 			componentToBePrinted.paint(g2d);
 			enableDoubleBuffering(componentToBePrinted);
-
-			System.out.println("\n---Leaving " + methodName
-					+ " and PAGE_EXISTS.");
-
 			return (PAGE_EXISTS);
 		}
 	} // end print() method of 3 parameters

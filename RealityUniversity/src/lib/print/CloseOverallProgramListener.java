@@ -10,9 +10,6 @@ import java.awt.event.*;
 
 public class CloseOverallProgramListener extends WindowAdapter {
 	public void windowClosing(WindowEvent event) {
-
-		System.out.println(methodName);
-
 		System.exit(0);
 	}
 }

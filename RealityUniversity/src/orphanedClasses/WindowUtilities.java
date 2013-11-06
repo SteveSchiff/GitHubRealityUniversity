@@ -20,8 +20,6 @@ public class WindowUtilities {
 
 	public static void setNativeLookAndFeel() {
 
-		System.out.println(methodName);
-
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
@@ -30,9 +28,7 @@ public class WindowUtilities {
 	}
 
 	public static void setJavaLookAndFeel() {
-
-		System.out.println(methodName);
-
+		
 		try {
 			UIManager.setLookAndFeel(UIManager
 					.getCrossPlatformLookAndFeelClassName());
@@ -42,8 +38,6 @@ public class WindowUtilities {
 	}
 
 	public static void setMotifLookAndFeel() {
-
-		System.out.println(methodName);
 
 		try {
 			UIManager
@@ -61,8 +55,6 @@ public class WindowUtilities {
 	public static JFrame openInJFrame(Container content, int width, int height,
 			String title, Color bgColor) {
 
-		System.out.println(methodName);
-
 		JFrame frame = new JFrame(title);
 		frame.setBackground(bgColor);
 		content.setBackground(bgColor);
@@ -78,8 +70,6 @@ public class WindowUtilities {
 	public static JFrame openInJFrame(Container content, int width, int height,
 			String title) {
 
-		System.out.println(methodName);
-
 		return (openInJFrame(content, width, height, title, Color.white));
 	}
 
@@ -89,8 +79,6 @@ public class WindowUtilities {
 	 */
 
 	public static JFrame openInJFrame(Container content, int width, int height) {
-
-		System.out.println(methodName);
 
 		return (openInJFrame(content, width, height, content.getClass()
 				.getName(), Color.white));

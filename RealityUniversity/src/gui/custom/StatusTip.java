@@ -41,8 +41,6 @@ public class StatusTip extends JDialog implements GuiInterface {
 	 */
 	public StatusTip(final String message, final Image icon) {
 
-		System.out.println(methodName);
-
 		this.message = message;
 
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -54,8 +52,6 @@ public class StatusTip extends JDialog implements GuiInterface {
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-
-				System.out.println(methodName);
 
 				RoundPanel pnlMain = new RoundPanel();
 				JPanel pnlMessage = new JPanel();
@@ -128,8 +124,6 @@ public class StatusTip extends JDialog implements GuiInterface {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-
-						System.out.println(methodName);
 
 						opacity -= 0.0015f;
 						setOpacity(Math.max(opacity, 0));

@@ -30,15 +30,8 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 	/**
 	 * Instantiates a new welcome screen.
 	 */
-	public WelcomeWindowFrame() {		
+	public WelcomeWindowFrame() {
 		
-		
-	    
-	    
-	    System.out.println("BEGIN WELCOMEWINDOWFRAME CONSTRUCTOR");
-	    
-		
-
 		/*********************************
 		 * Declarations
 		 *********************************/
@@ -122,13 +115,7 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 			    System.out.println("*    -- New Group Button Clicked--  *");
 			    System.out.println("*************************************");
 			    
-				 - 5 lines in all
-			    
 				new NewGroup();
-				
-				
-			    
-				
 			}
 		});
 
@@ -142,73 +129,39 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 			    System.out.println("*   -- Open Group Button Clicked--  *");
 			    System.out.println("*************************************");
 			    
-				 - 5 lines in all
-			    
 				new OpenGroup();
-				
-				
-			    
-				
 			}
 		});
 
 		editJobsButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
-				// the next five statements are for debugging purposes only
+			public void actionPerformed(ActionEvent e) {
 				
-			    
-			    
 			    System.out.println("*************************************");
 			    System.out.println("*   -- Edit Jobs Button Clicked--   *");
 			    System.out.println("*************************************");
 			    
-				 - 5 lines in all
-			    
 				new ManageJobs();
-				
-				
-			    
-				
 			}
 		});
 		
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				// the next five statements are for debugging purposes only
-				
-			    
 			    
 			    System.out.println("*************************************");
 			    System.out.println("*     -- Help Button Clicked--      *");
 			    System.out.println("*************************************");
 			    
-				 - 5 lines in all
-			    
 				Controller.getControllerInstance().openHelp();
-				
-				
-			    
-				
 			}
 		});
-		
-		
-	    
-		
 	} // end constructor
 
 	public static WelcomeWindowFrame getWelcomeWindowFrameInstance() {
 
 		if (welcomeWindowFrameInstance != null) {
-			// debugging statement
-			System.out
-					.println("SAME OLD SAME OLD WELCOME WINDOW FRAME INSTANCE");
 
 			return welcomeWindowFrameInstance;
 		} else {
-			// debugging statement set
-			System.out.println("");
-			System.out.println("******NEW WELCOME WINDOW FRAME INSTANCE******");
 
 			welcomeWindowFrameInstance = new WelcomeWindowFrame();
 			Controller.getControllerInstance().checkExistenceOfSQLTables();

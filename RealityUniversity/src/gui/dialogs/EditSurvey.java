@@ -546,14 +546,11 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				childrenCountComboBox.setEnabled(true);
-
 			}
 		});
 
 		preferredJobCategoryComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-
-				System.out.println("--Entering " + methodName);
 
 				// Get Job Names from Controller
 				List<String> lstJobNames = Controller.getControllerInstance()
@@ -567,7 +564,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 				// Populate Jobs ComboBox
 				preferredJobComboBox.setModel(model);
-
 			}
 		});
 

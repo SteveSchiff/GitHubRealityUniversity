@@ -23,14 +23,7 @@ public class Group {
 	/**
 	 * Constructor
 	 */
-	public Group() {		
-		// the next five statements are for debugging purposes only
-		
-	    
-	    
-	    System.out.println("GROUP CONSTRUCTOR");
-	    System.out.println(methodName);
-		 - 5 lines in all
+	public Group() {	
 	    
 		this.id = 0;
 		this.name = "";
@@ -119,9 +112,6 @@ public class Group {
 
 	@Override
 	public String toString() {
-
-		System.out.println(methodName);
-
 		return "Group [id=" + id + ", name=" + name + ", created=" + created
 				+ ", modified=" + modified + "]";
 	}

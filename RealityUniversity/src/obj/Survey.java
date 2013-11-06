@@ -41,9 +41,6 @@ public class Survey {
 	 */
 	public Survey() {
 
-		System.out.println("EMPTY SURVEY CONSTRUCTOR");
-		System.out.println(methodName);
-
 		this.id = 0; // 01
 		this.firstName = ""; // 02
 		this.lastName = ""; // 03
@@ -496,8 +493,6 @@ public class Survey {
 
 	@Override
 	public String toString() {
-
-		System.out.println(methodName);
 
 		return "Survey [id=" + id + ", fName=" + firstName + ", lName="
 				+ lastName + ", gpa=" + gpa + ", gender=" + gender

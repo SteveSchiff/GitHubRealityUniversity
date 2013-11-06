@@ -60,13 +60,6 @@ public class OpenGroup extends JDialog implements GuiInterface {
 	}// End Constructor
 
 	public void doOpenGroup(String groupName) {
-		// the next few statements are for debugging purposes only
-
-		StackTraceElement tre = stacktrace[1];// because 0th will be
-												// getStackTrace so 1st
-
-		// Make sure tables exist
-		// Controller.getInstance().checkExistenceOfTables();
 
 		// Set the new window environment
 		// debugging statement

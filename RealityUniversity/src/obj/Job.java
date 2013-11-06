@@ -38,13 +38,6 @@ public class Job {
 	 * Constructor 1 of 2
 	 */
 	public Job() {
-		// the next seven statements are for debugging purposes only
-		
-	    
-	    
-	    System.out.print("==EMPTY JOB CONSTRUCTOR==  ");
-	    System.out.println(methodName);
-		 - 7 lines in all
 	    
 		this.id = 0;
 		this.name = "";
@@ -71,17 +64,9 @@ public class Job {
 			String category, double annGrossSal, double monGrossSal,
 			double marAnnualTax, double marMonthlyTax, double marAfterTax,
 			double sinAnnualTax, double sinMonthlyTax, double sinAfterTax,
-			int gpa, double loan) {	    
-		super();	
+			int gpa, double loan) {
 		
-		// the next six statements are for debugging purposes only
-		
-	    
-	    
-	    System.out.println("");
-	    System.out.println("JOB CONSTRUCTOR");
-	    System.out.println(methodName);
-		 - 6 lines in all
+		super();
 	    
 		this.id = id;
 		this.name = name;
@@ -404,8 +389,6 @@ public class Job {
 
 	@Override
 	public String toString() {
-
-		System.out.println(methodName);
 
 		return "Job [id=" + id + ", name=" + name + ", type=" + type
 				+ ", industry=" + industry + ", category=" + category

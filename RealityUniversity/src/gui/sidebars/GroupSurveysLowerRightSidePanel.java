@@ -519,8 +519,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 	 ***********************************/
 	public static GroupSurveysLowerRightSidePanel getLowerRightSidePanelInstance() {
 
-		System.out.println(methodName);
-
 		// If we do not yet have an instance of this controller
 		// create a new one. Otherwise, return the controller.
 		if (lowerRightSidePanelInstance == null) {

@@ -37,8 +37,6 @@ public class ProcessCustodyChildSupport {
 
 	public List<Survey> doProcess() {
 
-		System.out.println(methodName);
-
 		// This can be uncommented. It will set childSupport to '0' for all
 		// surveys in group
 		for (Survey empty : lstSurveys) {
@@ -74,8 +72,6 @@ public class ProcessCustodyChildSupport {
 	} // end doProcess()
 
 	public void setChildSupportMale() {
-
-		System.out.println(methodName);
 
 		// set 'i' to '1' for groups of 10 or more. If 'i' is not '0'no male in
 		// a group under 10 will receive child support
@@ -128,8 +124,6 @@ public class ProcessCustodyChildSupport {
 	} // end setChildSupportMale()
 
 	public void setChildSupportFemale() {
-
-		System.out.println(methodName);
 
 		float i = 0;
 		int numFemales = lstDivFemalesWithChild.size();

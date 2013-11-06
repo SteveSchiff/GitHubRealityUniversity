@@ -264,14 +264,9 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 		// If we have an instance of this class, simply return it.
 		// Otherwise, return a new one.
 		if (menuBarInstance != null) {
-			// debugging statement
-			System.out.println("SAME OLD SAME OLD MENU BAR INSTANCE");
 
 			return menuBarInstance;
 		} else {
-			// debugging statement set
-			System.out.println("");
-			System.out.println("****NEW MENU BAR INSTANCE****");
 
 			menuBarInstance = new MenuBar();
 

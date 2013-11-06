@@ -103,17 +103,9 @@ public class ToolBar extends JToolBar implements GuiInterface {
 	public static ToolBar getToolBarInstance() {
 
 		if (toolBarInstance != null) {
-			// debugging statement
-			System.out.println("SAME OLD SAME OLD TOOLBAR INSTANCE");
-
 			return toolBarInstance;
 		} else {
-			// debugging statement set
-			System.out.println("");
-			System.out.println("******NEW TOOLBAR INSTANCE******");
-
 			toolBarInstance = new ToolBar();
-
 			return toolBarInstance;
 		}
 	}
