@@ -46,6 +46,11 @@ public class PrintMultiplePages implements Printable {
 		if (pageIndex < bufferedImages.length) {
 
 			bufferedImages[pageIndex] = this.getImage(pageFrames[pageIndex]);
+			
+			// Made the third parameter to be an offset to get rid of the
+			// ink depleting black band at the top of the image frame.
+			//TODO Maybe fix this little "black band" problem in the future.
+			graphics.drawImage(bufferedImages[pageIndex], 10, -23, null);
 
 			return PAGE_EXISTS;
 		} else {
