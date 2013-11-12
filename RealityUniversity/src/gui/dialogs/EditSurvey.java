@@ -47,11 +47,11 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 	private ValidationPanel surveyValidationPanel = new ValidationPanel();
 
-	RoundPanel mainPanel = new RoundPanel();
-	JPanel contentPanel = new JPanel();
-	JPanel footerPanel = new JPanel();
-	JButton updateSurveyButton = new JButton();
-	JButton resetButton = new JButton("Reset");
+	private RoundPanel mainPanel = new RoundPanel();
+	private JPanel contentPanel = new JPanel();
+	private JPanel footerPanel = new JPanel();
+	private JButton updateSurveyButton = new JButton();
+	private JButton resetButton = new JButton("Reset");
 	private Font labelFont = new Font("sansserif", Font.PLAIN, 12);
 
 	// Text Fields
@@ -836,6 +836,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 				.get(0).getID();
 
 		updatedSurvey.setPreferredJob(intJobID);
+		updatedSurvey.setAssignedJob(updatedSurvey.getAssignedJob());
 
 		updatedSurvey.setGender(1);
 

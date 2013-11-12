@@ -185,14 +185,8 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 			saveSurveyButton.setText("Save Survey");
 			saveSurveyButton.setFont(FNT_BIG_AND_BOLD);
 			saveSurveyButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {	
+				public void actionPerformed(ActionEvent e) {
 					
-					
-				    
-				    
-				    
-					
-				    
 					if (surveyValidationPanel.isFatalProblem()) {
 						new StatusTip(
 								"Error: Could not add survey. Please recheck form values.",
@@ -666,6 +660,9 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 			survey.setCreditCards(1);
 			survey.setCreditCardUses(creditCardUsesComboBox.getSelectedIndex());
 		}
+		
+		// the rest of the default values
+		survey.setAssignedJob(intJobID); // same as preferred until "further notice"
 
 		return survey;
 	} // -- end addSurvey() method

@@ -122,9 +122,6 @@ public class GuiMain implements GuiInterface {
 					WelcomeWindowFrame.getWelcomeWindowFrameInstance(),
 					BorderLayout.CENTER);
 
-			// debugging statement
-			System.out.println("The exception was " + npe.getStackTrace());
-
 			bigDaddyFrame.getContentPane().add(mainWindowPanel);
 			mainWindowPanel.validate();
 			mainWindowPanel.repaint();
@@ -141,12 +138,6 @@ public class GuiMain implements GuiInterface {
 		} catch (IllegalAccessException e) {
 		} catch (UnsupportedLookAndFeelException e) {
 		}
-
-		System.out
-				.println("Does nothing but call the getGUIMainInstance() method.");
-
-		// Initial Database Setup
-		// Controller.getInstance(); // comment out after commit 10/01/2013
 
 		GuiMain.getGUIMainInstance();
 

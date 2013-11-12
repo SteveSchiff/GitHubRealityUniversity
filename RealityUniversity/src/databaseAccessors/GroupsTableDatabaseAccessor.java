@@ -359,10 +359,6 @@ public class GroupsTableDatabaseAccessor implements DatabaseAccessorInterface {
 	} // end of createTable method
 
 	public boolean doesGroupsTableExist() {
-		// the next few statements are for debugging purposes only
-
-		System.out
-				.println("--This method returns a boolean and ONLY checks existence of groups table");
 
 		// Variable Declarations
 		Connection conn = null;

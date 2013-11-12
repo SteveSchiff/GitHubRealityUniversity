@@ -23,8 +23,6 @@ public class OpenGroup extends JDialog implements GuiInterface {
 	 */
 	public OpenGroup() {
 
-		System.out.println("OPENGROUP CONSTRUCTOR");
-
 		String groupName = null;
 		int response = -1;
 
@@ -62,9 +60,6 @@ public class OpenGroup extends JDialog implements GuiInterface {
 	public void doOpenGroup(String groupName) {
 
 		// Set the new window environment
-		// debugging statement
-		System.out
-				.println("\n*** start of three methods from doOpenGroup method ***\n");
 
 		Controller.getControllerInstance().setGroup(
 				Controller.getControllerInstance().getGroup("name", groupName));

@@ -55,14 +55,7 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 		// if statement takes up the rest of the constructor
 		// if the group exists, otherwise, there's no point in
 		// executing the rest of the constructor
-		if (Controller.getControllerInstance().getGroup().getID() > 0) { // outer
-																			// if
-																			// statement
-																			// -
-																			// ends
-																			// on
-																			// line
-																			// 482
+		if (Controller.getControllerInstance().getGroup().getID() > 0) {
 
 			JScrollPane scrollPane = new JScrollPane();
 			JPanel surveysPanel = new JPanel();
@@ -93,31 +86,10 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 			gbc_scrollPane.gridx = 0;
 			gbc_scrollPane.gridy = 0;
 
-			// List<Survey> listOfNewSurveys =
-			// Controller.getControllerInstance()
-			// .getNewSurveysList();
-			// List<Survey> listOfDeletedSurveys =
-			// Controller.getControllerInstance()
-			// .getDeletedSurveysList();
-			// Group group = Controller.getControllerInstance().getGroup();
 			Controller.getControllerInstance().setSQLselectWhereSurveysList(
 					group);
 			final List<Survey> listOfSurveys = Controller
 					.getControllerInstance().getSurveysList();
-
-			// debugging statements
-			System.out
-					.println("\n**********************************************************************");
-			// System.out.println("listOfNewSurveys has " +
-			// listOfNewSurveys.size() + " surveys.");
-			// System.out.println("listOfDeletedSurveys has " +
-			// listOfDeletedSurveys.size() + " surveys.");
-			System.out.println("listOfSurveys has " + listOfSurveys.size()
-					+ " surveys.");
-			System.out
-					.println("Inside the GroupSurveysLowerRightSidePanel constructor");
-			System.out
-					.println("**********************************************************************\n");
 
 			if (listOfSurveys.size() > 0) { // inner if statement - ends on line
 											// 448

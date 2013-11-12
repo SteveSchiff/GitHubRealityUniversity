@@ -5,6 +5,7 @@ import gui.GuiMain;
 import gui.custom.StatusTip;
 import gui.dialogs.EditJob;
 import gui.dialogs.ManageJobs;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -14,10 +15,17 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.JFrame;
+
 import obj.Group;
 import obj.Job;
 import obj.Survey;
+import processingLibrary.ProcessChildren;
+import processingLibrary.ProcessChildrenDivorcedFemales;
+import processingLibrary.ProcessChildrenDivorcedMales;
+import processingLibrary.ProcessCreditScore;
+import processingLibrary.ProcessCustodyChildSupport;
 import processingLibrary.ProcessJobs;
+import processingLibrary.ProcessMarried;
 import databaseAccessors.GroupsTableDatabaseAccessor;
 import databaseAccessors.JobsTableDatabaseAccessor;
 import databaseAccessors.SurveysTableDatabaseAccessor;
@@ -102,6 +110,34 @@ public class Controller implements GuiInterface {
 			return controllerInstance;
 		}
 	} // end of Controller static method
+
+	/**
+	 * Process the group.
+	 */
+	// TODO Give this a thorough review, it may be a problem method
+	public void processGroup() {
+		
+		System.out.println("getGroupsList.size() = " + getSurveysList().size());
+		// no point in doing all the heavy-duty processing if the
+		// survey group is less than 20 in size.
+		if (getSurveysList().size() > 19) {
+			// disabled these statements until the problems with them are solved
+			 listOfSurveys = new ProcessMarried().doProcess();
+			 System.out.println("ProcessMarried() method ran successfully.");
+//			 listOfSurveys = new ProcessCreditScore().doProcess();
+			 listOfSurveys = new ProcessJobs().doProcess();
+//			 listOfSurveys = new ProcessChildren().doProcess();
+//			 listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
+//			 listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
+//			 listOfSurveys = new ProcessCustodyChildSupport().doProcess();
+			
+		} else {
+			 listOfSurveys = new ProcessJobs().doProcess();
+		}
+
+		refreshScreen();
+
+	} // end processGroup method
 
 	/**
 	 * Refresh screen.
@@ -485,10 +521,6 @@ public class Controller implements GuiInterface {
 					case "id":
 						if (job.getID() == Integer.parseInt(criteria)) {
 							matchingCriteriaJobsList.add(job);
-							System.out
-									.println("inside searchJobsList(x,y) method and matchingCriteriaJobsList has "
-											+ matchingCriteriaJobsList.size()
-											+ " elements.");
 						}
 						break;
 					case "Name":
@@ -564,25 +596,6 @@ public class Controller implements GuiInterface {
 		new EditJob(job);
 
 	} // -- end openEditJob() method
-
-	/**
-	 * Save the group.
-	 */
-	// TODO Give this a thorough review, it may be a problem method
-	public void processGroup() {
-
-		// disabled these statements until the problems with them are solved
-		// listOfSurveys = new ProcessMarried().doProcess();
-		// listOfSurveys = new ProcessCreditScore().doProcess();
-		listOfSurveys = new ProcessJobs().doProcess();
-		// listOfSurveys = new ProcessChildren().doProcess();
-		// listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
-		// listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
-		// listOfSurveys = new ProcessCustodyChildSupport().doProcess();
-
-		refreshScreen();
-
-	} // end saveGroup method
 
 	/**
 	 * Gets the group in memory.
@@ -912,11 +925,6 @@ public class Controller implements GuiInterface {
 			listOfSurveys = surveysTableDatabaseAccessor.select("groupID",
 					String.valueOf(group.getID()), null);
 		}
-		// debugging statement
-		System.out
-				.println("\nlistOfSurveys set from setSQLselectWhereSurveysListGroup method has "
-						+ listOfSurveys.size() + " surveys.");
-
 	} // -- end seSQLselectWhereSurveysList() method
 
 	/**
@@ -1069,6 +1077,14 @@ public class Controller implements GuiInterface {
 
 		return result;
 	} // -- end deleteSQLSurvey() method
+	
+	/**
+	 * Set marital status for the ProcessMarried class
+	 * for marriage ratio resetting of survey groups
+	 */
+	public void setSQLmaritalStatus(int ident, int maritalStatus) {
+		
+	}
 
 	/**
 	 * Check tables.

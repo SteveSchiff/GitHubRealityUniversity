@@ -124,8 +124,6 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 	 ***********************/
 	public ViewSurvey(final Survey survey) {
 
-		System.out.println("MAIN VIEWSURVEY CONSTRUCTOR WITH SURVEY PARAMETER");
-
 		Job assignedJobInfo = Controller.getControllerInstance().getJob("id",
 				Integer.toString(survey.getAssignedJob()));
 
