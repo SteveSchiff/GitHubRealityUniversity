@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JToolBar;
 import javax.swing.text.DefaultEditorKit;
 
@@ -27,13 +28,16 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		 *********************************/
 		// Buttons
 	    JButton newGroupButton = new JButton();
+	    JLabel newGroupLabel = new JLabel(" New Group");
 		JButton openGroupButton = new JButton();
+		JLabel openGroupButtonLabel = new JLabel("Open Group");
 //		JButton btnPrintSurveys = new JButton();
 //		JButton btnUndo = new JButton();
 		JButton cutButton = new JButton(new DefaultEditorKit.CutAction());
 		JButton copyButton = new JButton(new DefaultEditorKit.CopyAction());
 		JButton pasteButton = new JButton(new DefaultEditorKit.PasteAction());
 		JButton editJobsButton = new JButton();
+		JLabel editJobsLabel = new JLabel("Edit Jobs");
 
 		/*******************************
 		 * Configurations
@@ -69,16 +73,19 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		 * Assembly
 		 *******************************/
 		add(newGroupButton);
+		add(newGroupLabel);
 		add(openGroupButton);
+		add(openGroupButtonLabel);
 //		add(saveButton);
 //		add(btnPrintSurveys);
 		addSeparator();
 //		add(btnUndo);
-		add(cutButton);
-		add(copyButton);
-		add(pasteButton);
-		addSeparator();
+//		add(cutButton);
+//		add(copyButton);
+//		add(pasteButton);
+//		addSeparator();
 		add(editJobsButton);
+		add(editJobsLabel);
 
 		/*********************************
 		 * Events
@@ -108,11 +115,5 @@ public class ToolBar extends JToolBar implements GuiInterface {
 			toolBarInstance = new ToolBar();
 			return toolBarInstance;
 		}
-	}
-
-	public void setSaveEnabled(boolean value) {
-
-		// saveButton.setEnabled(value);
-
-	}
-}
+	} // end getToolBarInstance() method
+} // end ToolBar class

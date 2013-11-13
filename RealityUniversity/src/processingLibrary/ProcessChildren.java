@@ -62,7 +62,7 @@ public class ProcessChildren {
 		for (Survey survey : surveysList) {
 
 			// Get surveys for all married women in group
-			if (survey.getGender() == 1 && survey.getMarried() == 1) {
+			if (survey.getGender() == 1 && survey.getMaritalStatus() == 1) {
 				marriedFemalesList.add(survey);
 
 				// If survey has children add to list married women with
@@ -72,9 +72,8 @@ public class ProcessChildren {
 					marriedFemalesWithChildrenList.add(survey);
 
 					// make sure the spouse has the same number of kids
-					spouseSurvey = Controller.getControllerInstance()
-							.getSurvey("id",
-									Integer.toString(survey.getSpouse()));
+					spouseSurvey = Controller.getControllerInstance().getSurvey("id", 
+							Integer.toString(survey.getSpouse()));
 					spouseSurvey.setChildren(survey.getChildren());
 
 					countKids++;
@@ -87,8 +86,7 @@ public class ProcessChildren {
 					marriedFemalesWithNoChildrenList.add(survey);
 
 					// Make sure the spouse has NO kids as well
-					spouseSurvey = Controller.getControllerInstance()
-							.getSurvey("id",
+					spouseSurvey = Controller.getControllerInstance().getSurvey("id",
 									Integer.toString(survey.getSpouse()));
 					spouseSurvey.setChildren(survey.getChildren());
 
@@ -167,11 +165,9 @@ public class ProcessChildren {
 		while ((double) marriedFemalesWithNoChildrenList.size()
 				/ marriedFemalesList.size() > marriedWithChildrenLimitRatio) {
 			System.out.println(countNoKids / marriedFemalesList.size());
-			randomInteger = randomGenerator
-					.nextInt(marriedFemalesWithNoChildrenList.size());
+			randomInteger = randomGenerator.nextInt(marriedFemalesWithNoChildrenList.size());
 
-			System.out.println("begin "
-					+ marriedFemalesWithNoChildrenList.size()/* countNoKids */);
+			System.out.println("begin "	+ marriedFemalesWithNoChildrenList.size()/* countNoKids */);
 			Survey survey = marriedFemalesWithNoChildrenList.get(randomInteger);
 
 			// Randomly assign 1 or 2 kids

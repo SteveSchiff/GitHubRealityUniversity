@@ -60,7 +60,7 @@ public class ProcessChildrenDivorcedFemales {
 		for (Survey survey : lstSurveys) {
 
 			// Get surveys for all divorced women in group
-			if (survey.getGender() == 1 && survey.getMarried() == 2) {
+			if (survey.getGender() == 1 && survey.getMaritalStatus() == 2) {
 				lstDivorcedFemales.add(survey);
 
 				// If survey has children add to list divorced women with

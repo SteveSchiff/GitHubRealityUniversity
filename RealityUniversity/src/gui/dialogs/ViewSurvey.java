@@ -170,15 +170,13 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 				"Class Information", 0, 0, BORDER_FONT, Color.black));
 		classInfoPanel.setPreferredSize(new Dimension(560, 10));
 		GridBagLayout classInfoPanelGridBagLayout = new GridBagLayout();
-		classInfoPanelGridBagLayout.columnWidths = new int[] { 100, 0, 60, 0,
-				85, 0, 60, 0 };
+		classInfoPanelGridBagLayout.columnWidths = new int[] { 100, 0, 60, 0, 85, 0, 60, 0 };
 		classInfoPanelGridBagLayout.rowHeights = new int[] { 0, 20, 0 };
-		classInfoPanelGridBagLayout.columnWeights = new double[] { 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		classInfoPanelGridBagLayout.rowWeights = new double[] { 0.0, 0.0,
-				Double.MIN_VALUE };
+		classInfoPanelGridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		classInfoPanelGridBagLayout.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		classInfoPanel.setLayout(classInfoPanelGridBagLayout);
-		// Group Name - 1 ****************************************************
+		// Group Name - 1
+		// ****************************************************
 		groupLabel = new JLabel("RealityU Group: ");
 		GridBagConstraints groupLabelConstraints = new GridBagConstraints();
 		groupLabelConstraints.anchor = GridBagConstraints.WEST;
@@ -227,8 +225,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		classPeriodLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		classPeriodInfoLabelConstraints.gridy = 2;
 		classPeriodInfoLabelConstraints.gridx = 1;
-		classInfoPanel.add(classPeriodInfoLabel,
-				classPeriodInfoLabelConstraints);
+		classInfoPanel.add(classPeriodInfoLabel, classPeriodInfoLabelConstraints);
 		// ****************************************************************
 
 		// AORD Student Information Panel (2) - 4 sections
@@ -236,17 +233,13 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		// *****************************************************************
 		studentInfoPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 		studentInfoPanel.setBorder(BorderFactory.createTitledBorder(
-				blackBorder, "Student Information", 0, 0, BORDER_FONT,
-				Color.black));
+				blackBorder, "Student Information", 0, 0, BORDER_FONT, Color.black));
 		studentInfoPanel.setPreferredSize(new Dimension(560, 10));
 		GridBagLayout studentInfoGridBagLayout = new GridBagLayout();
-		studentInfoGridBagLayout.columnWidths = new int[] { 73, 92, 6, 34, 120,
-				67, 52, 0 }; // sum of all 8 is 344
+		studentInfoGridBagLayout.columnWidths = new int[] { 73, 92, 6, 34, 120,	67, 52, 0 }; // sum of all 8 is 344
 		studentInfoGridBagLayout.rowHeights = new int[] { 20, 20, 0 };
-		studentInfoGridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		studentInfoGridBagLayout.rowWeights = new double[] { 0.0, 0.0,
-				Double.MIN_VALUE };
+		studentInfoGridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		studentInfoGridBagLayout.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		studentInfoPanel.setLayout(studentInfoGridBagLayout);
 		// Student name - 1
 		// *******************************************************
@@ -258,8 +251,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		fullNameLabelConstraints.gridx = 0;
 		studentInfoPanel.add(fullNameLabel, fullNameLabelConstraints);
 		// *****************************************************************
-		fullNameInfoLabel = new JLabel(survey.getLName() + ", "
-				+ survey.getFName());
+		fullNameInfoLabel = new JLabel(survey.getLName() + ", "	+ survey.getFName());
 		GridBagConstraints fullNameLabelInfoConstraints = new GridBagConstraints();
 		fullNameLabelInfoConstraints.anchor = GridBagConstraints.WEST;
 		fullNameLabelInfoConstraints.insets = new Insets(0, 0, 0, 5);
@@ -325,13 +317,10 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 				"Family Information", 0, 0, BORDER_FONT, Color.black));
 		famiyInfoPanel.setPreferredSize(new Dimension(560, 10));
 		GridBagLayout familyInfoPanelGridBagLayout = new GridBagLayout();
-		familyInfoPanelGridBagLayout.columnWidths = new int[] { 100, 0, 60, 20,
-				60, 0, 60, 0 };
+		familyInfoPanelGridBagLayout.columnWidths = new int[] { 100, 0, 60, 20,	60, 0, 60, 0 };
 		familyInfoPanelGridBagLayout.rowHeights = new int[] { 20, 20, 0 };
-		familyInfoPanelGridBagLayout.columnWeights = new double[] { 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		familyInfoPanelGridBagLayout.rowWeights = new double[] { 0.0, 0.0,
-				Double.MIN_VALUE };
+		familyInfoPanelGridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		familyInfoPanelGridBagLayout.rowWeights = new double[] { 0.0, 0.0,	Double.MIN_VALUE };
 		famiyInfoPanel.setLayout(familyInfoPanelGridBagLayout);
 		// Marital Status - 1
 		// *****************************************************
@@ -343,9 +332,9 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		maritalStatusLabelConstraints.gridx = 0;
 		famiyInfoPanel.add(maritalStatusLabel, maritalStatusLabelConstraints);
 		// *******************************************************************
-		if (survey.getMarried() == 0) {
+		if (survey.getMaritalStatus() == 0) {
 			marriedInfoLabel = new JLabel("Single");
-		} else if (survey.getMarried() == 1) {
+		} else if (survey.getMaritalStatus() == 1) {
 			marriedInfoLabel = new JLabel("Married");
 		} else {
 			marriedInfoLabel = new JLabel("Divorced");
@@ -367,10 +356,8 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		famiyInfoPanel.add(spouseLabel, spouseLabelConstraints);
 		// *************************************************************************
 		if (survey.getSpouse() > 0) {
-			Survey spouse = Controller.getControllerInstance().getSurvey("id",
-					Integer.toString(survey.getSpouse()));
-			spouseInfoLabel = new JLabel(spouse.getFName() + " "
-					+ spouse.getLName());
+			Survey spouse = Controller.getControllerInstance().getSurvey("id", Integer.toString(survey.getSpouse()));
+			spouseInfoLabel = new JLabel(spouse.getFName() + " " + spouse.getLName());
 		} else {
 			spouseInfoLabel = new JLabel("Unassigned");
 		}
@@ -404,21 +391,17 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		// ******************************************************************
 		financialConsiderationsPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 		financialConsiderationsPanel.setBorder(BorderFactory
-				.createTitledBorder(blackBorder, "Financial Considerations", 0,
-						0, BORDER_FONT, Color.black));
+				.createTitledBorder(blackBorder, "Financial Considerations", 0,	0, BORDER_FONT, Color.black));
 		financialConsiderationsPanel.setPreferredSize(new Dimension(560, 10));
 		GridBagLayout financialConsiderationsPanelGridBagLayout = new GridBagLayout();
 		financialConsiderationsPanelGridBagLayout.columnWidths = new int[] {
 				73, 92, 6, 34, 120, 67, 52, 0 }; // original -> { 100, 0, 60,
 													// 20, 100, 0, 60, 0 }
-		financialConsiderationsPanelGridBagLayout.rowHeights = new int[] { 20,
-				0 };
+		financialConsiderationsPanelGridBagLayout.rowHeights = new int[] { 20, 0 };
 		financialConsiderationsPanelGridBagLayout.columnWeights = new double[] {
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		financialConsiderationsPanelGridBagLayout.rowWeights = new double[] {
-				0.0, Double.MIN_VALUE };
-		financialConsiderationsPanel
-				.setLayout(financialConsiderationsPanelGridBagLayout);
+		financialConsiderationsPanelGridBagLayout.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		financialConsiderationsPanel.setLayout(financialConsiderationsPanelGridBagLayout);
 		// College Loan - 1
 		// ***********************************************************
 		collegeLoansLabel = new JLabel("College Loans: ");
@@ -427,18 +410,15 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		collegeLoansLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		collegeLoansLabelConstraints.gridy = 0;
 		collegeLoansLabelConstraints.gridx = 0;
-		financialConsiderationsPanel.add(collegeLoansLabel,
-				collegeLoansLabelConstraints);
+		financialConsiderationsPanel.add(collegeLoansLabel,	collegeLoansLabelConstraints);
 		// *************************************************************************
-		collegeLoansInfoLabel = new JLabel("$ "
-				+ Double.toString(assignedJobInfo.getLoan()));
+		collegeLoansInfoLabel = new JLabel("$ "	+ Double.toString(assignedJobInfo.getLoan()));
 		GridBagConstraints collegeLoansInfoLabelConstraints = new GridBagConstraints();
 		collegeLoansInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		collegeLoansInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		collegeLoansInfoLabelConstraints.gridy = 0;
 		collegeLoansInfoLabelConstraints.gridx = 1;
-		financialConsiderationsPanel.add(collegeLoansInfoLabel,
-				collegeLoansInfoLabelConstraints);
+		financialConsiderationsPanel.add(collegeLoansInfoLabel,	collegeLoansInfoLabelConstraints);
 		// Credit Score - 2
 		// *************************************************************************
 		creditScoreLabel = new JLabel("Credit Score: ");
@@ -447,18 +427,15 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		creditScoreLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		creditScoreLabelConstraints.gridy = 1;
 		creditScoreLabelConstraints.gridx = 0;
-		financialConsiderationsPanel.add(creditScoreLabel,
-				creditScoreLabelConstraints);
+		financialConsiderationsPanel.add(creditScoreLabel,	creditScoreLabelConstraints);
 		// *************************************************************************
-		creditScoreInfoLabel = new JLabel(Integer.toString(survey
-				.getCreditScore()));
+		creditScoreInfoLabel = new JLabel(Integer.toString(survey.getCreditScore()));
 		GridBagConstraints creditScoreInfoLabelConstraints = new GridBagConstraints();
 		creditScoreInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		creditScoreLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		creditScoreInfoLabelConstraints.gridy = 1;
 		creditScoreInfoLabelConstraints.gridx = 1;
-		financialConsiderationsPanel.add(creditScoreInfoLabel,
-				creditScoreInfoLabelConstraints);
+		financialConsiderationsPanel.add(creditScoreInfoLabel, creditScoreInfoLabelConstraints);
 		// Spouse's Income - 3
 		// ******************************************************************
 		spousalIncomeLabel = new JLabel("Spousal Income: ");
@@ -467,8 +444,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		spousalIncomeLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		spousalIncomeLabelConstraints.gridy = 2;
 		spousalIncomeLabelConstraints.gridx = 0;
-		financialConsiderationsPanel.add(spousalIncomeLabel,
-				spousalIncomeLabelConstraints);
+		financialConsiderationsPanel.add(spousalIncomeLabel, spousalIncomeLabelConstraints);
 		// **********************************************************************
 		spousalIncomeInfoLabel = new JLabel("N/A");
 		GridBagConstraints spousalIncomeInfoLabelConstraints = new GridBagConstraints();
@@ -476,8 +452,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		spousalIncomeInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		spousalIncomeInfoLabelConstraints.gridy = 2;
 		spousalIncomeInfoLabelConstraints.gridx = 1;
-		financialConsiderationsPanel.add(spousalIncomeInfoLabel,
-				spousalIncomeInfoLabelConstraints);
+		financialConsiderationsPanel.add(spousalIncomeInfoLabel,  spousalIncomeInfoLabelConstraints);
 		// Child Support - 4
 		// **********************************************************************
 		childSupportLabel = new JLabel("Child Support: ");
@@ -486,8 +461,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		childSupportLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		childSupportLabelConstraints.gridy = 3;
 		childSupportLabelConstraints.gridx = 0;
-		financialConsiderationsPanel.add(childSupportLabel,
-				childSupportLabelConstraints);
+		financialConsiderationsPanel.add(childSupportLabel,	childSupportLabelConstraints);
 		// **********************************************************************
 		childSupportInfoLabel = new JLabel("$ "
 				+ Double.toString(survey.getChildSupport()));
@@ -496,8 +470,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		childSupportInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		childSupportInfoLabelConstraints.gridy = 3;
 		childSupportInfoLabelConstraints.gridx = 1;
-		financialConsiderationsPanel.add(childSupportInfoLabel,
-				childSupportInfoLabelConstraints);
+		financialConsiderationsPanel.add(childSupportInfoLabel,	childSupportInfoLabelConstraints);
 		// **********************************************************************
 
 		// AORD Occupation and Income Panel (5) - 7 sections
@@ -508,13 +481,10 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 				"Occupation and Income", 0, 0, BORDER_FONT, Color.black));
 		occupationPanel.setPreferredSize(new Dimension(560, 100));
 		GridBagLayout gbl_pnlOccupation = new GridBagLayout();
-		gbl_pnlOccupation.columnWidths = new int[] { 160, 100, 30, 100, 100, 0,
-				0, 0 }; //
+		gbl_pnlOccupation.columnWidths = new int[] { 160, 100, 30, 100, 100, 0,	0, 0 }; //
 		gbl_pnlOccupation.rowHeights = new int[] { 2, 0, 0, 0, 0, 0, 14, 0 };
-		gbl_pnlOccupation.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_pnlOccupation.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnlOccupation.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_pnlOccupation.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		occupationPanel.setLayout(gbl_pnlOccupation);
 		// Occupation Description - 1
 		// *******************************************
@@ -572,8 +542,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		netIncomeLabelConstraints.gridx = 0;
 		occupationPanel.add(netIncomeLabel, netIncomeLabelConstraints);
 		// **********************************************************************
-		netIncomeInfoLabel = new JLabel("$ "
-				+ Double.toString(surveySalary - surveyMonthlyTaxes
+		netIncomeInfoLabel = new JLabel("$ " + Double.toString(surveySalary - surveyMonthlyTaxes
 						+ surveyChildSupport));
 		GridBagConstraints netIncomeInfoLabelConstraints = new GridBagConstraints();
 		netIncomeInfoLabelConstraints.anchor = GridBagConstraints.WEST;
@@ -589,18 +558,15 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		checkbookEntryLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		checkbookEntryLabelConstraints.gridy = 6;
 		checkbookEntryLabelConstraints.gridx = 0;
-		occupationPanel
-				.add(checkbookEntryLabel, checkbookEntryLabelConstraints);
+		occupationPanel.add(checkbookEntryLabel, checkbookEntryLabelConstraints);
 		// **********************************************************************
-		checkbookEntryInfoLabel = new JLabel("$ "
-				+ Double.toString(netIncome + spouseIncome));
+		checkbookEntryInfoLabel = new JLabel("$ " + Double.toString(netIncome + spouseIncome));
 		GridBagConstraints checkbookEntryInfoLabelConstraints = new GridBagConstraints();
 		checkbookEntryInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		checkbookEntryLabelConstraints.insets = new Insets(0, 0, 0, 5);
 		checkbookEntryInfoLabelConstraints.gridy = 6;
 		checkbookEntryInfoLabelConstraints.gridx = 1;
-		occupationPanel.add(checkbookEntryInfoLabel,
-				checkbookEntryInfoLabelConstraints);
+		occupationPanel.add(checkbookEntryInfoLabel, checkbookEntryInfoLabelConstraints);
 
 		// Annual Salary - 5
 		// *********************************************************
@@ -806,7 +772,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 			// Nothing to do
 		}
 
-		if (survey.getMarried() == 1) {
+		if (survey.getMaritalStatus() == 1) {
 			annualTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getSinAnnualTax()));
 			surveyAnnualTaxes = assignedJobInfo.getSinAnnualTax();
@@ -815,7 +781,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 					+ Double.toString(assignedJobInfo.getMarAnnualTax()));
 			surveyAnnualTaxes = assignedJobInfo.getMarAnnualTax();
 		}
-		if (survey.getMarried() == 1) {
+		if (survey.getMaritalStatus() == 1) {
 			monthlyTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getSinMonthlyTax()));
 			surveyMonthlyTaxes = assignedJobInfo.getSinMonthlyTax();

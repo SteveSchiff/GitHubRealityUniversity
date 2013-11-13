@@ -161,6 +161,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 			updateSurveyButton.setToolTipText("Update Survey");
 			updateSurveyButton.setText("Update Survey");
+			updateSurveyButton.setFont(FNT_BIG_AND_BOLD);
 
 			// TODO - DONE! make this work as intended
 			updateSurveyButton.addActionListener(new ActionListener() {
@@ -183,7 +184,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 				} // -- end actionPerformed method
 			});
-			footerPanel.add(resetButton);
+//			footerPanel.add(resetButton);
 			footerPanel.add(updateSurveyButton);
 			contentPanel.add(drawHeader());
 			contentPanel.add(surveyValidationPanel);
@@ -771,7 +772,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			femaleGenderRadioButton.setSelected(true);
 		}
 		// Married
-		if (survey.getMarried() == 1) {
+		if (survey.getMaritalStatus() == 1) {
 			yesMarriedRadioButton.setSelected(true);
 		} else {
 			noMarriedRadioButton.setSelected(true);
@@ -792,10 +793,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			noCreditCardsRadioButton.setSelected(true);
 			creditCardUsesComboBox.setEnabled(false);
 		}
-
-		System.out.println("firstNameTextField's value is "
-				+ firstNameTextField.getText());
-
 	} // end setSurveyForm() method
 
 	/**
@@ -829,18 +826,15 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		// preferredJobComboBox.getSelectedItem().toString() + "'")
 		// .get(0).getID());
 
-		int intJobID = Controller
-				.getControllerInstance()
-				.searchJobsList("name",
-						preferredJobComboBox.getSelectedItem().toString())
-				.get(0).getID();
+		int intJobID = Controller.getControllerInstance().searchJobsList("name",
+						preferredJobComboBox.getSelectedItem().toString()).get(0).getID();
 
 		updatedSurvey.setPreferredJob(intJobID);
 		updatedSurvey.setAssignedJob(updatedSurvey.getAssignedJob());
 
 		updatedSurvey.setGender(1);
 
-		updatedSurvey.setMarried(0);
+		updatedSurvey.setMaritalStatus(0);
 		updatedSurvey.setChildren(0);
 		updatedSurvey.setCreditCards(0);
 
@@ -852,7 +846,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		if (genderMale)
 			updatedSurvey.setGender(0);
 		if (married) {
-			updatedSurvey.setMarried(1);
+			updatedSurvey.setMaritalStatus(1);
 		} else {
 			updatedSurvey.setSpouse(0);
 		}
@@ -864,7 +858,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			updatedSurvey.setCreditCardUses(creditCardUsesComboBox
 					.getSelectedIndex());
 		}
-
 		return updatedSurvey;
 	} // -- end getSurveyForm() method
 
@@ -875,10 +868,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 			return false;
 		}
-
-		System.out.println("firstNameTextField's value is "
-				+ firstNameTextField.getText());
-
 		return true;
 	} // -- end validateSurvey() method
 } // end EditSurvey class

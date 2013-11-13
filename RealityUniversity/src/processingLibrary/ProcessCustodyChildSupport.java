@@ -47,7 +47,7 @@ public class ProcessCustodyChildSupport {
 
 		for (Survey survey : lstSurveys) {
 
-			if (survey.getMarried() == 2 && survey.getChildren() > 0) {
+			if (survey.getMaritalStatus() == 2 && survey.getChildren() > 0) {
 				// Get surveys for all divorced men with children in group
 				if (survey.getGender() == 0) {
 					lstDivMalesWithChild.add(survey);

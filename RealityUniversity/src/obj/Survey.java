@@ -280,10 +280,11 @@ public class Survey {
 	/**
 	 * Gets the married status of the survey.
 	 * 
-	 * @return 0: no<br>
-	 *         1: yes
+	 * @return 0: single
+	 *         1: married
+	 *         2: divorced
 	 */
-	public int getMarried() {
+	public int getMaritalStatus() {
 		return married;
 	}
 
@@ -293,7 +294,7 @@ public class Survey {
 	 * @param married
 	 *            the new married status of the survey
 	 */
-	public void setMarried(int married) {
+	public void setMaritalStatus(int married) {
 		this.married = married;
 	}
 

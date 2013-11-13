@@ -114,7 +114,6 @@ public class Controller implements GuiInterface {
 	/**
 	 * Process the group.
 	 */
-	// TODO Give this a thorough review, it may be a problem method
 	public void processGroup() {
 		
 		System.out.println("getGroupsList.size() = " + getSurveysList().size());
@@ -123,15 +122,15 @@ public class Controller implements GuiInterface {
 		if (getSurveysList().size() > 19) {
 			// disabled these statements until the problems with them are solved
 			 listOfSurveys = new ProcessMarried().doProcess();
-			 System.out.println("ProcessMarried() method ran successfully.");
-//			 listOfSurveys = new ProcessCreditScore().doProcess();
+			 listOfSurveys = new ProcessCreditScore().doProcess();
 			 listOfSurveys = new ProcessJobs().doProcess();
-//			 listOfSurveys = new ProcessChildren().doProcess();
+			 listOfSurveys = new ProcessChildren().doProcess();
 //			 listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
 //			 listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
 //			 listOfSurveys = new ProcessCustodyChildSupport().doProcess();
 			
 		} else {
+			 listOfSurveys = new ProcessCreditScore().doProcess();
 			 listOfSurveys = new ProcessJobs().doProcess();
 		}
 

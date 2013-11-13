@@ -15,26 +15,28 @@ public class ProcessCreditScore {
 		for (Survey survey : lstSurveys) {
 			// for surveys that do not have credit cards
 			if (survey.getCreditCards() == 0) {
-				// set credit scores as follows based on gpa
-				if (survey.getGPA() == 1) {
+				switch (survey.getGPA()) {
+				case 1:
 					survey.setCreditScore(550);
-				}
-				if (survey.getGPA() == 2) {
+					break;
+				case 2:
 					survey.setCreditScore(600);
-				}
-				if (survey.getGPA() == 3) {
+					break;
+				case 3:
 					survey.setCreditScore(625);
-				}
-				if (survey.getGPA() == 4) {
+					break;
+				case 4:
 					survey.setCreditScore(650);
-				}
-				if (survey.getGPA() == 5) {
+					break;
+				case 5:
 					survey.setCreditScore(675);
-				}
-				if (survey.getGPA() == 6) {
+					break;
+				case 6:
 					survey.setCreditScore(700);
-				}
-			}
+					break;
+				} // end switch statement
+				Controller.getControllerInstance().updateSQLSurvey(survey);
+			} // outer if
 
 			// TODO: the assumption in this logic is credit card use is
 			// "emergency only"
@@ -43,55 +45,59 @@ public class ProcessCreditScore {
 			// if statement
 			// these comments will self destruct
 			// for surveys that have credit cards for emergency only
-			if (survey.getCreditCards() == 1 && survey.getCreditCardUses() == 0) {
-				// set credit scores as follows based on gpa
-				if (survey.getGPA() == 0) {
+			if ((survey.getCreditCards() == 1 && survey.getCreditCardUses() == 0)) {
+				switch (survey.getGPA()) {
+				case 0:
 					survey.setCreditScore(550);
-				}
-				if (survey.getGPA() == 1) {
+					break;
+				case 1:
 					survey.setCreditScore(550);
-				}
-				if (survey.getGPA() == 2) {
+					break;
+				case 2:
 					survey.setCreditScore(600);
-				}
-				if (survey.getGPA() == 3) {
+					break;
+				case 3:
 					survey.setCreditScore(625);
-				}
-				if (survey.getGPA() == 4) {
+					break;
+				case 4:
 					survey.setCreditScore(650);
-				}
-				if (survey.getGPA() == 5) {
+					break;
+				case 5:
 					survey.setCreditScore(675);
-				}
-				if (survey.getGPA() == 6) {
+					break;
+				case 6:
 					survey.setCreditScore(700);
-				}
-			}
+					break;
+				} // end switch statement
+				Controller.getControllerInstance().updateSQLSurvey(survey);
+			} // end if
 
 			// any other combinations get decreased credit scores
 			else {
-				// set credit scores as follows based on gpa
-				if (survey.getGPA() == 0) {
+				switch (survey.getGPA()) {
+				case 0:
 					survey.setCreditScore(500);
-				}
-				if (survey.getGPA() == 1) {
+					break;
+				case 1:
 					survey.setCreditScore(500);
-				}
-				if (survey.getGPA() == 2) {
+					break;
+				case 2:
 					survey.setCreditScore(550);
-				}
-				if (survey.getGPA() == 3) {
+					break;
+				case 3:
 					survey.setCreditScore(575);
-				}
-				if (survey.getGPA() == 4) {
+					break;
+				case 4:
 					survey.setCreditScore(600);
-				}
-				if (survey.getGPA() == 5) {
+					break;
+				case 5:
 					survey.setCreditScore(625);
-				}
-				if (survey.getGPA() == 6) {
+					break;
+				case 6:
 					survey.setCreditScore(650);
-				}
+					break;
+				} // end switch statement
+				Controller.getControllerInstance().updateSQLSurvey(survey);
 			} // end else block
 		} // end big for loop
 		return lstSurveys;

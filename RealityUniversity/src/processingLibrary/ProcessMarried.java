@@ -1,6 +1,7 @@
 package processingLibrary;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -68,7 +69,7 @@ public class ProcessMarried {
 				listOfFemales.add(survey);
 
 			// Populate married lists (based on income)
-			if (survey.getMarried() == 1) {
+			if (survey.getMaritalStatus() == 1) {
 				if (survey.getGender() == 0) // Married Male
 					listOfMarriedMales.add(survey);
 				if (survey.getGender() == 1) // Married Female
@@ -76,7 +77,7 @@ public class ProcessMarried {
 			}
 
 			// Populate divorced lists
-			if (survey.getMarried() == 2) {
+			if (survey.getMaritalStatus() == 2) {
 				if (survey.getGender() == 0) // Divorced Male
 					listOfDivorcedMales.add(survey);
 				if (survey.getGender() == 1) // Divorced Female
@@ -127,46 +128,48 @@ public class ProcessMarried {
 		Controller localControllerInstance = Controller.getControllerInstance();
 		
 		// debug sysout statement
-		System.out.println("married RequirementRatio is " + marriedRequirementRatio);
+//		System.out.println("married RequirementRatio is " + marriedRequirementRatio);
 
 		Random rndMarMale = new Random();
 		
-		float actualMarriedMales = ((float)listOfMarriedMales.size()) / listOfMales.size();
-		System.out.println("listOfMarriedMales.size() is " + listOfMarriedMales.size());
-		System.out.println("listOfMales().size() is " + listOfMales.size());
+		float actualMarriedMalesRatio = ((float)listOfMarriedMales.size()) / listOfMales.size();
+		
+//		System.out.println("listOfMarriedMales.size() is " + listOfMarriedMales.size());
+//		System.out.println("listOfMales().size() is " + listOfMales.size());
 
 		// first we test to make sure we have enough  married males
-		while (actualMarriedMales < marriedRequirementRatio) {
+		while (actualMarriedMalesRatio < marriedRequirementRatio) {
 			
 			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales.size()));
 			
-			if (survey.getMarried() == 0) {
-				survey.setMarried(1);
+			if (survey.getMaritalStatus() == 0) {
+				survey.setMaritalStatus(1);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfMarriedMales.add(survey);
-				actualMarriedMales = ((float)listOfMarriedMales.size()) / listOfMales.size();
+				actualMarriedMalesRatio = ((float)listOfMarriedMales.size()) / listOfMales.size();
 			} // end if
 		} // end while
 		
 		// debug sysout statement set
 		System.out.println("");
-		System.out.println("Generated actualMarriedMales variable. It is "	+ actualMarriedMales);
+		System.out.println("Generated actualMarriedMales variable. It is "	+ actualMarriedMalesRatio);
 		System.out.println("rndMarMale from new Random() is a number type of "	+ rndMarMale);
 		System.out.println("marriedRequirementRatio is " + marriedRequirementRatio);
 		// end of debug statements
 
 		// then we test to make sure we don't have too many!
-		while (actualMarriedMales > marriedRequirementRatio) {
+		while (actualMarriedMalesRatio > marriedRequirementRatio) {
 			
 			Survey survey = listOfMales.get(rndMarMale.nextInt(listOfMales.size()));
 			
-			if (survey.getMarried() == 1) {
-				survey.setMarried(0);
+			if (survey.getMaritalStatus() == 1) {
+				survey.setMaritalStatus(0);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfMarriedMales.remove(survey);
-				actualMarriedMales = ((float)listOfMarriedMales.size()) / listOfMales.size();
+				actualMarriedMalesRatio = ((float)listOfMarriedMales.size()) / listOfMales.size();
 			} // end if
 		} // end while
+		System.out.println("Number of married males is " + listOfMarriedMales.size());
 		System.out.println("Leaving setMarriedMales() method.");
 	} // end of setMarriedMales method
 
@@ -180,33 +183,34 @@ public class ProcessMarried {
 
 		Random rndMarFemale = new Random();
 		
-		float actualMarriedFemales = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
+		float actualMarriedFemalesRatio = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
 
 		// first we test to make sure we have enough married females
-		while (actualMarriedFemales < marriedRequirementRatio) {
+		while (actualMarriedFemalesRatio < marriedRequirementRatio) {
 			
 			Survey survey = listOfFemales.get(rndMarFemale.nextInt(listOfFemales.size()));
 			
-			if (survey.getMarried() == 0) {
-				survey.setMarried(1);
+			if (survey.getMaritalStatus() == 0) {
+				survey.setMaritalStatus(1);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfMarriedFemales.add(survey);
-				actualMarriedFemales = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
+				actualMarriedFemalesRatio = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
 			} // end if
 		} // end while
 		
 		// then we test to make sure we don't have too many!
-		while (actualMarriedFemales > marriedRequirementRatio) {
+		while (actualMarriedFemalesRatio > marriedRequirementRatio) {
 			
 			Survey survey = listOfFemales.get(rndMarFemale.nextInt(listOfFemales.size()));
 			
-			if (survey.getMarried() == 1) {
-				survey.setMarried(0);
+			if (survey.getMaritalStatus() == 1) {
+				survey.setMaritalStatus(0);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfMarriedFemales.remove(survey);
-				actualMarriedFemales = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
+				actualMarriedFemalesRatio = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
 			} // end if
 		} // end while
+		System.out.println("Number of married females is " + listOfMarriedFemales.size());
 		System.out.println("Leaving setMarriedFemales() method.");
 	} // end setMarried Females method
 
@@ -216,68 +220,70 @@ public class ProcessMarried {
 	public void setSpouses() {
 		
 		System.out.println("\nEntering setSpouses() method.");
+		System.out.println("There are " + listOfMarriedFemales.size() + " females.");
+		System.out.println("There are " + listOfMarriedMales.size() + " males.");
 
-		Random rndSpouse = new Random();
+		Random randomSpouse = new Random();
 		// TODO: Try to match similar income
 
-		List<Survey> surveys;
-		List<Survey> spouseSurveys;
-
-		if (listOfMarriedFemales.size() > listOfMarriedMales.size()) {
-			surveys = listOfMarriedFemales;
-			spouseSurveys = listOfMarriedMales;
-		} else {
-			surveys = listOfMarriedMales;
-			spouseSurveys = listOfMarriedFemales;
-		}
-
-		for (int i = 0; i < surveys.size(); i++) {
-
-			if (listOfMarriedMales.size() > 0
-					&& listOfMarriedFemales.size() > 0) {
-
-				Survey survey = surveys.get(i);
-				if (!checkSpouse(survey) && survey.getMarried() != 2) {
-
-					try {
-						// Set a spouse
-						Survey spouse = spouseSurveys.get(rndSpouse
-								.nextInt(spouseSurveys.size()));
-
-						// Find an eligible spouse
-						while (checkSpouse(spouse) && spouseSurveys.size() > 1) {
-
-							// If spouse is already married, remove from
-							// eligible spouses
-							if (checkSpouse(spouse))
-								spouseSurveys.remove(spouse);
-
-							spouse = spouseSurveys.get(rndSpouse
-									.nextInt(spouseSurveys.size()));
-
-						}
-
-						if (spouse != null) {
-
-							// Remove the old surveys
-							listOfSurveys.remove(survey);
-							listOfSurveys.remove(spouse);
-
-							// Make the 2 spouses to each other
-							survey.setSpouse(spouse.getID());
-							spouse.setSpouse(survey.getID());
-
-							// Add the new surveys
-
-							listOfSurveys.add(survey);
-							listOfSurveys.add(spouse);
-						}
-					} catch (IndexOutOfBoundsException iobe) {
-						break;
-					}
-				} // CheckSpouse
+		List<Survey> marriedMalesSurveys = listOfMarriedMales;
+		List<Survey> marriedFemalesSurveys = listOfMarriedFemales;
+		
+		List<Survey> temporaryMarriedMalesSurveys = marriedMalesSurveys;
+		List<Survey> temporaryMarriedFemalesSurveys = marriedFemalesSurveys;
+		
+		// First we need to loop through the above two lists to winnow out
+		// the marrieds that already have an assigned spouse from previous
+		// survey group processing run-throughs.
+		for (int i = 0; i < marriedMalesSurveys.size(); i++) {
+			
+			Survey marriedMale = marriedMalesSurveys.get(i);
+			
+			if (hasSpouse(marriedMale)) {
+				temporaryMarriedMalesSurveys.remove(i);
 			}
-		} // For Loop
+		} // end married male for loop
+		
+		for (int i = 0; i < marriedFemalesSurveys.size(); i++) {
+			
+			Survey marriedFemale = marriedFemalesSurveys.get(i);
+			
+			if (hasSpouse(marriedFemale)) {
+				temporaryMarriedFemalesSurveys.remove(i);
+			}
+		} // end married female for loop
+		
+		// Now we use the temporary married lists to reset the married lists
+		// that we really want to work with - the ones that have no assigned
+		// spouse yet.
+		marriedMalesSurveys = temporaryMarriedMalesSurveys;
+		marriedFemalesSurveys = temporaryMarriedFemalesSurveys;
+		
+		// *********************************************************************
+		// Now that we've winnowed both married lists down to only the ones
+		// that are married with no assigned spouses, we can start the assigning
+		// *********************************************************************
+		if( (marriedMalesSurveys.size() > 0) && (marriedFemalesSurveys.size() > 0) ) {
+		
+			for (int i = 0; i < marriedMalesSurveys.size(); i++) {
+				
+				Survey marriedMale = marriedMalesSurveys.get(i);
+				
+				if ( marriedFemalesSurveys.size() >= 1 ) {
+					
+					// Set a spouse from random choice of available married pool
+					Survey marriedFemale = marriedFemalesSurveys.get(randomSpouse
+							.nextInt(marriedFemalesSurveys.size()));
+
+					marriedMale.setSpouse(marriedFemale.getID());
+					marriedFemale.setSpouse(marriedMale.getID());
+					
+					marriedFemalesSurveys.remove(marriedFemale);
+				} // if marriedFemale had no assigned spouse
+				
+			} // For Loop
+			
+		} // if both married lists have at least one member a piece
 		System.out.println("Leaving setSpouses() method.");
 	} // end setSpouses() method
 
@@ -290,30 +296,30 @@ public class ProcessMarried {
 		Controller localControllerInstance = Controller.getControllerInstance();
 
 		Random rndDivMale = new Random();
-		float actualDivorcedMales = (float)(listOfDivorcedMales.size()) / listOfMales.size();
-		System.out.println("actualDivorcedMales is " + actualDivorcedMales);
+		float actualDivorcedMalesRatio = (float)(listOfDivorcedMales.size()) / listOfMales.size();
+		System.out.println("actualDivorcedMales is " + actualDivorcedMalesRatio);
 
 		// first we test to make sure we have enough divorced males
-		while (actualDivorcedMales < divorcedRequirementRatio) {
+		while (actualDivorcedMalesRatio < divorcedRequirementRatio) {
 			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales.size()));
-			if (survey.getMarried() == 0) {
-				survey.setMarried(2);
+			if (survey.getMaritalStatus() == 0) {
+				survey.setMaritalStatus(2);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfDivorcedMales.add(survey);
-				actualDivorcedMales = (float)(listOfDivorcedMales.size()) / listOfMales.size();
-				System.out.println("actualDivorcedMales is " + actualDivorcedMales + " first while");
+				actualDivorcedMalesRatio = (float)(listOfDivorcedMales.size()) / listOfMales.size();
+				System.out.println("actualDivorcedMales is " + actualDivorcedMalesRatio + " first while");
 			}
 		}
 		
 		// then we test to make sure we don't have too many!
-		while (actualDivorcedMales > divorcedRequirementRatio) {
+		while (actualDivorcedMalesRatio > divorcedRequirementRatio) {
 			Survey survey = listOfMales.get(rndDivMale.nextInt(listOfMales.size()));
-			if (survey.getMarried() == 2) {
-				survey.setMarried(0);
+			if (survey.getMaritalStatus() == 2) {
+				survey.setMaritalStatus(0);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfDivorcedMales.remove(survey);
-				actualDivorcedMales = (float)(listOfDivorcedMales.size()) / listOfMales.size();
-				System.out.println("actualDivorcedMales is " + actualDivorcedMales + " second while");
+				actualDivorcedMalesRatio = (float)(listOfDivorcedMales.size()) / listOfMales.size();
+				System.out.println("actualDivorcedMales is " + actualDivorcedMalesRatio + " second while");
 			} // end if
 		} // end while
 		System.out.println("Leaving setDivorcedMales() method.");
@@ -328,30 +334,30 @@ public class ProcessMarried {
 		Controller localControllerInstance = Controller.getControllerInstance();
 
 		Random rndDivFemale = new Random();
-		float actualDivorcedFemales = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
-		System.out.println("actualDivorcedFemales is " + actualDivorcedFemales);
+		float actualDivorcedFemalesRatio = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
+		System.out.println("actualDivorcedFemales is " + actualDivorcedFemalesRatio);
 
 		// first we check to make sure we have enough divorced females
-		while (actualDivorcedFemales < divorcedRequirementRatio) {
+		while (actualDivorcedFemalesRatio < divorcedRequirementRatio) {
 			Survey survey = listOfFemales.get(rndDivFemale.nextInt(listOfFemales.size()));
-			if (survey.getMarried() == 0) {
-				survey.setMarried(2);
+			if (survey.getMaritalStatus() == 0) {
+				survey.setMaritalStatus(2);
 				localControllerInstance.updateSQLSurvey(survey);
 				listOfDivorcedFemales.add(survey);
-				actualDivorcedFemales = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
-				System.out.println("actualDivorcedFemales is " + actualDivorcedFemales + " first while");
+				actualDivorcedFemalesRatio = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
+				System.out.println("actualDivorcedFemales is " + actualDivorcedFemalesRatio + " first while");
 			} // end if
 		} // end while
 		
 		// then we make sure we don't have too many!
-		while (actualDivorcedFemales > divorcedRequirementRatio) {
+		while (actualDivorcedFemalesRatio > divorcedRequirementRatio) {
 			Survey survey = listOfFemales.get(rndDivFemale.nextInt(listOfFemales.size()));
-			if (survey.getMarried() == 2) {
-				survey.setMarried(0);
+			if (survey.getMaritalStatus() == 2) {
+				survey.setMaritalStatus(0);
 				listOfDivorcedFemales.remove(survey);
 				localControllerInstance.updateSQLSurvey(survey);
-				actualDivorcedFemales = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
-				System.out.println("actualDivorcedFemales is " + actualDivorcedFemales + " second while");
+				actualDivorcedFemalesRatio = (float)(listOfDivorcedFemales.size()) / listOfFemales.size();
+				System.out.println("actualDivorcedFemales is " + actualDivorcedFemalesRatio + " second while");
 			} // end if
 		} // end while
 		System.out.println("Leaving setDivorcedFemales() method.");
@@ -364,11 +370,14 @@ public class ProcessMarried {
 	 *            : the survey being checked
 	 * @return true, if has spouse
 	 */
-	public boolean checkSpouse(Survey survey) {
+	public boolean hasSpouse(Survey survey) {
 
-		if (survey.getSpouse() > 0)
+		if (survey.getSpouse() > 0){
 			return true;
-		return false;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public float getActualMarried() {

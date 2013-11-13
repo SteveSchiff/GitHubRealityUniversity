@@ -72,7 +72,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 				survey.setEducation(rs.getInt("education"));
 				survey.setPreferredJob(rs.getInt("prefJob"));
 				survey.setAssignedJob(rs.getInt("job"));
-				survey.setMarried(rs.getInt("married"));
+				survey.setMaritalStatus(rs.getInt("married"));
 				survey.setSpouse(rs.getInt("spouse"));
 				survey.setChildren(rs.getInt("children"));
 				survey.setCreditCards(rs.getInt("cCards"));
@@ -157,16 +157,16 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 			stmt.setInt(8, survey.getEducation());
 			stmt.setInt(9, survey.getPreferredJob());
 			stmt.setInt(10, survey.getAssignedJob());
-			stmt.setInt(11, survey.getMarried());
+			stmt.setInt(11, survey.getMaritalStatus());
 			stmt.setInt(12, survey.getSpouse());
 			stmt.setInt(13, survey.getChildren());
 			stmt.setInt(14, survey.getCreditCards());
 
 			if (survey.getCreditCards() == 0) {
-				stmt.setString(15, null);
+				stmt.setInt(15, 0);
 			}
 
-			stmt.setInt(15, survey.getCreditCards());
+			stmt.setInt(15, survey.getCreditCardUses());
 			stmt.setString(16, survey.getGroceries());
 			stmt.setString(17, survey.getClothing());
 			stmt.setString(18, survey.getHome());
@@ -250,7 +250,7 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 			stmt.setInt(8, survey.getEducation());
 			stmt.setInt(9, survey.getPreferredJob());
 			stmt.setInt(10, survey.getAssignedJob());
-			stmt.setInt(11, survey.getMarried());
+			stmt.setInt(11, survey.getMaritalStatus());
 			stmt.setInt(12, survey.getSpouse());
 			stmt.setInt(13, survey.getChildren());
 			stmt.setInt(14, survey.getCreditCards());

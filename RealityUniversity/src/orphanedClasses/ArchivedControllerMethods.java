@@ -40,9 +40,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 	 */
 	public void addToListOfNewSurveys(Survey survey) {
 
-		// lstSurveys.add(survey);
 		listOfNewSurveys.add(survey);
-		ToolBar.getToolBarInstance().setSaveEnabled(true);
 		refreshScreen();
 
 	} // -- end addToListOfNewSurveys() method
@@ -260,7 +258,7 @@ public class ArchivedControllerMethods implements GuiInterface {
 
 		listOfDeletedSurveys.add(survey);
 		listOfSurveys.remove(survey);
-		gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
+
 		refreshScreen();
 
 	} // -- end removeSurveyFromListOfNewSurveys() method
@@ -276,9 +274,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 	public void destroyListOfDeletedSurveys() {
 
 		listOfDeletedSurveys.clear();
-		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		// isGroupChanged(); // possibly unneeded
-
 	} // -- end destroyListOfDeletedSurveys() method
 
 	//
@@ -292,9 +287,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 	public void destroyListOfNewSurveys() {
 
 		listOfNewSurveys.clear();
-		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		// isGroupChanged(); // possibly unneeded
-
 	} // -- end destroyListOfNewSurveys() method
 
 	//
@@ -308,9 +300,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 	public void destroyListOfUpdatedSurveys() {
 
 		listOfUpdatedSurveys.clear();
-		ToolBar.getToolBarInstance().setSaveEnabled(false); // possibly unneeded
-		// isGroupChanged(); // possibly unneeded
-
 	} // -- end destroyListOfUpdatedSurveys() method
 
 	//
@@ -365,9 +354,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 		listOfUpdatedSurveys.add(newSurvey);
 		listOfSurveys.remove(oldSurvey);
 		listOfSurveys.add(newSurvey);
-
-		gui.ToolBar.getToolBarInstance().setSaveEnabled(true);
-
 	} // -- end of updateSurvey() method
 
 	//
@@ -391,7 +377,6 @@ public class ArchivedControllerMethods implements GuiInterface {
 
 		ViewSurvey viewSurvey = new ViewSurvey(survey);
 		viewSurvey.paperPrintOneSurvey(survey);
-
 	} // -- end printSurvey() method
 
 	private void refreshScreen() {

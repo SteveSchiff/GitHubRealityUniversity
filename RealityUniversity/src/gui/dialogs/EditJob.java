@@ -71,8 +71,6 @@ public class EditJob extends JDialog implements GuiInterface {
 
 	public EditJob(final Job job) {
 
-		System.out.println("BEGIN EDITJOB CONSTRUCTOR");
-
 		try {
 			job.getID();
 			this.action = "update";

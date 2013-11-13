@@ -640,7 +640,7 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 
 		// default values - can be changed in statements after this 4-line block
 		survey.setGender(1);
-		survey.setMarried(0);
+		survey.setMaritalStatus(0);
 		survey.setChildren(0);
 		survey.setCreditCards(0);
 
@@ -652,7 +652,7 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		if (isGenderMale)
 			survey.setGender(0);
 		if (isMarried)
-			survey.setMarried(1);
+			survey.setMaritalStatus(1);
 		if (haveChildren)
 			survey.setChildren(Integer.parseInt(childrenCountComboBox
 					.getSelectedItem().toString()));
