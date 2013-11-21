@@ -51,7 +51,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 	private JPanel contentPanel = new JPanel();
 	private JPanel footerPanel = new JPanel();
 	private JButton updateSurveyButton = new JButton();
-	private JButton resetButton = new JButton("Reset");
+//	private JButton resetButton = new JButton("Reset");
 	private Font labelFont = new Font("sansserif", Font.PLAIN, 12);
 
 	// Text Fields

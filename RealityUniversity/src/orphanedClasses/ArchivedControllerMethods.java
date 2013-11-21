@@ -1,7 +1,6 @@
 package orphanedClasses;
 
 import gui.GuiInterface;
-import gui.ToolBar;
 import gui.dialogs.EditSurvey;
 import gui.dialogs.ViewSurvey;
 

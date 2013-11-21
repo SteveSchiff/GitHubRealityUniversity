@@ -410,8 +410,8 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		gbc_cboJob.gridwidth = 5;
 		gbc_cboJob.anchor = GridBagConstraints.WEST;
 		gbc_cboJob.insets = new Insets(0, 0, 5, 0);
-		gbc_cboJob.gridx = 1;
-		gbc_cboJob.gridy = 6;
+		gbc_cboJob.gridx = 4; // 1 (original value) 4 (new default)
+		gbc_cboJob.gridy = 5; // 6 (original value) 5 (new default)
 		surveyPanel.add(preferredJobComboBox, gbc_cboJob);
 
 		// Married
