@@ -21,8 +21,7 @@ import obj.Survey;
 public class ProcessCustodyChildSupport {
 
 	/** The list of surveys. */
-	private List<Survey> lstSurveys = Controller.getControllerInstance()
-			.getSurveysList();
+	private List<Survey> surveysList = Controller.getControllerInstance().getSurveysList();
 
 	/** The list of divorced males that HAVE children. */
 	private List<Survey> lstDivMalesWithChild = new ArrayList<>();
@@ -39,13 +38,13 @@ public class ProcessCustodyChildSupport {
 
 		// This can be uncommented. It will set childSupport to '0' for all
 		// surveys in group
-		for (Survey empty : lstSurveys) {
+		for (Survey empty : surveysList) {
 			if (empty.getChildSupport() != 0)
 				empty.setChildSupport(0);
 		}
 		System.out.println("Reset child support to zero for re-processing");
 
-		for (Survey survey : lstSurveys) {
+		for (Survey survey : surveysList) {
 
 			if (survey.getMaritalStatus() == 2 && survey.getChildren() > 0) {
 				// Get surveys for all divorced men with children in group
@@ -67,13 +66,13 @@ public class ProcessCustodyChildSupport {
 		setChildSupportMale();
 		setChildSupportFemale();
 
-		return lstSurveys;
+		return surveysList;
 
 	} // end doProcess()
 
 	public void setChildSupportMale() {
 
-		// set 'i' to '1' for groups of 10 or more. If 'i' is not '0'no male in
+		// set 'i' to '1' for groups of 10 or more. If 'i' is not '0' no male in
 		// a group under 10 will receive child support
 		int i = 0;
 

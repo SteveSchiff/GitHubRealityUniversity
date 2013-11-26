@@ -236,129 +236,127 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		JPanel surveyPanel = new JPanel();
 
 		// Main Panel
-		GridBagLayout gbl_pnlSurvey = new GridBagLayout();
+		GridBagLayout surveyPanelGridBagLayout = new GridBagLayout();
 		surveyPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		surveyPanel.setBorder(new TitledBorder(null, "New Survey",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		gbl_pnlSurvey.columnWidths = new int[] { 78, 31, 49, 94, 53, 0, 0 };
-		gbl_pnlSurvey.rowHeights = new int[] { 23, 0, 0, 0, 30, 0, 0, 0, 0, 0,
-				0 };
-		gbl_pnlSurvey.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
-		gbl_pnlSurvey.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		surveyPanel.setLayout(gbl_pnlSurvey);
+		surveyPanel.setBorder(new TitledBorder(null, "New Survey", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		surveyPanelGridBagLayout.columnWidths = new int[] { 78, 31, 49, 94, 53, 0, 0 };
+		surveyPanelGridBagLayout.rowHeights = new int[] { 23, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0 };
+		surveyPanelGridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		surveyPanelGridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		surveyPanel.setLayout(surveyPanelGridBagLayout);
 
 		// Class Period
-		JLabel lblCPeriod = new JLabel("Class Period: ", SwingConstants.RIGHT);
-		lblCPeriod.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblCPeriod = new GridBagConstraints();
-		gbc_lblCPeriod.anchor = GridBagConstraints.WEST;
-		gbc_lblCPeriod.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCPeriod.gridx = 0;
-		gbc_lblCPeriod.gridy = 0;
-		surveyPanel.add(lblCPeriod, gbc_lblCPeriod);
+		JLabel classPeriodLabel = new JLabel("Class Period: ", SwingConstants.RIGHT);
+		classPeriodLabel.setFont(newSurveyFont);
+		GridBagConstraints classPeriodLabelGridBagConstraint = new GridBagConstraints();
+		classPeriodLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		classPeriodLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		classPeriodLabelGridBagConstraint.gridx = 0;
+		classPeriodLabelGridBagConstraint.gridy = 0;
+		surveyPanel.add(classPeriodLabel, classPeriodLabelGridBagConstraint);
 		// ------
 		periodComboBox.setName("Class Period"); // JComboBox
-		GridBagConstraints gbc_cboCPeriod = new GridBagConstraints();
-		gbc_cboCPeriod.anchor = GridBagConstraints.WEST;
-		gbc_cboCPeriod.insets = new Insets(0, 0, 5, 5);
-		gbc_cboCPeriod.gridx = 1;
-		gbc_cboCPeriod.gridy = 0;
-		surveyPanel.add(periodComboBox, gbc_cboCPeriod);
+		GridBagConstraints periodComboBoxGridBagConstraint = new GridBagConstraints();
+		periodComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		periodComboBoxGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		periodComboBoxGridBagConstraint.gridx = 1;
+		periodComboBoxGridBagConstraint.gridy = 0;
+		surveyPanel.add(periodComboBox, periodComboBoxGridBagConstraint);
 
 		// Teacher
 		JLabel teacherLabel = new JLabel("Teacher: ", SwingConstants.RIGHT);
 		teacherLabel.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblTeacher = new GridBagConstraints();
-		gbc_lblTeacher.anchor = GridBagConstraints.WEST;
-		gbc_lblTeacher.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTeacher.gridx = 3;
-		gbc_lblTeacher.gridy = 0;
-		surveyPanel.add(teacherLabel, gbc_lblTeacher);
+		GridBagConstraints teacherLabelGridBagConstraint = new GridBagConstraints();
+		teacherLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		teacherLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		teacherLabelGridBagConstraint.gridx = 3;
+		teacherLabelGridBagConstraint.gridy = 0;
+		surveyPanel.add(teacherLabel, teacherLabelGridBagConstraint);
 		// ------
 		teacherComboBox.setName("Teacher"); // JComboBox
 		teacherComboBox.setEditable(true); // JComboBox
-		GridBagConstraints gbc_cboTeacher = new GridBagConstraints();
-		gbc_cboTeacher.gridwidth = 2;
-		gbc_cboTeacher.anchor = GridBagConstraints.WEST;
-		gbc_cboTeacher.insets = new Insets(0, 0, 5, 0);
-		gbc_cboTeacher.gridx = 4;
-		gbc_cboTeacher.gridy = 0;
-		surveyPanel.add(teacherComboBox, gbc_cboTeacher);
+		GridBagConstraints teacherComboBoxGridBagConstraint = new GridBagConstraints();
+		teacherComboBoxGridBagConstraint.gridwidth = 2;
+		teacherComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		teacherComboBoxGridBagConstraint.insets = new Insets(0, 0, 5, 0);
+		teacherComboBoxGridBagConstraint.gridx = 4;
+		teacherComboBoxGridBagConstraint.gridy = 0;
+		surveyPanel.add(teacherComboBox, teacherComboBoxGridBagConstraint);
 
 		// First Name
 		JLabel firstNameLabel = new JLabel("First Name: ", SwingConstants.RIGHT);
 		firstNameLabel.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblFName = new GridBagConstraints();
-		gbc_lblFName.anchor = GridBagConstraints.WEST;
-		gbc_lblFName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFName.gridx = 0;
-		gbc_lblFName.gridy = 1;
-		surveyPanel.add(firstNameLabel, gbc_lblFName);
+		GridBagConstraints firstNameLabelGridBagConstraint = new GridBagConstraints();
+		firstNameLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		firstNameLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		firstNameLabelGridBagConstraint.gridx = 0;
+		firstNameLabelGridBagConstraint.gridy = 1;
+		surveyPanel.add(firstNameLabel, firstNameLabelGridBagConstraint);
 		// ------
 		firstNameTextField.setName("FirstName");
-		GridBagConstraints gbc_txtFName = new GridBagConstraints();
-		gbc_txtFName.gridwidth = 2;
-		gbc_txtFName.anchor = GridBagConstraints.WEST;
-		gbc_txtFName.insets = new Insets(0, 0, 5, 5);
-		gbc_txtFName.gridx = 1;
-		gbc_txtFName.gridy = 1;
-		surveyPanel.add(firstNameTextField, gbc_txtFName);
+		GridBagConstraints firstNameTextfieldGridBagConstraint = new GridBagConstraints();
+		firstNameTextfieldGridBagConstraint.gridwidth = 2;
+		firstNameTextfieldGridBagConstraint.anchor = GridBagConstraints.WEST;
+		firstNameTextfieldGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		firstNameTextfieldGridBagConstraint.gridx = 1;
+		firstNameTextfieldGridBagConstraint.gridy = 1;
+		surveyPanel.add(firstNameTextField, firstNameTextfieldGridBagConstraint);
 
 		// Last Name
-		JLabel lblLName = new JLabel("Last Name: ", SwingConstants.RIGHT);
-		lblLName.setFont(newSurveyFont);
+		JLabel lastNameLabel = new JLabel("Last Name: ", SwingConstants.RIGHT);
+		lastNameLabel.setFont(newSurveyFont);
 		GridBagConstraints gbc_lblLName = new GridBagConstraints();
 		gbc_lblLName.anchor = GridBagConstraints.WEST;
 		gbc_lblLName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLName.gridx = 3;
 		gbc_lblLName.gridy = 1;
-		surveyPanel.add(lblLName, gbc_lblLName);
+		surveyPanel.add(lastNameLabel, gbc_lblLName);
+		// ------
 		lastNameTextField.setName("Last Name");
-		GridBagConstraints gbc_txtLName = new GridBagConstraints();
-		gbc_txtLName.gridwidth = 2;
-		gbc_txtLName.anchor = GridBagConstraints.WEST;
-		gbc_txtLName.insets = new Insets(0, 0, 5, 0);
-		gbc_txtLName.gridx = 4;
-		gbc_txtLName.gridy = 1;
-		surveyPanel.add(lastNameTextField, gbc_txtLName);
+		GridBagConstraints lastNameTextfieldGridBagConstraint = new GridBagConstraints();
+		lastNameTextfieldGridBagConstraint.gridwidth = 2;
+		lastNameTextfieldGridBagConstraint.anchor = GridBagConstraints.WEST;
+		lastNameTextfieldGridBagConstraint.insets = new Insets(0, 0, 5, 0);
+		lastNameTextfieldGridBagConstraint.gridx = 4;
+		lastNameTextfieldGridBagConstraint.gridy = 1;
+		surveyPanel.add(lastNameTextField, lastNameTextfieldGridBagConstraint);
 
 		// Gender
-		JLabel lblGender = new JLabel("Gender: ", SwingConstants.RIGHT);
-		lblGender.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblGender = new GridBagConstraints();
-		gbc_lblGender.anchor = GridBagConstraints.WEST;
-		gbc_lblGender.insets = new Insets(0, 0, 5, 5);
-		gbc_lblGender.gridx = 0;
-		gbc_lblGender.gridy = 2;
-		surveyPanel.add(lblGender, gbc_lblGender);
-
+		JLabel genderLabel = new JLabel("Gender: ", SwingConstants.RIGHT);
+		genderLabel.setFont(newSurveyFont);
+		GridBagConstraints genderLabelGridBagConstraint = new GridBagConstraints();
+		genderLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		genderLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		genderLabelGridBagConstraint.gridx = 0;
+		genderLabelGridBagConstraint.gridy = 2;
+		surveyPanel.add(genderLabel, genderLabelGridBagConstraint);
+		// ------
 		genderButtonGroup.add(maleGenderRadioButton);
-		GridBagConstraints gbc_btnGenderMale = new GridBagConstraints();
-		gbc_btnGenderMale.anchor = GridBagConstraints.WEST;
-		gbc_btnGenderMale.insets = new Insets(0, 0, 5, 5);
-		gbc_btnGenderMale.gridx = 1;
-		gbc_btnGenderMale.gridy = 2;
-		surveyPanel.add(maleGenderRadioButton, gbc_btnGenderMale);
-
+		GridBagConstraints maleGenderRadioButtonGridBagConstraint = new GridBagConstraints();
+		maleGenderRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		maleGenderRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		maleGenderRadioButtonGridBagConstraint.gridx = 1;
+		maleGenderRadioButtonGridBagConstraint.gridy = 2;
+		surveyPanel.add(maleGenderRadioButton, maleGenderRadioButtonGridBagConstraint);
+		// ------
 		genderButtonGroup.add(femaleGenderRadioButton);
-		GridBagConstraints gbc_btnGenderFemale = new GridBagConstraints();
-		gbc_btnGenderFemale.anchor = GridBagConstraints.WEST;
-		gbc_btnGenderFemale.insets = new Insets(0, 0, 5, 5);
-		gbc_btnGenderFemale.gridx = 2;
-		gbc_btnGenderFemale.gridy = 2;
-		surveyPanel.add(femaleGenderRadioButton, gbc_btnGenderFemale);
+		GridBagConstraints femaleGenderRadioButtonGridBagConstraint = new GridBagConstraints();
+		femaleGenderRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		femaleGenderRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		femaleGenderRadioButtonGridBagConstraint.gridx = 2;
+		femaleGenderRadioButtonGridBagConstraint.gridy = 2;
+		surveyPanel.add(femaleGenderRadioButton, femaleGenderRadioButtonGridBagConstraint);
 
 		// GPA
-		JLabel lblGPA = new JLabel("Current GPA: ", SwingConstants.RIGHT);
-		lblGPA.setFont(newSurveyFont);
+		JLabel gpaLabel = new JLabel("Current GPA: ", SwingConstants.RIGHT);
+		gpaLabel.setFont(newSurveyFont);
 		GridBagConstraints gbc_lblGPA = new GridBagConstraints();
 		gbc_lblGPA.anchor = GridBagConstraints.WEST;
 		gbc_lblGPA.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGPA.gridx = 3;
 		gbc_lblGPA.gridy = 2;
-		surveyPanel.add(lblGPA, gbc_lblGPA);
+		surveyPanel.add(gpaLabel, gbc_lblGPA);
+		// ------
 		GridBagConstraints gbc_cboGPA = new GridBagConstraints();
 		gbc_cboGPA.gridwidth = 2;
 		gbc_cboGPA.anchor = GridBagConstraints.WEST;
@@ -368,15 +366,15 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		surveyPanel.add(GPAComboBox, gbc_cboGPA);
 
 		// Education
-		JLabel lblEducation = new JLabel("Planned Education:  ",
-				SwingConstants.RIGHT);
-		lblEducation.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblEducation = new GridBagConstraints();
-		gbc_lblEducation.anchor = GridBagConstraints.WEST;
-		gbc_lblEducation.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEducation.gridx = 0;
-		gbc_lblEducation.gridy = 3;
-		surveyPanel.add(lblEducation, gbc_lblEducation);
+		JLabel plannedEducationLabel = new JLabel("Planned Education:  ", SwingConstants.RIGHT);
+		plannedEducationLabel.setFont(newSurveyFont);
+		GridBagConstraints educationLabelGridBagConstraint = new GridBagConstraints();
+		educationLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		educationLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		educationLabelGridBagConstraint.gridx = 0;
+		educationLabelGridBagConstraint.gridy = 3;
+		surveyPanel.add(plannedEducationLabel, educationLabelGridBagConstraint);
+		// ------
 		GridBagConstraints gbc_cboEducation = new GridBagConstraints();
 		gbc_cboEducation.gridwidth = 3;
 		gbc_cboEducation.anchor = GridBagConstraints.WEST;
@@ -385,194 +383,186 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 		gbc_cboEducation.gridy = 3;
 		surveyPanel.add(educationComboBox, gbc_cboEducation);
 
-		// Occupation
-		JLabel lblJob = new JLabel("Preferred Occupation: ");
-		lblJob.setFont(newSurveyFont);
-
-		GridBagConstraints gbc_lblJob = new GridBagConstraints();
-		gbc_lblJob.anchor = GridBagConstraints.WEST;
-		gbc_lblJob.insets = new Insets(0, 0, 5, 5);
-		gbc_lblJob.gridx = 0;
-		gbc_lblJob.gridy = 5;
-		surveyPanel.add(lblJob, gbc_lblJob);
-
+		// Occupation category
+		JLabel preferredOccupationLabel = new JLabel("Preferred Occupation: ");
+		preferredOccupationLabel.setFont(newSurveyFont);
+		GridBagConstraints preferredOccupationLabelGridBagConstraint = new GridBagConstraints();
+		preferredOccupationLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		preferredOccupationLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		preferredOccupationLabelGridBagConstraint.gridx = 0;
+		preferredOccupationLabelGridBagConstraint.gridy = 5;
+		surveyPanel.add(preferredOccupationLabel, preferredOccupationLabelGridBagConstraint);
+		// ------
 		preferredJobCategoryComboBox.setSize(150, 20);
-		GridBagConstraints gbc_cboJobCategory = new GridBagConstraints();
-		gbc_cboJobCategory.gridwidth = 5;
-		gbc_cboJobCategory.anchor = GridBagConstraints.WEST;
-		gbc_cboJobCategory.insets = new Insets(0, 0, 5, 0);
-		gbc_cboJobCategory.gridx = 1;
-		gbc_cboJobCategory.gridy = 5;
-		surveyPanel.add(preferredJobCategoryComboBox, gbc_cboJobCategory);
+		GridBagConstraints preferredJobCategoryComboBoxGridBagConstraint = new GridBagConstraints();
+		preferredJobCategoryComboBoxGridBagConstraint.gridwidth = 5;
+		preferredJobCategoryComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		preferredJobCategoryComboBoxGridBagConstraint.insets = new Insets(0, 0, 5, 0);
+		preferredJobCategoryComboBoxGridBagConstraint.gridx = 1;
+		preferredJobCategoryComboBoxGridBagConstraint.gridy = 5;
+		surveyPanel.add(preferredJobCategoryComboBox, preferredJobCategoryComboBoxGridBagConstraint);
 
+		// Specific job
 		preferredJobComboBox.setSize(150, 20);
-		GridBagConstraints gbc_cboJob = new GridBagConstraints();
-		gbc_cboJob.gridwidth = 5;
-		gbc_cboJob.anchor = GridBagConstraints.WEST;
-		gbc_cboJob.insets = new Insets(0, 0, 5, 0);
-		gbc_cboJob.gridx = 4; // 1 (original value) 4 (new default)
-		gbc_cboJob.gridy = 5; // 6 (original value) 5 (new default)
-		surveyPanel.add(preferredJobComboBox, gbc_cboJob);
+		GridBagConstraints preferredJobComboBoxGridBagConstraint = new GridBagConstraints();
+		preferredJobComboBoxGridBagConstraint.gridwidth = 5;
+		preferredJobComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		preferredJobComboBoxGridBagConstraint.insets = new Insets(0, 0, 5, 0);
+		preferredJobComboBoxGridBagConstraint.gridx = 1; // 1 (original value) 4 (new default)
+		preferredJobComboBoxGridBagConstraint.gridy = 6; // 6 (original value) 5 (new default)
+		surveyPanel.add(preferredJobComboBox, preferredJobComboBoxGridBagConstraint);
 
 		// Married
-		JLabel lblMarried = new JLabel("Married: ");
-		lblMarried.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblMarried = new GridBagConstraints();
-		gbc_lblMarried.anchor = GridBagConstraints.WEST;
-		gbc_lblMarried.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMarried.gridx = 0;
-		gbc_lblMarried.gridy = 7;
-		surveyPanel.add(lblMarried, gbc_lblMarried);
-
+		JLabel maritalStatusLabel = new JLabel("Married: ");
+		maritalStatusLabel.setFont(newSurveyFont);
+		GridBagConstraints maritalStatusLabelGridBagConstraint = new GridBagConstraints();
+		maritalStatusLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		maritalStatusLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		maritalStatusLabelGridBagConstraint.gridx = 0;
+		maritalStatusLabelGridBagConstraint.gridy = 7;
+		surveyPanel.add(maritalStatusLabel, maritalStatusLabelGridBagConstraint);
+		// ------
 		marriedButtonGroup.add(yesMarriedRadioButton);
-		GridBagConstraints gbc_btnMarriedYes = new GridBagConstraints();
-		gbc_btnMarriedYes.anchor = GridBagConstraints.WEST;
-		gbc_btnMarriedYes.insets = new Insets(0, 0, 5, 5);
-		gbc_btnMarriedYes.gridx = 1;
-		gbc_btnMarriedYes.gridy = 7;
+		GridBagConstraints yesMarriedRadioButtonGridBagConstraint = new GridBagConstraints();
+		yesMarriedRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		yesMarriedRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		yesMarriedRadioButtonGridBagConstraint.gridx = 1;
+		yesMarriedRadioButtonGridBagConstraint.gridy = 7;
 		yesMarriedRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(yesMarriedRadioButton, gbc_btnMarriedYes);
-
+		surveyPanel.add(yesMarriedRadioButton, yesMarriedRadioButtonGridBagConstraint);
+		// ------
 		marriedButtonGroup.add(noMarriedRadioButton);
-		GridBagConstraints gbc_btnMarriedNo = new GridBagConstraints();
-		gbc_btnMarriedNo.anchor = GridBagConstraints.WEST;
-		gbc_btnMarriedNo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnMarriedNo.gridx = 2;
-		gbc_btnMarriedNo.gridy = 7;
+		GridBagConstraints noMarriedRadioButtonGridBagConstraint = new GridBagConstraints();
+		noMarriedRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		noMarriedRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		noMarriedRadioButtonGridBagConstraint.gridx = 2;
+		noMarriedRadioButtonGridBagConstraint.gridy = 7;
 		noMarriedRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(noMarriedRadioButton, gbc_btnMarriedNo);
+		surveyPanel.add(noMarriedRadioButton, noMarriedRadioButtonGridBagConstraint);
 
 		// Children
-		JLabel lblChildren = new JLabel("Children: ");
-		lblChildren.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblChildren = new GridBagConstraints();
-		gbc_lblChildren.anchor = GridBagConstraints.WEST;
-		gbc_lblChildren.insets = new Insets(0, 0, 5, 5);
-		gbc_lblChildren.gridx = 0;
-		gbc_lblChildren.gridy = 8;
-		surveyPanel.add(lblChildren, gbc_lblChildren);
+		JLabel childrenLabel = new JLabel("Children: ");
+		childrenLabel.setFont(newSurveyFont);
+		GridBagConstraints childrenLabelGridBagConstraint = new GridBagConstraints();
+		childrenLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		childrenLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		childrenLabelGridBagConstraint.gridx = 0;
+		childrenLabelGridBagConstraint.gridy = 8;
+		surveyPanel.add(childrenLabel, childrenLabelGridBagConstraint);
+		// ------
 		childrenButtonGroup.add(yesChildrenRadioButton);
-		GridBagConstraints gbc_btnChildrenYes = new GridBagConstraints();
-		gbc_btnChildrenYes.anchor = GridBagConstraints.WEST;
-		gbc_btnChildrenYes.insets = new Insets(0, 0, 5, 5);
-		gbc_btnChildrenYes.gridx = 1;
-		gbc_btnChildrenYes.gridy = 8;
+		GridBagConstraints yesChildrenRadioButtonGridBagConstraint = new GridBagConstraints();
+		yesChildrenRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		yesChildrenRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		yesChildrenRadioButtonGridBagConstraint.gridx = 1;
+		yesChildrenRadioButtonGridBagConstraint.gridy = 8;
 		yesChildrenRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(yesChildrenRadioButton, gbc_btnChildrenYes);
-
+		surveyPanel.add(yesChildrenRadioButton, yesChildrenRadioButtonGridBagConstraint);
+		// ------
 		childrenButtonGroup.add(noChildrenRadioButton);
-		GridBagConstraints gbc_btnChildrenNo = new GridBagConstraints();
-		gbc_btnChildrenNo.anchor = GridBagConstraints.WEST;
-		gbc_btnChildrenNo.insets = new Insets(0, 0, 5, 5);
-		gbc_btnChildrenNo.gridx = 2;
-		gbc_btnChildrenNo.gridy = 8;
+		GridBagConstraints noChildrenRadioButtonGridBagConstraint = new GridBagConstraints();
+		noChildrenRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		noChildrenRadioButtonGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		noChildrenRadioButtonGridBagConstraint.gridx = 2;
+		noChildrenRadioButtonGridBagConstraint.gridy = 8;
 		noChildrenRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(noChildrenRadioButton, gbc_btnChildrenNo);
+		surveyPanel.add(noChildrenRadioButton, noChildrenRadioButtonGridBagConstraint);
 
 		// How Many Children
-		JLabel lblChildrenCount = new JLabel("How many: ");
-		lblChildrenCount.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblChildrenCount = new GridBagConstraints();
-		gbc_lblChildrenCount.anchor = GridBagConstraints.WEST;
-		gbc_lblChildrenCount.insets = new Insets(0, 0, 5, 5);
-		gbc_lblChildrenCount.gridx = 3;
-		gbc_lblChildrenCount.gridy = 8;
-		surveyPanel.add(lblChildrenCount, gbc_lblChildrenCount);
+		JLabel childrenCountLabel = new JLabel("How many: ");
+		childrenCountLabel.setFont(newSurveyFont);
+		GridBagConstraints childrenCountLabelGridBagConstraint = new GridBagConstraints();
+		childrenCountLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		childrenCountLabelGridBagConstraint.insets = new Insets(0, 0, 5, 5);
+		childrenCountLabelGridBagConstraint.gridx = 3;
+		childrenCountLabelGridBagConstraint.gridy = 8;
+		surveyPanel.add(childrenCountLabel, childrenCountLabelGridBagConstraint);
 
-		GridBagConstraints gbc_cboChildrenCount = new GridBagConstraints();
-		gbc_cboChildrenCount.gridwidth = 2;
-		gbc_cboChildrenCount.anchor = GridBagConstraints.WEST;
-		gbc_cboChildrenCount.insets = new Insets(0, 0, 5, 0);
-		gbc_cboChildrenCount.gridx = 4;
-		gbc_cboChildrenCount.gridy = 8;
-		surveyPanel.add(childrenCountComboBox, gbc_cboChildrenCount);
+		GridBagConstraints childrenCountComboBoxGridBagConstraint = new GridBagConstraints();
+		childrenCountComboBoxGridBagConstraint.gridwidth = 2;
+		childrenCountComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		childrenCountComboBoxGridBagConstraint.insets = new Insets(0, 0, 5, 0);
+		childrenCountComboBoxGridBagConstraint.gridx = 4;
+		childrenCountComboBoxGridBagConstraint.gridy = 8;
+		surveyPanel.add(childrenCountComboBox, childrenCountComboBoxGridBagConstraint);
 
 		// Credit Cards
-		JLabel lblCCards = new JLabel("Credit Cards: ");
-		lblCCards.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblCCards = new GridBagConstraints();
-		gbc_lblCCards.anchor = GridBagConstraints.WEST;
-		gbc_lblCCards.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCCards.gridx = 0;
-		gbc_lblCCards.gridy = 9;
-		surveyPanel.add(lblCCards, gbc_lblCCards);
+		JLabel creditCardsLabel = new JLabel("Credit Cards: ");
+		creditCardsLabel.setFont(newSurveyFont);
+		GridBagConstraints creditCardsLabelGridBagConstraint = new GridBagConstraints();
+		creditCardsLabelGridBagConstraint.anchor = GridBagConstraints.WEST;
+		creditCardsLabelGridBagConstraint.insets = new Insets(0, 0, 0, 5);
+		creditCardsLabelGridBagConstraint.gridx = 0;
+		creditCardsLabelGridBagConstraint.gridy = 9;
+		surveyPanel.add(creditCardsLabel, creditCardsLabelGridBagConstraint);
 
 		creditCardsButtonGroup.add(yesCreditCardsRadioButton);
-		GridBagConstraints gbc_btnCCardsYes = new GridBagConstraints();
-		gbc_btnCCardsYes.anchor = GridBagConstraints.WEST;
-		gbc_btnCCardsYes.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCCardsYes.gridx = 1;
-		gbc_btnCCardsYes.gridy = 9;
+		GridBagConstraints yesCreditCardsRadioButtonGridBagConstraint = new GridBagConstraints();
+		yesCreditCardsRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		yesCreditCardsRadioButtonGridBagConstraint.insets = new Insets(0, 0, 0, 5);
+		yesCreditCardsRadioButtonGridBagConstraint.gridx = 1;
+		yesCreditCardsRadioButtonGridBagConstraint.gridy = 9;
 		yesCreditCardsRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(yesCreditCardsRadioButton, gbc_btnCCardsYes);
+		surveyPanel.add(yesCreditCardsRadioButton, yesCreditCardsRadioButtonGridBagConstraint);
 
 		creditCardsButtonGroup.add(noCreditCardsRadioButton);
-		GridBagConstraints gbc_btnCCardsNo = new GridBagConstraints();
-		gbc_btnCCardsNo.anchor = GridBagConstraints.WEST;
-		gbc_btnCCardsNo.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCCardsNo.gridx = 2;
-		gbc_btnCCardsNo.gridy = 9;
+		GridBagConstraints noCreditCardsRadioButtonGridBagConstraint = new GridBagConstraints();
+		noCreditCardsRadioButtonGridBagConstraint.anchor = GridBagConstraints.WEST;
+		noCreditCardsRadioButtonGridBagConstraint.insets = new Insets(0, 0, 0, 5);
+		noCreditCardsRadioButtonGridBagConstraint.gridx = 2;
+		noCreditCardsRadioButtonGridBagConstraint.gridy = 9;
 		noCreditCardsRadioButton.setHorizontalAlignment(SwingConstants.CENTER);
-		surveyPanel.add(noCreditCardsRadioButton, gbc_btnCCardsNo);
+		surveyPanel.add(noCreditCardsRadioButton, noCreditCardsRadioButtonGridBagConstraint);
 
 		// Credit Card Uses
-		JLabel lblCCardUse = new JLabel("Used for: ");
-		lblCCardUse.setFont(newSurveyFont);
-		GridBagConstraints gbc_lblCCardUse = new GridBagConstraints();
-		gbc_lblCCardUse.anchor = GridBagConstraints.WEST;
-		gbc_lblCCardUse.insets = new Insets(0, 0, 0, 5);
-		gbc_lblCCardUse.gridx = 3;
-		gbc_lblCCardUse.gridy = 9;
-		surveyPanel.add(lblCCardUse, gbc_lblCCardUse);
-		GridBagConstraints gbc_cboCCardUses = new GridBagConstraints();
-		gbc_cboCCardUses.gridwidth = 2;
-		gbc_cboCCardUses.anchor = GridBagConstraints.WEST;
-		gbc_cboCCardUses.gridx = 4;
-		gbc_cboCCardUses.gridy = 9;
-		surveyPanel.add(creditCardUsesComboBox, gbc_cboCCardUses);
+		JLabel creditCardUsesLabel = new JLabel("Used for: ");
+		creditCardUsesLabel.setFont(newSurveyFont);
+		GridBagConstraints creditCardUsesLabelGridBagLayout = new GridBagConstraints();
+		creditCardUsesLabelGridBagLayout.anchor = GridBagConstraints.WEST;
+		creditCardUsesLabelGridBagLayout.insets = new Insets(0, 0, 0, 5);
+		creditCardUsesLabelGridBagLayout.gridx = 3;
+		creditCardUsesLabelGridBagLayout.gridy = 9;
+		surveyPanel.add(creditCardUsesLabel, creditCardUsesLabelGridBagLayout);
+		// ------
+		GridBagConstraints creditCardUsesComboBoxGridBagConstraint = new GridBagConstraints();
+		creditCardUsesComboBoxGridBagConstraint.gridwidth = 2;
+		creditCardUsesComboBoxGridBagConstraint.anchor = GridBagConstraints.WEST;
+		creditCardUsesComboBoxGridBagConstraint.gridx = 4;
+		creditCardUsesComboBoxGridBagConstraint.gridy = 9;
+		surveyPanel.add(creditCardUsesComboBox, creditCardUsesComboBoxGridBagConstraint);
 
 		// Events
 		noCreditCardsRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				creditCardUsesComboBox.setEnabled(false);
-
 			}
 		});
-
 		yesCreditCardsRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				creditCardUsesComboBox.setEnabled(true);
-
 			}
 		});
-
 		noChildrenRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				childrenCountComboBox.setEnabled(false);
-
 			}
 		});
-
 		yesChildrenRadioButton.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				childrenCountComboBox.setEnabled(true);
-
 			}
 		});
-
 		preferredJobCategoryComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 
 				// Get Job Names from Controller
 				List<String> lstJobNames = Controller.getControllerInstance()
-						.getJobsByCategoryList(
-								// Cast Current Selected Category as String
-								(String) preferredJobCategoryComboBox
-										.getSelectedItem());
+						.getJobsByCategoryList(// Cast Current Selected Category as String
+								(String) preferredJobCategoryComboBox.getSelectedItem());
 				// Create Model of Job Names
 				DefaultComboBoxModel<?> model = new DefaultComboBoxModel<>(
 						lstJobNames.toArray());

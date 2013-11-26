@@ -174,8 +174,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 						// Custom Validator
 						if (validateSurvey()) {
 
-							Controller.getControllerInstance().updateSQLSurvey(
-									updateSurvey());
+							Controller.getControllerInstance().updateSQLSurvey(updateSurvey());
 							Controller.getControllerInstance().refreshScreen();
 						} else {
 							new StatusTip("Error: Enter GPA", LG_EXCEPTION);
@@ -818,19 +817,12 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		updatedSurvey.setGPA(GPAComboBox.getSelectedIndex());
 
 		updatedSurvey.setEducation(educationComboBox.getSelectedIndex());
-		// Go to the controller
-		// Get the job (it will be returned as a list so you have to .get(0)
-		// Get the ID
-		// updatedSurvey.setPreferredJob(Controller.getControllerInstance()
-		// .searchJobsList("name", "'" +
-		// preferredJobComboBox.getSelectedItem().toString() + "'")
-		// .get(0).getID());
 
 		int intJobID = Controller.getControllerInstance().searchJobsList("name",
 						preferredJobComboBox.getSelectedItem().toString()).get(0).getID();
 
 		updatedSurvey.setPreferredJob(intJobID);
-		updatedSurvey.setAssignedJob(updatedSurvey.getAssignedJob());
+		updatedSurvey.setAssignedJob(survey.getAssignedJob());
 
 		updatedSurvey.setGender(1);
 
