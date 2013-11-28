@@ -16,8 +16,7 @@ import obj.Survey;
 public class ProcessChildrenDivorcedMales {
 
 	/** The list of surveys. */
-	private List<Survey> lstSurveys = Controller.getControllerInstance()
-			.getSurveysList();
+	private List<Survey> lstSurveys = Controller.getControllerInstance().getSurveysList();
 
 	/** The list of divorced males. */
 	private List<Survey> lstDivorcedMales = new ArrayList<>();
@@ -33,12 +32,12 @@ public class ProcessChildrenDivorcedMales {
 	double countNoKids;
 
 	/** Divorced with children requirement. */
-	private double divWithChildrenLimit = .4; // target is 40% or .4
-	private double divWithOutChildrenLimit = .6; // target is 60% or .6
+	private double divWithChildrenLimitRatio = .4; // target is 40% or .4
+	private double divWithOutChildrenLimitRatio = .6; // target is 60% or .6
 
 	/** Used to calculate %'s of men with/without kids **/
-	private double actualChildren;
-	private double actualNoChildren;
+	private double actualChildrenRatio;
+	private double actualNoChildrenRatio;
 
 	/**
 	 * Random generators for selecting random surveys and number of children to
@@ -78,28 +77,26 @@ public class ProcessChildrenDivorcedMales {
 
 			}// end if male and divorced
 
-		} // end for survey
+		} // end for loop
 
 		System.out.println("with kids " + countKids);
 		System.out.println("with NO kids " + countNoKids);
 
 		// Get percentages of divorced men with and without children
-		actualChildren = (double) lstDivWithChild.size()
-				/ lstDivorcedMales.size();
-		actualNoChildren = (double) lstDivNoChild.size()
-				/ lstDivorcedMales.size();
+		actualChildrenRatio = (double) lstDivWithChild.size() / lstDivorcedMales.size();
+		actualNoChildrenRatio = (double) lstDivNoChild.size() / lstDivorcedMales.size();
 
-		System.out.println("% with children " + actualChildren);
-		System.out.println("% withOUt children " + actualNoChildren);
+		System.out.println("% with children " + actualChildrenRatio);
+		System.out.println("% withOUt children " + actualNoChildrenRatio);
 
 		// If more than 40% of men have children we need to adjust down
-		if (actualChildren > divWithChildrenLimit) {
+		if (actualChildrenRatio > divWithChildrenLimitRatio) {
 			System.out.println("too many kids");
 			adjustChildrenDown();
 		}
 		// If more than 60% of men have NO children we need to adjust up
 		else {
-			if (actualNoChildren > divWithOutChildrenLimit) {
+			if (actualNoChildrenRatio > divWithOutChildrenLimitRatio) {
 				System.out.println("need MORE kids");
 				adjustChildrenUp();
 			}
@@ -115,13 +112,17 @@ public class ProcessChildrenDivorcedMales {
 		 * select a divorced man with kids and take his children away ...darn
 		 * DFACS
 		 */
-		while ((double) lstDivWithChild.size() / lstDivorcedMales.size() > divWithChildrenLimit) {
+		while ((double) lstDivWithChild.size() / lstDivorcedMales.size() > divWithChildrenLimitRatio) {
 
 			randomInt = randomGenerator.nextInt(lstDivWithChild.size());
 
 			Survey survey = lstDivWithChild.get(randomInt);
 			survey.setChildren(0);
+			
+			// enter directly to the database
+			Controller.getControllerInstance().updateSQLSurvey(survey);
 			lstDivWithChild.remove(survey);
+			lstDivNoChild.add(survey);
 
 			countKids--;
 			countNoKids++;
@@ -138,7 +139,7 @@ public class ProcessChildrenDivorcedMales {
 		 * While our percentage of divorced with NO kids is to high we randomly
 		 * select a divorced man with NO kids and give him children ...Surprise!
 		 */
-		while ((double) lstDivNoChild.size() / lstDivorcedMales.size() > divWithOutChildrenLimit) {
+		while ((double) lstDivNoChild.size() / lstDivorcedMales.size() > divWithOutChildrenLimitRatio) {
 			System.out.println(countNoKids / lstDivorcedMales.size());
 			randomInt = randomGenerator.nextInt(lstDivNoChild.size());
 
@@ -149,7 +150,12 @@ public class ProcessChildrenDivorcedMales {
 			randomKids = randomGenerator.nextInt(2) + 1;
 
 			survey.setChildren(randomKids);
+			
+			// enter directly to the database
+			Controller.getControllerInstance().updateSQLSurvey(survey);
 			lstDivNoChild.remove(survey);
+			lstDivWithChild.add(survey);
+			
 
 			countNoKids--;
 			countKids++;

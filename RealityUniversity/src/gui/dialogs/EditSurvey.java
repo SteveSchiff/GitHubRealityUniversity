@@ -45,13 +45,15 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 	private Survey survey;
 
-	private ValidationPanel surveyValidationPanel = new ValidationPanel();
-
+	// Declaring various panel instances...
 	private RoundPanel mainPanel = new RoundPanel();
 	private JPanel contentPanel = new JPanel();
+	private JPanel headerPanel = new JPanel();
+	private ValidationPanel surveyValidationPanel = new ValidationPanel();
+	private JPanel jobInfoValidationPanel = new JPanel();
 	private JPanel footerPanel = new JPanel();
 	private JButton updateSurveyButton = new JButton();
-//	private JButton resetButton = new JButton("Reset");
+	
 	private Font labelFont = new Font("sansserif", Font.PLAIN, 12);
 
 	// Text Fields
@@ -63,7 +65,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			.getJobCategoriesList();
 	private List<String> jobsList = Controller.getControllerInstance()
 			.getJobsByCategoryList(jobCategoriesList.get(0));
-
 	private JComboBox periodComboBox = new JComboBox(ARR_PERIOD);
 	private JComboBox educationComboBox = new JComboBox(ARR_EDUCATION);
 	private JComboBox GPAComboBox = new JComboBox(ARR_GPA);
@@ -123,9 +124,10 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		try {
 			Controller.getControllerInstance().getGroup();
 
+			headerPanel = drawHeader();
 			SwingValidationGroup svgValSurvey = surveyValidationPanel
 					.getValidationGroup();
-
+			jobInfoValidationPanel = drawJobInfo();
 			footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			footerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 			mainPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -183,13 +185,28 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 				} // -- end actionPerformed method
 			});
-//			footerPanel.add(resetButton);
+			
+			/**
+			 *  Content panel hierarchy
+			 *  
+			 *  This
+			 *  	mainPanel
+			 *  		contentPanel
+			 *  			headerPanel
+			 *  			surveyValidationPanel
+			 *  			jobInfoValidationPanel
+			 *  			footerPanel
+			 *  				updateSurveyButton
+			 */
 			footerPanel.add(updateSurveyButton);
-			contentPanel.add(drawHeader());
+			
+			contentPanel.add(headerPanel);
 			contentPanel.add(surveyValidationPanel);
-			// pnlContent.add(vpnlJobInfo);
+//			contentPanel.add(jobInfoValidationPanel, BorderLayout.EAST);
+			contentPanel.add(footerPanel);
+			
 			mainPanel.add(contentPanel, BorderLayout.CENTER);
-			contentPanel.add(footerPanel, BorderLayout.SOUTH);
+			
 			add(mainPanel);
 			setInitialSurveyValues();
 		} catch (NullPointerException npe) {

@@ -15,7 +15,7 @@ import obj.Survey;
 public class ProcessChildrenDivorcedFemales {
 
 	/** The list of surveys. */
-	private List<Survey> lstSurveys = Controller.getControllerInstance()
+	private List<Survey> surveysList = Controller.getControllerInstance()
 			.getSurveysList();
 
 	/** The list of divorced females. */
@@ -31,24 +31,24 @@ public class ProcessChildrenDivorcedFemales {
 	 * Counters to track number of surveys with/without kids for
 	 * testing/verification
 	 **/
-	double countKids;
-	double countNoKids;
+	private double countKids;
+	private double countNoKids;
 
 	/** Married with children requirement. */
 	private double divWithChildrenLimit = .4; // target is 40% or .4
 	private double divWithOutChildrenLimit = .6; // target is 60% or .6
 
 	/** Used to calculate %'s of women with/without kids **/
-	private double actualChildren;
-	private double actualNoChildren;
+	private double actualChildrenRatio;
+	private double actualNoChildrenRatio;
 
 	/**
 	 * Random generators for selecting random surveys and number of children to
 	 * add to survey
 	 **/
-	Random randomGenerator = new Random();
-	int randomInt;
-	int randomKids;
+	private Random randomGenerator = new Random();
+	private int randomInt;
+	private int randomKids;
 
 	public List<Survey> doProcess() {
 
@@ -57,7 +57,7 @@ public class ProcessChildrenDivorcedFemales {
 		countKids = 0;
 		countNoKids = 0;
 
-		for (Survey survey : lstSurveys) {
+		for (Survey survey : surveysList) {
 
 			// Get surveys for all divorced women in group
 			if (survey.getGender() == 1 && survey.getMaritalStatus() == 2) {
@@ -68,7 +68,9 @@ public class ProcessChildrenDivorcedFemales {
 				// Count surveys with children
 				if (survey.getChildren() > 0) {
 					lstDivWithChild.add(survey);
+					
 					countKids++;
+//					countKids += survey.getChildren();
 				}
 
 				// If survey has NO children add to list divorced with no
@@ -78,44 +80,44 @@ public class ProcessChildrenDivorcedFemales {
 					lstDivNoChild.add(survey);
 					countNoKids++;
 				}
-
 			}// end if female and divorced
 
-		} // end for survey
+		} // end for loop
 
 		System.out.println("with kids " + countKids);
 		System.out.println("with NO kids " + countNoKids);
 
 		// Get percentages of divorced women with and without children
-		actualChildren = (double) lstDivWithChild.size()
-				/ lstDivorcedFemales.size();
-		actualNoChildren = (double) lstDivNoChild.size()
-				/ lstDivorcedFemales.size();
+		actualChildrenRatio = (double) (lstDivWithChild.size()) / lstDivorcedFemales.size();
+		actualNoChildrenRatio = (double) (lstDivNoChild.size()) / lstDivorcedFemales.size();
 
-		System.out.println("% with children " + actualChildren);
-		System.out.println("% withOUt children " + actualNoChildren);
+		System.out.println("% with children " + actualChildrenRatio);
+		System.out.println("% withOUt children " + actualNoChildrenRatio);
 
 		// If more than 40% of women have children we need to adjust down
-		if (actualChildren > divWithChildrenLimit) {
+		if (actualChildrenRatio > divWithChildrenLimit) {
 			System.out.println("too many kids");
 			adjustChildrenDown();
 		}
 		// If more than 60% of women have NO children we need to adjust up
 		else {
-			if (actualNoChildren > divWithOutChildrenLimit) {
+			if (actualNoChildrenRatio > divWithOutChildrenLimit) {
 				System.out.println("need MORE kids");
 				adjustChildrenUp();
 			}
 		}// end else
 
-		return lstSurveys;
+		return surveysList;
 	} // end doProcess()
+	
+	/* ***************************************************** */
 
 	public void adjustChildrenDown() {
 
 		/*
 		 * While our percentage of divorced WITH kids is too high we randomly
-		 * select a divorced woman with kids and take her children away
+		 * select a divorced woman with kids and take her children away.
+		 * (Yes, please let us know how that works out for ya!) :P
 		 */
 		while ((double) lstDivWithChild.size() / lstDivorcedFemales.size() > divWithChildrenLimit) {
 
@@ -123,7 +125,11 @@ public class ProcessChildrenDivorcedFemales {
 
 			Survey survey = lstDivWithChild.get(randomInt);
 			survey.setChildren(0);
+			
+			// enter directly to the database
+			Controller.getControllerInstance().updateSQLSurvey(survey);
 			lstDivWithChild.remove(survey);
+			lstDivNoChild.add(survey);
 
 			countKids--;
 			countNoKids++;
@@ -134,6 +140,8 @@ public class ProcessChildrenDivorcedFemales {
 
 	} // end adjustChildrenDown()
 
+	/* ***************************************************** */
+	
 	public void adjustChildrenUp() {
 
 		/*
@@ -141,7 +149,7 @@ public class ProcessChildrenDivorcedFemales {
 		 * select a divorced woman with NO kids and give her children
 		 */
 		while ((double) lstDivNoChild.size() / lstDivorcedFemales.size() > divWithOutChildrenLimit) {
-			System.out.println(countNoKids / lstDivorcedFemales.size());
+			System.out.println((double) lstDivNoChild.size() / lstDivorcedFemales.size());
 			randomInt = randomGenerator.nextInt(lstDivNoChild.size());
 
 			System.out.println("begin " + countNoKids);
@@ -151,7 +159,11 @@ public class ProcessChildrenDivorcedFemales {
 			randomKids = randomGenerator.nextInt(2) + 1;
 
 			survey.setChildren(randomKids);
+			
+			// enter directly to the database
+			Controller.getControllerInstance().updateSQLSurvey(survey);
 			lstDivNoChild.remove(survey);
+			lstDivWithChild.add(survey);
 
 			countNoKids--;
 			countKids++;
@@ -163,4 +175,4 @@ public class ProcessChildrenDivorcedFemales {
 
 	}// end adjustChildrenUp()
 
-}
+} // end class ProcessChildrenDivorcedFemales

@@ -125,16 +125,10 @@ public class ProcessMarried {
 		
 		System.out.println("\nEntering setMarriedMales() method.");
 		Controller localControllerInstance = Controller.getControllerInstance();
-		
-		// debug sysout statement
-//		System.out.println("married RequirementRatio is " + marriedRequirementRatio);
 
 		Random rndMarMale = new Random();
 		
 		float actualMarriedMalesRatio = ((float)listOfMarriedMales.size()) / listOfMales.size();
-		
-//		System.out.println("listOfMarriedMales.size() is " + listOfMarriedMales.size());
-//		System.out.println("listOfMales().size() is " + listOfMales.size());
 
 		// first we test to make sure we have enough  married males
 		while (actualMarriedMalesRatio < marriedRequirementRatio) {
@@ -149,13 +143,6 @@ public class ProcessMarried {
 			} // end if
 		} // end while
 		
-		// debug sysout statement set
-		System.out.println("");
-		System.out.println("Generated actualMarriedMales variable. It is "	+ actualMarriedMalesRatio);
-		System.out.println("rndMarMale from new Random() is a number type of "	+ rndMarMale);
-		System.out.println("marriedRequirementRatio is " + marriedRequirementRatio);
-		// end of debug statements
-
 		// then we test to make sure we don't have too many!
 		while (actualMarriedMalesRatio > marriedRequirementRatio) {
 			
@@ -177,7 +164,6 @@ public class ProcessMarried {
 	 */
 	public void setMarriedFemales() {
 		
-		System.out.println("\nEntering setMarriedFemales() method.");
 		Controller localControllerInstance = Controller.getControllerInstance();
 
 		Random rndMarFemale = new Random();
@@ -209,8 +195,6 @@ public class ProcessMarried {
 				actualMarriedFemalesRatio = ((float)listOfMarriedFemales.size()) / listOfFemales.size();
 			} // end if
 		} // end while
-		System.out.println("Number of married females is " + listOfMarriedFemales.size());
-		System.out.println("Leaving setMarriedFemales() method.");
 	} // end setMarried Females method
 
 	// ************************************************
@@ -220,56 +204,38 @@ public class ProcessMarried {
 	 * Sets the spouses for the group.
 	 */
 	public void setSpouses() {
+		// TODO: Try to match similar income (Still to be done)
 		
-		System.out.println("\nEntering setSpouses() method.");
-		System.out.println("There are " + listOfMarriedFemales.size() + " females.");
-		System.out.println("There are " + listOfMarriedMales.size() + " males.");
-
 		Random randomSpouse = new Random();
-		// TODO: Try to match similar income
 
 		List<Survey> marriedMalesWithoutAssignedSpouseList = listOfMarriedMales;
 		List<Survey> marriedFemalesWithoutAssignedSpouseList = listOfMarriedFemales;
-		
-		// These next two values are temporarily needed in oder to
-		// prune the available married list without affecting it while
-		// the loop is running.  After the looping is through, then the
-		// temporary values will be used to reset the main married lists.
-		List<Survey> tempMarriedMalesWithoutAssignedSpouseList = marriedMalesWithoutAssignedSpouseList;
-		List<Survey> tempMarriedFemalesWithoutAssignedSpouseList = marriedFemalesWithoutAssignedSpouseList;
 		
 		// First we need to loop through the two lists to winnow out
 		// the marrieds that already have an assigned spouse from previous
 		// survey group processing run-throughs.
 		for (int i = 0; i < marriedMalesWithoutAssignedSpouseList.size(); i++) {
 			
-			Survey marriedMale = marriedMalesWithoutAssignedSpouseList.get(i);
-			
-			if (hasSpouse(marriedMale)) {
-				tempMarriedMalesWithoutAssignedSpouseList.remove(i);
-			}
+			if (hasSpouse(marriedMalesWithoutAssignedSpouseList.get(i))) {
+				marriedMalesWithoutAssignedSpouseList.remove(i);
+				i--; // necessary in order for next item not to be skipped over
+			} // end if block
 		} // end married male for loop
 		
 		for (int i = 0; i < marriedFemalesWithoutAssignedSpouseList.size(); i++) {
 			
-			Survey marriedFemale = marriedFemalesWithoutAssignedSpouseList.get(i);
-			
-			if (hasSpouse(marriedFemale)) {
-				tempMarriedFemalesWithoutAssignedSpouseList.remove(i);
-			}
+			if (hasSpouse(marriedFemalesWithoutAssignedSpouseList.get(i))) {
+				marriedFemalesWithoutAssignedSpouseList.remove(i);
+				i--; // necessary in order for next item not to be skipped over
+			} // end if block
 		} // end married female for loop
-		
-		// Now we use the temporary married lists to reset the married lists
-		// that we really want to work with - the ones that have no assigned
-		// spouse yet.
-		marriedMalesWithoutAssignedSpouseList = tempMarriedMalesWithoutAssignedSpouseList;
-		marriedFemalesWithoutAssignedSpouseList = tempMarriedFemalesWithoutAssignedSpouseList;
 		
 		// *********************************************************************
 		// Now that we've winnowed both married lists down to only the ones
 		// that are married with no assigned spouses, we can start the assigning
 		// *********************************************************************
-		if( (marriedMalesWithoutAssignedSpouseList.size() > 0) && (marriedFemalesWithoutAssignedSpouseList.size() > 0) ) {
+		if( (marriedMalesWithoutAssignedSpouseList.size() > 0)
+				&& (marriedFemalesWithoutAssignedSpouseList.size() > 0) ) {
 		
 			for (int i = 0; i < marriedMalesWithoutAssignedSpouseList.size(); i++) {
 				
@@ -284,53 +250,32 @@ public class ProcessMarried {
 					marriedMale.setSpouse(marriedFemale.getID());
 					marriedFemale.setSpouse(marriedMale.getID());
 					
-					// must use the temp list for the married males so the loop through
-					// is not broken during the whole process
-					tempMarriedMalesWithoutAssignedSpouseList.remove(marriedMale);
+					marriedMalesWithoutAssignedSpouseList.remove(marriedMale);
 					marriedFemalesWithoutAssignedSpouseList.remove(marriedFemale);
 				} // if marriedFemale had no assigned spouse
 				else {
-					// no sense in continuing the looping if there are
-					// no more available partners
-					marriedMalesWithoutAssignedSpouseList = tempMarriedMalesWithoutAssignedSpouseList;
-					break;
-				}				
+					break; // no point in looping anymore if no more eligible females
+				}
 			} // end for Loop
 			
 			// Set whatever spouseless marriages that are left over to
 			// marital status of single.
 			for (int i = 0; i < marriedMalesWithoutAssignedSpouseList.size(); i++ ) {
+				
 				marriedMalesWithoutAssignedSpouseList.get(i).setMaritalStatus(0);
 				
 				// write to database
 				Controller.getControllerInstance().updateSQLSurvey(marriedMalesWithoutAssignedSpouseList.get(i));
 				
-				// Now we must loop through the original married males list to
-				// remove this newly single male from it.
-				for(int j = 0; j < listOfMarriedMales.size(); j++) {
-					
-					if ( listOfMarriedMales.get(j) == marriedMalesWithoutAssignedSpouseList.get(i) ) {
-						listOfMarriedMales.remove(j);
-						break; // move on to the next male without a spouse since we've got a match
-					}
-				} // end inner loop
 			} // end male outer loop
 			
 			for (int i = 0; i < marriedFemalesWithoutAssignedSpouseList.size(); i++ ) {
+				
 				marriedFemalesWithoutAssignedSpouseList.get(i).setMaritalStatus(0);
 				
 				// write to database
 				Controller.getControllerInstance().updateSQLSurvey(marriedFemalesWithoutAssignedSpouseList.get(i));
 				
-				// Now we must loop through the original married males list to
-				// remove this newly single male from it.
-				for(int j = 0; j < listOfMarriedFemales.size(); j++) {
-					
-					if ( listOfMarriedFemales.get(j) == marriedFemalesWithoutAssignedSpouseList.get(i) ) {
-						listOfMarriedFemales.remove(j);
-						break; // move on to the next female without a spouse since we've got a match
-					}
-				} // end inner loop
 			} // end female outer loop			
 		} // end big if code block
 		
@@ -342,47 +287,29 @@ public class ProcessMarried {
 			// Set whatever spouseless marriages that are left over to
 			// marital status of single.
 			for (int i = 0; i < marriedMalesWithoutAssignedSpouseList.size(); i++ ) {
+				
 				marriedMalesWithoutAssignedSpouseList.get(i).setMaritalStatus(0);
 				
 				// write to database
 				Controller.getControllerInstance().updateSQLSurvey(marriedMalesWithoutAssignedSpouseList.get(i));
 				
-				// Now we must loop through the original married males list to
-				// remove this newly single male from it.
-				for(int j = 0; j < listOfMarriedMales.size(); j++) {
-					
-					if ( listOfMarriedMales.get(j) == marriedMalesWithoutAssignedSpouseList.get(i) ) {
-						listOfMarriedMales.remove(j);
-						break; // move on to the next male without a spouse since we've got a match
-					}
-				} // end inner loop
 			} // end male outer loop			
 		} // end the else if part of the code block for the males
 		
 		// ****************************************************************
 		// else if only the marriedFemalesWithoutSpouseList > 0 to start with
 		// ****************************************************************
-		else {
+		else if (marriedFemalesWithoutAssignedSpouseList.size() > 0) {
 			
 			for (int i = 0; i < marriedFemalesWithoutAssignedSpouseList.size(); i++ ) {
+				
 				marriedFemalesWithoutAssignedSpouseList.get(i).setMaritalStatus(0);
 				
 				// write to database
 				Controller.getControllerInstance().updateSQLSurvey(marriedFemalesWithoutAssignedSpouseList.get(i));
 				
-				// Now we must loop through the original married males list to
-				// remove this newly single male from it.
-				for(int j = 0; j < listOfMarriedFemales.size(); j++) {
-					
-					if ( listOfMarriedFemales.get(j) == marriedFemalesWithoutAssignedSpouseList.get(i) ) {
-						listOfMarriedFemales.remove(j);
-						break; // move on to the next female without a spouse since we've got a match
-					}
-				} // end inner loop
 			} // end female outer loop			
-		} // end the else part of the code block for the females
-		
-		System.out.println("Leaving setSpouses() method.");
+		} // end the else part of the code block for the females		
 	} // end setSpouses() method
 
 	/**
