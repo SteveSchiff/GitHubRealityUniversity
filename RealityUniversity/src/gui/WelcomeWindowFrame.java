@@ -61,11 +61,11 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 		/*********************************
 		 * Configurations
 		 *********************************/
-		setBackground(PANEL_BACKGROUNDLIGHTGREEN); // sets the background color of the overall frame/window
-		contentPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
+		setBackground(HOVER_COLOR); // sets the background color of the overall frame/window
+		contentPanel.setOpaque(false);
 		contentPanel.setLayout(new GridLayout(2, 0));
 		headerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		buttonsPanel.setBackground(Color.lightGray);
+		buttonsPanel.setBackground(Color.YELLOW);
 
 		headerContainer.setLayout(headerGridLayout);
 		buttonsContainer.setLayout(buttonGridLayout);
@@ -92,7 +92,6 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 		headerPanel.add(headerContainer);
 		buttonsPanel.add(buttonsContainer);
 
-		//contentPanel.add(headerContainer); // original
 		contentPanel.add(headerPanel);  // added as an experiment
 		contentPanel.add(buttonsPanel);
 
@@ -100,7 +99,7 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 
 		add(bigDaddyContainer);
 		
-		// this -> bidDaddyContainer -> contentPanel -> headerPanel,buttonsPanel -> headerContainer,buttonsContainer
+		// this <- bidDaddyContainer <- contentPanel <- headerPanel,buttonsPanel <- headerContainer,buttonsContainer
 
 		/*********************************
 		 * Events

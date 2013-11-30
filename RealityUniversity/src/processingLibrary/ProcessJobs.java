@@ -29,6 +29,7 @@ public class ProcessJobs {
 	 * @return the list
 	 */
 	public List<Survey> doProcess() {
+		System.out.println("Entering ProcessJobs.doProcess() method");
 
 		for (Survey survey : surveysList) {
 			surveyPreferredJob = Controller.getControllerInstance().getJob(
@@ -88,23 +89,17 @@ public class ProcessJobs {
 								randomArrayNumber).getID());
 						Controller.getControllerInstance().updateSQLSurvey(
 								survey);
-						// Controller.getControllerInstance().refreshScreen();
-						System.out.println("Seed: " + randomArrayNumber);
 					}
 				}
 				Job job = Controller.getControllerInstance().getJob("id",
 						Integer.toString(survey.getAssignedJob()));
-				System.out.println("Job: " + job.getName());
-				System.out.println("Job GPA: " + job.getGPA());
-				System.out.println("Job Category: " + job.getCategory());
-				System.out.println("Job Industry: " + job.getIndustry());
-				System.out.println("Job Type: " + job.getType());
 			} // end outer else loop
 
 		} // end for loop
 
+		System.out.println("Leaving ProcessJobs.doProcess() method");
+		System.out.println("-------------------------\n");
 		return surveysList;
-
 	} // end doProcess() method
 
 	/**

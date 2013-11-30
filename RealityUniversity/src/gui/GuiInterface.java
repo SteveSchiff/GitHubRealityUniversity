@@ -42,18 +42,10 @@ public interface GuiInterface {
 	static final Color FRAME_BACKGROUND = new Color(155, 185, 210); // Light
 																	// Blue
 	static final Color HOVER_COLOR = new Color(0, 0, 255); // Dark Blue
-	static final Color PANEL_BACKGROUNDLIGHTGREEN = new Color(127, 255, 0); // Light
-																			// green
-																			// by
-																			// Steve
+	static final Color PANEL_BACKGROUNDLIGHTGREEN = new Color(127, 255, 0);
 	static final Color PANEL_BACKGROUNDTAN = new Color(230, 220, 200); // Tan
-	static final Color TOPGROUPPANEL_BACKGROUND_YELLOW = new Color(255, 255, 0); // Yellow
-																					// by
-																					// Steve
-	static final Color FOOTPANEL_BACKGROUND_INDIANRED = new Color(205, 92, 92); // Indian
-																				// Red
-																				// by
-																				// Steve
+	static final Color TOPGROUPPANEL_BACKGROUND_YELLOW = new Color(255, 255, 0);
+	static final Color FOOTPANEL_BACKGROUND_INDIANRED = new Color(205, 92, 92); 
 	static final Color STATUSTIP_BACKGROUND = new Color(75, 75, 75); // Yellow
 	static final Color SURVEY_SHADOW = new Color(128, 128, 128); // Grey
 

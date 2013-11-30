@@ -4,22 +4,17 @@ import gui.dialogs.ManageJobs;
 import gui.dialogs.NewGroup;
 import gui.dialogs.OpenGroup;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JToolBar;
-import javax.swing.text.DefaultEditorKit;
 
 public class ToolBar extends JToolBar implements GuiInterface {
 
 	private static ToolBar toolBarInstance = null;
-
-	// JButton saveButton = new JButton();
-
-	// Controller controller = Controller.getInstance();
 
 	public ToolBar() {
 
@@ -27,17 +22,9 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		 * Declarations
 		 *********************************/
 		// Buttons
-	    JButton newGroupButton = new JButton();
-	    JLabel newGroupLabel = new JLabel(" New Group");
-		JButton openGroupButton = new JButton();
-		JLabel openGroupButtonLabel = new JLabel("Open Group");
-//		JButton btnPrintSurveys = new JButton();
-//		JButton btnUndo = new JButton();
-		JButton cutButton = new JButton(new DefaultEditorKit.CutAction());
-		JButton copyButton = new JButton(new DefaultEditorKit.CopyAction());
-		JButton pasteButton = new JButton(new DefaultEditorKit.PasteAction());
-		JButton editJobsButton = new JButton();
-		JLabel editJobsLabel = new JLabel("Edit Jobs");
+	    JButton newGroupButton = new JButton("New Group");
+		JButton openGroupButton = new JButton("Open Group");
+		JButton editJobsButton = new JButton("Edit Jobs");
 
 		/*******************************
 		 * Configurations
@@ -45,47 +32,33 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		// File
 		newGroupButton.setToolTipText("New Group");
 		openGroupButton.setToolTipText("Open Group");
-//		btnPrintSurveys.setToolTipText("Print Current Survey");
-//		saveButton.setToolTipText("Save Current Survey");
-
-		// Edit
-//		btnUndo.setText("");
-		cutButton.setText("");
-		copyButton.setText("");
-		pasteButton.setText("");
-//		btnUndo.setToolTipText("Undelete Last Survey");
-		cutButton.setToolTipText("Cut Text");
-		copyButton.setToolTipText("Copy Text");
-		pasteButton.setToolTipText("Paste Text");
 		editJobsButton.setToolTipText("Edit Jobs");
 
 		// Set Icons to Buttons
 		newGroupButton.setIcon(new ImageIcon(SM_NEW_GROUP));
 		openGroupButton.setIcon(new ImageIcon(SM_OPEN_GROUP));
-
-//		btnUndo.setIcon(new ImageIcon(SM_UNDO));
-		cutButton.setIcon(new ImageIcon(SM_CUT));
-		copyButton.setIcon(new ImageIcon(SM_COPY));
-		pasteButton.setIcon(new ImageIcon(SM_PASTE));
 		editJobsButton.setIcon(new ImageIcon(SM_SETTINGS));
+		
+		// Set buttons' background colors
+		newGroupButton.setOpaque(true);
+		newGroupButton.setBackground(Color.CYAN);
+		openGroupButton.setOpaque(true);
+		openGroupButton.setBackground(Color.GREEN);
+		editJobsButton.setOpaque(true);
+		editJobsButton.setBackground(Color.YELLOW);
+		
+		// Set toolbar background
+		this.setOpaque(true);
+		this.setBackground(Color.RED);
 
 		/*******************************
 		 * Assembly
 		 *******************************/
 		add(newGroupButton);
-		add(newGroupLabel);
-		add(openGroupButton);
-		add(openGroupButtonLabel);
-//		add(saveButton);
-//		add(btnPrintSurveys);
 		addSeparator();
-//		add(btnUndo);
-//		add(cutButton);
-//		add(copyButton);
-//		add(pasteButton);
-//		addSeparator();
+		add(openGroupButton);
+		addSeparator();
 		add(editJobsButton);
-		add(editJobsLabel);
 
 		/*********************************
 		 * Events
@@ -102,7 +75,7 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		});
 		editJobsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				ManageJobs.getManageJobsInstance();
+				new ManageJobs();
 			}
 		});
 	} // end constructor

@@ -4,6 +4,7 @@ import gui.GuiInterface;
 import gui.custom.RoundPanel;
 import gui.custom.StatusTip;
 
+import javax.swing.DefaultComboBoxModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,8 +20,6 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -45,14 +44,14 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 	private Survey survey;
 
-	private ValidationPanel surveyValidationPanel = new ValidationPanel();
-
+	// Declaring various panel instances...
 	private RoundPanel mainPanel = new RoundPanel();
 	private JPanel headerPanel = new JPanel();
 	private JPanel contentPanel = new JPanel();
+	private ValidationPanel surveyValidationPanel = new ValidationPanel();
 	private JPanel footerPanel = new JPanel();
 	private JButton updateSurveyButton = new JButton();
-//	private JButton resetButton = new JButton("Reset");
+	
 	private Font labelFont = new Font("sansserif", Font.PLAIN, 12);
 
 	// Text Fields
@@ -64,7 +63,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			.getJobCategoriesList();
 	private List<String> jobsList = Controller.getControllerInstance()
 			.getJobsByCategoryList(jobCategoriesList.get(0));
-
 	private JComboBox periodComboBox = new JComboBox(ARR_PERIOD);
 	private JComboBox educationComboBox = new JComboBox(ARR_EDUCATION);
 	private JComboBox GPAComboBox = new JComboBox(ARR_GPA);
@@ -93,16 +91,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 	private ButtonGroup childrenButtonGroup = new ButtonGroup();
 	private ButtonGroup creditCardsButtonGroup = new ButtonGroup();
 
-	// Text fields
-	private JTextField annualSalaryTextField;
-	private JTextField annualTaxesTextField;
-	private JTextField monthlySalaryTextField;
-	private JTextField monthlyTaxesTextField;
-	private JTextField childSupportTextField;
-	private JTextField spousalIncomeTextField;
-	private JTextField netIncomeTextField;
-	private JTextField checkbookEntryTextField;
-
 	/**
 	 * Constructor
 	 * 
@@ -124,10 +112,14 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		try {
 			Controller.getControllerInstance().getGroup();
 
+			headerPanel = drawHeader();
 			SwingValidationGroup svgValSurvey = surveyValidationPanel
 					.getValidationGroup();
+<<<<<<< HEAD
 
 			headerPanel = drawHeader();
+=======
+>>>>>>> refs/heads/surveyWindowRedos
 			footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			footerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 			mainPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -176,8 +168,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 						// Custom Validator
 						if (validateSurvey()) {
 
-							Controller.getControllerInstance().updateSQLSurvey(
-									updateSurvey());
+							Controller.getControllerInstance().updateSQLSurvey(updateSurvey());
 							Controller.getControllerInstance().refreshScreen();
 						} else {
 							new StatusTip("Error: Enter GPA", LG_EXCEPTION);
@@ -186,13 +177,31 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 				} // -- end actionPerformed method
 			});
-//			footerPanel.add(resetButton);
+			
+			/**
+			 *  Content panel hierarchy
+			 *  
+			 *  This
+			 *  	mainPanel
+			 *  		contentPanel
+			 *  			headerPanel
+			 *  			surveyValidationPanel
+			 *  			jobInfoValidationPanel
+			 *  			footerPanel
+			 *  				updateSurveyButton
+			 */
 			footerPanel.add(updateSurveyButton);
+<<<<<<< HEAD
+=======
+			
+>>>>>>> refs/heads/surveyWindowRedos
 			contentPanel.add(headerPanel);
 			contentPanel.add(surveyValidationPanel);
-			// pnlContent.add(vpnlJobInfo);
+//			contentPanel.add(jobInfoValidationPanel, BorderLayout.EAST);
+			
 			mainPanel.add(contentPanel, BorderLayout.CENTER);
 			contentPanel.add(footerPanel, BorderLayout.SOUTH);
+			
 			add(mainPanel);
 			setInitialSurveyValues();
 		} catch (NullPointerException npe) {
@@ -573,7 +582,149 @@ public class EditSurvey extends JDialog implements GuiInterface {
 		return surveyPanel;
 	} // -- end drawSurvey() method
 
-	public JPanel drawJobInfo() {
+
+
+	/**
+	 * Set the form fields to the survey
+	 */
+	public void setInitialSurveyValues() {
+
+		firstNameTextField.setText(survey.getFName());
+		lastNameTextField.setText(survey.getLName());
+		periodComboBox.setSelectedIndex(survey.getCPeriod() - 1);
+		educationComboBox.setSelectedIndex(survey.getEducation());
+		GPAComboBox.setSelectedIndex(survey.getGPA());
+		teacherComboBox.setSelectedItem(survey.getTeacher());
+		preferredJobCategoryComboBox.setSelectedItem(Controller
+				.getControllerInstance()
+				.searchJobsList("id",
+						Integer.toString(survey.getPreferredJob())).get(0)
+				.getCategory());
+		preferredJobComboBox.setSelectedItem(Controller
+				.getControllerInstance()
+				.searchJobsList("id",
+						Integer.toString(survey.getPreferredJob())).get(0)
+				.getName());
+		// Gender
+		if (survey.getGender() == 0) {
+			maleGenderRadioButton.setSelected(true);
+		} else {
+			femaleGenderRadioButton.setSelected(true);
+		}
+		// Married
+		if (survey.getMaritalStatus() == 1) {
+			yesMarriedRadioButton.setSelected(true);
+		} else {
+			noMarriedRadioButton.setSelected(true);
+		}
+		// Children
+		if (survey.getChildren() > 0) {
+			yesChildrenRadioButton.setSelected(true);
+			childrenCountComboBox.setSelectedItem(survey.getChildren());
+		} else {
+			noChildrenRadioButton.setSelected(true);
+			childrenCountComboBox.setEnabled(false);
+		}
+		// Credit Cards
+		if (survey.getCreditCards() == 1) {
+			yesCreditCardsRadioButton.setSelected(true);
+			creditCardUsesComboBox.setSelectedIndex(survey.getCreditCardUses());
+		} else {
+			noCreditCardsRadioButton.setSelected(true);
+			creditCardUsesComboBox.setEnabled(false);
+		}
+	} // end setSurveyForm() method
+
+	/**
+	 * Gets the information currently entered in a survey
+	 * 
+	 * @return a Survey object
+	 * @throws NullPointerException
+	 */
+	public Survey updateSurvey() throws NullPointerException {
+
+		Survey updatedSurvey = new Survey();
+
+		updatedSurvey.setID(survey.getID());
+		updatedSurvey.setGroupID(Controller.getControllerInstance().getGroup()
+				.getID());
+
+		updatedSurvey.setTeacher(teacherComboBox.getSelectedItem().toString());
+		updatedSurvey.setFName(firstNameTextField.getText());
+		updatedSurvey.setLName(lastNameTextField.getText());
+		updatedSurvey.setCPeriod(Integer.parseInt(periodComboBox
+				.getSelectedItem().toString()));
+
+		updatedSurvey.setGPA(GPAComboBox.getSelectedIndex());
+
+		updatedSurvey.setEducation(educationComboBox.getSelectedIndex());
+
+		int intJobID = Controller.getControllerInstance().searchJobsList("name",
+						preferredJobComboBox.getSelectedItem().toString()).get(0).getID();
+
+		updatedSurvey.setPreferredJob(intJobID);
+		updatedSurvey.setAssignedJob(survey.getAssignedJob());
+
+		updatedSurvey.setGender(1);
+
+		updatedSurvey.setMaritalStatus(0);
+		updatedSurvey.setChildren(0);
+		updatedSurvey.setCreditCards(0);
+
+		boolean genderMale = maleGenderRadioButton.isSelected();
+		boolean married = yesMarriedRadioButton.isSelected();
+		boolean children = yesChildrenRadioButton.isSelected();
+		boolean ccards = yesCreditCardsRadioButton.isSelected();
+
+		if (genderMale)
+			updatedSurvey.setGender(0);
+		if (married) {
+			updatedSurvey.setMaritalStatus(1);
+		} else {
+			updatedSurvey.setSpouse(0);
+		}
+		if (children)
+			updatedSurvey.setChildren(Integer.parseInt(childrenCountComboBox
+					.getSelectedItem().toString()));
+		if (ccards) {
+			updatedSurvey.setCreditCards(1);
+			updatedSurvey.setCreditCardUses(creditCardUsesComboBox
+					.getSelectedIndex());
+		}
+		return updatedSurvey;
+	} // -- end getSurveyForm() method
+
+	public boolean validateSurvey() {
+
+		// Validate GPA
+		if (GPAComboBox.getSelectedIndex() == 0) {
+
+			return false;
+		}
+		return true;
+	} // -- end validateSurvey() method
+	
+	/* ********* Not used ***************************
+	 * 
+	 * Commented out this huge piece of code because it
+	 * was used nowhere in this class.  It appears, though,
+	 * that it may have some use in future iterations, so
+	 * it was preserved here in comment form along with its
+	 * dependent fields and imports.
+	 * 
+	import javax.swing.ComboBoxModel;
+
+	// Text fields
+	private JTextField annualSalaryTextField;
+	private JTextField annualTaxesTextField;
+	private JTextField monthlySalaryTextField;
+	private JTextField monthlyTaxesTextField;
+	private JTextField childSupportTextField;
+	private JTextField spousalIncomeTextField;
+	private JTextField netIncomeTextField;
+	private JTextField checkbookEntryTextField;
+	 
+	 	public JPanel drawJobInfo() {
 
 		JPanel pnlJobInfo = new JPanel();
 		pnlJobInfo.setBorder(new TitledBorder(null, "Job Information",
@@ -745,131 +896,7 @@ public class EditSurvey extends JDialog implements GuiInterface {
 
 		return pnlJobInfo;
 	} // end drawJobinfo() method
-
-	/**
-	 * Set the form fields to the survey
-	 */
-	public void setInitialSurveyValues() {
-
-		firstNameTextField.setText(survey.getFName());
-		lastNameTextField.setText(survey.getLName());
-		periodComboBox.setSelectedIndex(survey.getCPeriod() - 1);
-		educationComboBox.setSelectedIndex(survey.getEducation());
-		GPAComboBox.setSelectedIndex(survey.getGPA());
-		teacherComboBox.setSelectedItem(survey.getTeacher());
-		preferredJobCategoryComboBox.setSelectedItem(Controller
-				.getControllerInstance()
-				.searchJobsList("id",
-						Integer.toString(survey.getPreferredJob())).get(0)
-				.getCategory());
-		preferredJobComboBox.setSelectedItem(Controller
-				.getControllerInstance()
-				.searchJobsList("id",
-						Integer.toString(survey.getPreferredJob())).get(0)
-				.getName());
-		// Gender
-		if (survey.getGender() == 0) {
-			maleGenderRadioButton.setSelected(true);
-		} else {
-			femaleGenderRadioButton.setSelected(true);
-		}
-		// Married
-		if (survey.getMaritalStatus() == 1) {
-			yesMarriedRadioButton.setSelected(true);
-		} else {
-			noMarriedRadioButton.setSelected(true);
-		}
-		// Children
-		if (survey.getChildren() > 0) {
-			yesChildrenRadioButton.setSelected(true);
-			childrenCountComboBox.setSelectedItem(survey.getChildren());
-		} else {
-			noChildrenRadioButton.setSelected(true);
-			childrenCountComboBox.setEnabled(false);
-		}
-		// Credit Cards
-		if (survey.getCreditCards() == 1) {
-			yesCreditCardsRadioButton.setSelected(true);
-			creditCardUsesComboBox.setSelectedIndex(survey.getCreditCardUses());
-		} else {
-			noCreditCardsRadioButton.setSelected(true);
-			creditCardUsesComboBox.setEnabled(false);
-		}
-	} // end setSurveyForm() method
-
-	/**
-	 * Gets the information currently entered in a survey
-	 * 
-	 * @return a Survey object
-	 * @throws NullPointerException
-	 */
-	public Survey updateSurvey() throws NullPointerException {
-
-		Survey updatedSurvey = new Survey();
-
-		updatedSurvey.setID(survey.getID());
-		updatedSurvey.setGroupID(Controller.getControllerInstance().getGroup()
-				.getID());
-
-		updatedSurvey.setTeacher(teacherComboBox.getSelectedItem().toString());
-		updatedSurvey.setFName(firstNameTextField.getText());
-		updatedSurvey.setLName(lastNameTextField.getText());
-		updatedSurvey.setCPeriod(Integer.parseInt(periodComboBox
-				.getSelectedItem().toString()));
-
-		updatedSurvey.setGPA(GPAComboBox.getSelectedIndex());
-
-		updatedSurvey.setEducation(educationComboBox.getSelectedIndex());
-		// Go to the controller
-		// Get the job (it will be returned as a list so you have to .get(0)
-		// Get the ID
-		// updatedSurvey.setPreferredJob(Controller.getControllerInstance()
-		// .searchJobsList("name", "'" +
-		// preferredJobComboBox.getSelectedItem().toString() + "'")
-		// .get(0).getID());
-
-		int intJobID = Controller.getControllerInstance().searchJobsList("name",
-						preferredJobComboBox.getSelectedItem().toString()).get(0).getID();
-
-		updatedSurvey.setPreferredJob(intJobID);
-		updatedSurvey.setAssignedJob(updatedSurvey.getAssignedJob());
-
-		updatedSurvey.setGender(1);
-
-		updatedSurvey.setMaritalStatus(0);
-		updatedSurvey.setChildren(0);
-		updatedSurvey.setCreditCards(0);
-
-		boolean genderMale = maleGenderRadioButton.isSelected();
-		boolean married = yesMarriedRadioButton.isSelected();
-		boolean children = yesChildrenRadioButton.isSelected();
-		boolean ccards = yesCreditCardsRadioButton.isSelected();
-
-		if (genderMale)
-			updatedSurvey.setGender(0);
-		if (married) {
-			updatedSurvey.setMaritalStatus(1);
-		} else {
-			updatedSurvey.setSpouse(0);
-		}
-		if (children)
-			updatedSurvey.setChildren(Integer.parseInt(childrenCountComboBox
-					.getSelectedItem().toString()));
-		if (ccards) {
-			updatedSurvey.setCreditCards(1);
-			updatedSurvey.setCreditCardUses(creditCardUsesComboBox
-					.getSelectedIndex());
-		}
-		return updatedSurvey;
-	} // -- end getSurveyForm() method
-
-	public boolean validateSurvey() {
-
-		// Validate GPA
-		if (GPAComboBox.getSelectedIndex() == 0) {
-
-			return false;
-		}
-		return true;
-	} // -- end validateSurvey() method
+	 
+	 **************************************** */
+	
 } // end EditSurvey class

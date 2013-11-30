@@ -11,7 +11,7 @@ public class ProcessCreditScore {
 			.getSurveysList();
 
 	public List<Survey> doProcess() {
-
+		System.out.println("Entering ProcessCreditScore.doProcess() method.");
 		for (Survey survey : lstSurveys) {
 			// for surveys that do not have credit cards
 			if (survey.getCreditCards() == 0) {
@@ -100,6 +100,8 @@ public class ProcessCreditScore {
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 			} // end else block
 		} // end big for loop
+		System.out.println("Leaving ProcessCreditScore.doProcess() method.");
+		System.out.println("-------------------------\n");
 		return lstSurveys;
 	} // end doProcess() method
 } // end ProcessCreditScore class

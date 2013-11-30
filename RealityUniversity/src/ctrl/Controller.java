@@ -112,22 +112,22 @@ public class Controller implements GuiInterface {
 	} // end of Controller static method
 
 	/**
+	 *  THE HEART AND SOUL of all the calculations.
 	 * Process the group.
 	 */
 	public void processGroup() {
 		
-		System.out.println("getGroupsList.size() = " + getSurveysList().size());
+		System.out.println("getGroupsList.size() = " + getSurveysList().size() + "\n");
 		// no point in doing all the heavy-duty processing if the
 		// survey group is less than 20 in size.
 		if (getSurveysList().size() > 19) {
-			// disabled these statements until the problems with them are solved
 			 listOfSurveys = new ProcessMarried().doProcess();
 			 listOfSurveys = new ProcessCreditScore().doProcess();
 			 listOfSurveys = new ProcessJobs().doProcess();
 			 listOfSurveys = new ProcessChildren().doProcess();
-//			 listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
-//			 listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
-//			 listOfSurveys = new ProcessCustodyChildSupport().doProcess();
+			 listOfSurveys = new ProcessChildrenDivorcedFemales().doProcess();
+			 listOfSurveys = new ProcessChildrenDivorcedMales().doProcess();
+			 listOfSurveys = new ProcessCustodyChildSupport().doProcess();
 			
 		} else {
 			 listOfSurveys = new ProcessCreditScore().doProcess();
@@ -681,24 +681,8 @@ public class Controller implements GuiInterface {
 	 */
 	public void setGroup(Group group) {
 
-		// if (isGroupChanged()) {
-		// int response = JOptionPane.showConfirmDialog(null, new String(
-		// "Would you like to save your changes to the group: "
-		// + this.group.getName() + "?"), "Unsaved Changes",
-		// JOptionPane.YES_NO_OPTION, 0, new ImageIcon(LG_CAUTION));
-		//
-		// if (response == JOptionPane.YES_OPTION) {
-		// saveGroup();
-		// this.group = group;
-		// } // end inner if
-		// } // end outer if
-		// else {
 		this.group = group;
-		// }
-
-		// destroyListOfNewSurveys(); // these 3 statements may be unnecessary
-		// destroyListOfDeletedSurveys();
-		// destroyListOfUpdatedSurveys();
+		
 		setSQLselectWhereSurveysList(group);
 
 	} // end setGroup method
@@ -925,6 +909,8 @@ public class Controller implements GuiInterface {
 					String.valueOf(group.getID()), null);
 		}
 	} // -- end seSQLselectWhereSurveysList() method
+	
+	
 
 	/**
 	 * Updates current Group<br>
@@ -1082,7 +1068,7 @@ public class Controller implements GuiInterface {
 	 * for marriage ratio resetting of survey groups
 	 */
 	public void setSQLmaritalStatus(int ident, int maritalStatus) {
-		
+		//TODO no references
 	}
 
 	/**

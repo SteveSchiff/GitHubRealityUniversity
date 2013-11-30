@@ -30,8 +30,8 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 	 * 
 	 * @return Returns a List of Survey objects.
 	 */
-	// where could be "id", "fname", "lname", "gpa", "gender", "cperiod",
-	// "teacher", "groupID", "education", "
+	// The 'where' parameter could be "id" or "fname" or "lname" or "gpa" or "gender"
+	// or "cperiod" or "teacher" or "groupID" or "education" or etc.
 	public List<Survey> select(String where, String criteria, String groupBy) {
 
 		// Variable Declarations
@@ -139,14 +139,13 @@ public class SurveysTableDatabaseAccessor implements DatabaseAccessorInterface {
 
 			// Create SQL Statement
 			String sql = "UPDATE surveys SET "
-					+ /* "id=?, */"fName=?, lName=?, gpa=?, gender=?, " // 1-4
+					+ "fName=?, lName=?, gpa=?, gender=?, " // 1-4
 					+ "cPeriod=?, teacher=?, groupID=?, education=?, prefJob=?, job=?, married=?, " // 5-11
 					+ "spouse=?, children=?, cCards=?, cCardUses=?, groceries=?, clothing=?, home=?," // 12-18
 					+ "vehicle=?, childSupport=?, creditScore=? WHERE id=?"; // 19-22
 
 			stmt = conn.prepareStatement(sql);
 
-			// stmt.setInt(1, survey.getID());
 			stmt.setString(1, survey.getFName());
 			stmt.setString(2, survey.getLName());
 			stmt.setInt(3, survey.getGPA());
