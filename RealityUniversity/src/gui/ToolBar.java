@@ -75,7 +75,7 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		});
 		editJobsButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
-				ManageJobs.getManageJobsInstance();
+				new ManageJobs();
 			}
 		});
 	} // end constructor

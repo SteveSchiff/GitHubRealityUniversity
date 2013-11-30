@@ -10,6 +10,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -35,12 +36,12 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 	private Survey spouseSurvey;
 
 	// Used to do calculations in Occupation/Income section */
-	private double surveySalary;
-	private double surveyMonthlyTaxes;
-	private double surveyAnnualTaxes;
-	private double surveyChildSupport;
-	private double netIncome;
-	private double spouseIncome;
+	private float surveySalary;
+	private float surveyMonthlyTaxes;
+	private float surveyAnnualTaxes;
+	private float surveyChildSupport;
+	private float netIncome;
+	private float spouseIncome;
 
 	// Main panel
 	private RoundPanel mainPanel = new RoundPanel();
@@ -412,7 +413,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		collegeLoansLabelConstraints.gridx = 0;
 		financialConsiderationsPanel.add(collegeLoansLabel,	collegeLoansLabelConstraints);
 		// *************************************************************************
-		collegeLoansInfoLabel = new JLabel("$ "	+ Double.toString(assignedJobInfo.getLoan()));
+		collegeLoansInfoLabel = new JLabel(FMT_CURRENCY.format(assignedJobInfo.getLoan()));
 		GridBagConstraints collegeLoansInfoLabelConstraints = new GridBagConstraints();
 		collegeLoansInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		collegeLoansInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -446,7 +447,12 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		spousalIncomeLabelConstraints.gridx = 0;
 		financialConsiderationsPanel.add(spousalIncomeLabel, spousalIncomeLabelConstraints);
 		// **********************************************************************
-		spousalIncomeInfoLabel = new JLabel("N/A");
+		if (survey.getSpouse()  == 0) {
+			spousalIncomeInfoLabel = new JLabel("N/A");
+		}
+		else {			
+			spousalIncomeInfoLabel = new JLabel(FMT_CURRENCY.format(getSpousalIncome(survey)));
+		}
 		GridBagConstraints spousalIncomeInfoLabelConstraints = new GridBagConstraints();
 		spousalIncomeInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		spousalIncomeInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -463,8 +469,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		childSupportLabelConstraints.gridx = 0;
 		financialConsiderationsPanel.add(childSupportLabel,	childSupportLabelConstraints);
 		// **********************************************************************
-		childSupportInfoLabel = new JLabel("$ "
-				+ Double.toString(survey.getChildSupport()));
+		childSupportInfoLabel = new JLabel(String.format("$%.2f", survey.getChildSupport()));
 		GridBagConstraints childSupportInfoLabelConstraints = new GridBagConstraints();
 		childSupportInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		childSupportInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -542,8 +547,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		netIncomeLabelConstraints.gridx = 0;
 		occupationPanel.add(netIncomeLabel, netIncomeLabelConstraints);
 		// **********************************************************************
-		netIncomeInfoLabel = new JLabel("$ " + Double.toString(surveySalary - surveyMonthlyTaxes
-						+ surveyChildSupport));
+		netIncomeInfoLabel = new JLabel(FMT_CURRENCY.format(surveySalary - surveyMonthlyTaxes	+ surveyChildSupport));
 		GridBagConstraints netIncomeInfoLabelConstraints = new GridBagConstraints();
 		netIncomeInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		netIncomeInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -560,7 +564,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		checkbookEntryLabelConstraints.gridx = 0;
 		occupationPanel.add(checkbookEntryLabel, checkbookEntryLabelConstraints);
 		// **********************************************************************
-		checkbookEntryInfoLabel = new JLabel("$ " + Double.toString(netIncome + spouseIncome));
+		checkbookEntryInfoLabel = new JLabel(FMT_CURRENCY.format(netIncome + spouseIncome + surveyChildSupport));
 		GridBagConstraints checkbookEntryInfoLabelConstraints = new GridBagConstraints();
 		checkbookEntryInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		checkbookEntryLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -597,8 +601,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		annualTaxesLabelConstraints.gridx = 3;
 		occupationPanel.add(annualTaxesLabel, annualTaxesLabelConstraints);
 		// *******************************************************************
-		annualTaxesInfoLabel = new JLabel(
-				FMT_CURRENCY.format(surveyAnnualTaxes));
+		annualTaxesInfoLabel = new JLabel(FMT_CURRENCY.format(surveyAnnualTaxes));
 		GridBagConstraints annualTaxesInfoLabelConstraints = new GridBagConstraints();
 		annualTaxesInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		annualTaxesInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -616,8 +619,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		monthlySalaryLabelConstraints.gridx = 3;
 		occupationPanel.add(monthlySalaryLabel, monthlySalaryLabelConstraints);
 		// *******************************************************************
-		monthlySalaryInfoLabel = new JLabel("$ "
-				+ Double.toString(assignedJobInfo.getMonGrossSal()));
+		monthlySalaryInfoLabel = new JLabel(FMT_CURRENCY.format(assignedJobInfo.getMonGrossSal()));
 		GridBagConstraints monthlySalaryInfoLabelConstraints = new GridBagConstraints();
 		monthlySalaryInfoLabelConstraints.anchor = GridBagConstraints.WEST;
 		monthlySalaryInfoLabelConstraints.insets = new Insets(0, 0, 0, 5);
@@ -696,6 +698,20 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 	} // -- end Constructor
 		// end ViewSurvey constructor
 
+	private double getSpousalIncome(Survey survey) {
+
+		int spouseId = survey.getSpouse();
+		String spouseIdString = spouseId + "";
+		Survey spouseSurvey;
+		spouseSurvey = Controller.getControllerInstance().getSurvey("id", spouseIdString);
+		int jobCode = spouseSurvey.getAssignedJob();
+		String jobCodeString = jobCode + "";
+		Job job = Controller.getControllerInstance().getJob("id", jobCodeString);
+		double income = job.getMarAfterTax();
+		
+		return income;
+	}
+
 	/**
 	 * Gets the single instance of Controller.
 	 * 
@@ -759,7 +775,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 	 */
 	private void processFinancialInformation(Survey survey, Job assignedJobInfo) {
 
-		surveySalary = assignedJobInfo.getMonGrossSal();
+		surveySalary = (float) assignedJobInfo.getMonGrossSal();
 
 		try {
 			Job spouseJob = Controller.getControllerInstance().getJob("id",
@@ -767,7 +783,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 			survey.getSpouse();
 			spousalIncomeInfoLabel.setText("$"
 					+ Double.toString(spouseJob.getMarAfterTax()));
-			spouseIncome = spouseJob.getMarAfterTax();
+			spouseIncome = (float) spouseJob.getMarAfterTax();
 		} catch (NullPointerException npe) {
 			// Nothing to do
 		}
@@ -775,23 +791,23 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		if (survey.getMaritalStatus() == 1) {
 			annualTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getSinAnnualTax()));
-			surveyAnnualTaxes = assignedJobInfo.getSinAnnualTax();
+			surveyAnnualTaxes = (float) assignedJobInfo.getSinAnnualTax();
 		} else {
 			annualTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getMarAnnualTax()));
-			surveyAnnualTaxes = assignedJobInfo.getMarAnnualTax();
+			surveyAnnualTaxes = (float) assignedJobInfo.getMarAnnualTax();
 		}
 		if (survey.getMaritalStatus() == 1) {
 			monthlyTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getSinMonthlyTax()));
-			surveyMonthlyTaxes = assignedJobInfo.getSinMonthlyTax();
+			surveyMonthlyTaxes = (float) assignedJobInfo.getSinMonthlyTax();
 		} else {
 			monthlyTaxesInfoLabel.setText("$ "
 					+ Double.toString(assignedJobInfo.getMarMonthlyTax()));
-			surveyMonthlyTaxes = assignedJobInfo.getMarMonthlyTax();
+			surveyMonthlyTaxes = (float) assignedJobInfo.getMarMonthlyTax();
 		}
 		// for income calculation
-		surveyChildSupport = survey.getChildSupport();
+		surveyChildSupport = (float) survey.getChildSupport();
 		// calculate net income for survey
 		netIncome = surveySalary - surveyMonthlyTaxes + surveyChildSupport;
 	} // end of processFinancialInformation() method

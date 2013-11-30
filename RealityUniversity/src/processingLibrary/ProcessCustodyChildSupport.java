@@ -12,50 +12,64 @@ import ctrl.Controller;
  * custodial parent receiving child support.
  **********************************************************************************************/
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import ctrl.Controller;
 import obj.Group;
 import obj.Job;
 import obj.Survey;
 
 public class ProcessCustodyChildSupport {
 
-	Group group = Controller.getControllerInstance().getGroup();
+	private Controller localControllerInstance = Controller.getControllerInstance();
+	private Group group = localControllerInstance.getGroup();
 	
-	/** The list of surveys. */
 	// Gets the list directly from the database
-	private List<Survey> surveysList = currentSurveysList(group);
-	
+	private List<Survey> surveysList = currentSurveysList(group);	
 
-	/** The list of divorced males that HAVE children. */
 	private List<Survey> lstDivMalesWithChild = new ArrayList<>();
 
-	/** The list of divorced females that HAVE children. */
 	private List<Survey> lstDivFemalesWithChild = new ArrayList<>();
 
 	/** Random generators */
-	Random randomGenerator = new Random();
-	int randomMale;
-	int randomFemale;
+	private Random randomGenerator = new Random();
+	private int randomMale;
+	private int randomFemale;
+	
 
 	public List<Survey> doProcess() {
 
+		lstDivMalesWithChild.clear();
+		lstDivFemalesWithChild.clear();
+		System.out.println("Entering ProcessCustodyChildSupport.doProcess() method.");
+		
+		int divorcedMaleCount = 0;
+		int divorcedFemaleCount = 0;
 		// This can be uncommented. It will set childSupport to '0' for all
 		// surveys in group
-		for (Survey empty : surveysList) {
-			if (empty.getChildSupport() != 0)
-				empty.setChildSupport(0);
+		for (Survey survey : surveysList) {
+				survey.setChildSupport(0.0);
+				localControllerInstance.updateSQLSurvey(survey);
+				if (survey.getMaritalStatus() == 2) {
+					if (survey.getGender() == 0) {
+						divorcedMaleCount++;
+					} else {
+						divorcedFemaleCount++;
+					}
+				}
 		}
+		System.out.println("Number of males divorced is " + divorcedMaleCount);
+		System.out.println("Number of females divorced is " + divorcedFemaleCount);
 		System.out.println("Reset child support to zero for re-processing");
 
 		// Populate the "divorced with children" lists for
 		// both women and men.
 		for (Survey survey : surveysList) {
 
-			if (survey.getMaritalStatus() == 2 && survey.getChildren() > 0) {
+			if ( (survey.getMaritalStatus() == 2) && (survey.getChildren() > 0) ) {
 				// Get surveys for all divorced men with children in group
 				if (survey.getGender() == 0) {
 					lstDivMalesWithChild.add(survey);
@@ -66,11 +80,6 @@ public class ProcessCustodyChildSupport {
 				}
 			} // end if
 		} // end for survey
-
-		System.out.println("ChildSupport/Custody \n -----------------");
-		System.out.println("Divorced males: " + lstDivMalesWithChild.size());
-		System.out.println("Divorced females : "
-				+ lstDivFemalesWithChild.size());
 
 		// if the list of divorced men with children
 		// is less than 10, don't even bother trying
@@ -83,6 +92,8 @@ public class ProcessCustodyChildSupport {
 		setChildSupportFemale();
 		
 		surveysList = currentSurveysList(group);
+		System.out.println("Leaving ProcessCustodyChildSupport.doProcess() method.");
+		System.out.println("-------------------------\n");
 		return surveysList;
 
 	} // end doProcess()
@@ -165,15 +176,25 @@ public class ProcessCustodyChildSupport {
 	// *****************************************
 	
 	public void setChildSupportFemale() {
-		
-		float i = 1;
 		int numberOfDivorcedFemales = lstDivFemalesWithChild.size();
 		List<Survey> listOfFemalesNotReceivingChildSupport = lstDivFemalesWithChild;
+		
+		// We must first test the lstDivFemalesWithChild list to
+		// verify  the marital and child status
+		for (int i = 0; i < lstDivFemalesWithChild.size(); i++) {
+			Survey survey = lstDivFemalesWithChild.get(i);
+			
+			if (survey.getMaritalStatus() !=2) {
+				System.out.println("Marital status was " + survey.getMaritalStatus());
+				survey.setMaritalStatus(2);
+				localControllerInstance.updateSQLSurvey(survey);
+			};			
+		} // end for loop
 		
 		// ******************************************************
 		
 		// While less than 75% of women receive child support
-		while (i < numberOfDivorcedFemales * .75) {
+		for (int i = 0; i < numberOfDivorcedFemales * .75; i++) {
 
 			randomFemale = randomGenerator.nextInt(listOfFemalesNotReceivingChildSupport.size());
 			
@@ -181,11 +202,10 @@ public class ProcessCustodyChildSupport {
 			Survey survey = listOfFemalesNotReceivingChildSupport.get(randomFemale);
 
 			// Get job information from survey
-			Job jobInfo = Controller.getControllerInstance().getJob("id",
-					Integer.toString(survey.getAssignedJob()));
+			Job jobInfo = localControllerInstance.getJob("id", Integer.toString(survey.getAssignedJob()));
 			
 			// TODO: do we need to take tax out of this equation?
-			double salary = jobInfo.getAnnGrossSal();
+			float salary = (float) jobInfo.getMonGrossSal();
 			
 			// Assign child support based on income and number of children
 			if (survey.getChildren() == 1) {
@@ -194,6 +214,10 @@ public class ProcessCustodyChildSupport {
 				// write the change directly to the database
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 				listOfFemalesNotReceivingChildSupport.remove(survey);
+				System.out.println("Person is " + survey.getFName());
+				System.out.println("Marital status is " + survey.getMaritalStatus());
+				System.out.println("Child support is " + survey.getChildSupport());
+				System.out.println("-----------------------\n");
 			}
 			if (survey.getChildren() >= 2) {
 				survey.setChildSupport(.0174 * salary);
@@ -201,44 +225,34 @@ public class ProcessCustodyChildSupport {
 				// write the change directly to the database
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 				listOfFemalesNotReceivingChildSupport.remove(survey);
+				System.out.println("Person is " + survey.getFName());
+				System.out.println("Marital status is " + survey.getMaritalStatus());
+				System.out.println("Child support is " + survey.getChildSupport());
+				System.out.println("-----------------------\n");
 			}
-			i++;
-
-			System.out.println("i = : " + i);
-			System.out.println("child support/Female: "
-					+ survey.getChildSupport());
-		} // end while loop
+		} // for loop
 		
 		// ******************************************************
 		
-		// the women left over that don't get child support
-		// has a changed list that must be pruned.
-		lstDivFemalesWithChild = listOfFemalesNotReceivingChildSupport;
-
 		// For remaining women, assign child support payment based on income
-		for (Survey survey2 : lstDivFemalesWithChild) {
-
-			Job jobInfo = Controller.getControllerInstance().getJob("id",
-					Integer.toString(survey2.getAssignedJob()));
-			// TODO: do we need to take tax out of this equation?
-			double salary = jobInfo.getAnnGrossSal();
-
+		for (Survey survey2 : listOfFemalesNotReceivingChildSupport) {
+			
+			// Get job information from survey
+			Job jobInfo = localControllerInstance.getJob("id", Integer.toString(survey2.getAssignedJob()));
+			float salary = (float) jobInfo.getAnnGrossSal();
+			
 			if (survey2.getChildSupport() == 0) {
 				if (survey2.getChildren() == 1) {
 					survey2.setChildSupport(-(.0116 * salary));
 					
 					// write the change directly to the database
 					Controller.getControllerInstance().updateSQLSurvey(survey2);
-					System.out.println("Came from neg.: "
-							+ survey2.getChildSupport());
 				} // end first inner if block
 				if (survey2.getChildren() >= 2) {
 					survey2.setChildSupport(-(.0174 * salary));
 					
 					// write the change directly to the database
 					Controller.getControllerInstance().updateSQLSurvey(survey2);
-					System.out.println("Came from neg.: "
-							+ survey2.getChildSupport());
 				} // end second inner if block
 			} // end outer if block
 		} // end for loop
@@ -251,9 +265,9 @@ public class ProcessCustodyChildSupport {
 	public List<Survey> currentSurveysList(Group group){
 		
 		List<Survey> survey;
-		Controller.getControllerInstance().setGroup(group);
-		Controller.getControllerInstance().setSQLselectWhereSurveysList(group);
-		survey = Controller.getControllerInstance().getSurveysList();
+		localControllerInstance.setGroup(group);
+		localControllerInstance.setSQLselectWhereSurveysList(group);
+		survey = localControllerInstance.getSurveysList();
 		return survey;
 	}
 } // end class

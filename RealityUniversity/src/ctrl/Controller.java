@@ -117,11 +117,10 @@ public class Controller implements GuiInterface {
 	 */
 	public void processGroup() {
 		
-		System.out.println("getGroupsList.size() = " + getSurveysList().size());
+		System.out.println("getGroupsList.size() = " + getSurveysList().size() + "\n");
 		// no point in doing all the heavy-duty processing if the
 		// survey group is less than 20 in size.
 		if (getSurveysList().size() > 19) {
-			// disabled these statements until the problems with them are solved
 			 listOfSurveys = new ProcessMarried().doProcess();
 			 listOfSurveys = new ProcessCreditScore().doProcess();
 			 listOfSurveys = new ProcessJobs().doProcess();
@@ -910,6 +909,8 @@ public class Controller implements GuiInterface {
 					String.valueOf(group.getID()), null);
 		}
 	} // -- end seSQLselectWhereSurveysList() method
+	
+	
 
 	/**
 	 * Updates current Group<br>
@@ -1067,7 +1068,7 @@ public class Controller implements GuiInterface {
 	 * for marriage ratio resetting of survey groups
 	 */
 	public void setSQLmaritalStatus(int ident, int maritalStatus) {
-		
+		//TODO no references
 	}
 
 	/**

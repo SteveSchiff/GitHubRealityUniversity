@@ -20,8 +20,6 @@ public class NewGroup extends JDialog implements GuiInterface {
 	 */
 	public NewGroup() {
 
-		System.out.println("NEWGROUP CONSTRUCTOR");
-
 		String groupName;
 		groupName = (String) JOptionPane.showInputDialog(null, "Group Name:\n",
 				"New Group", JOptionPane.PLAIN_MESSAGE, new ImageIcon(

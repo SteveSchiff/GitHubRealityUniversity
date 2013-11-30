@@ -10,39 +10,28 @@ import java.util.List;
 import java.util.Random;
 
 import ctrl.Controller;
+import obj.Group;
 import obj.Survey;
 
 public class ProcessChildren {
 
-	/** The list of surveys. */
-	private List<Survey> surveysList = Controller.getControllerInstance()
-			.getSurveysList();
+	Controller localControllerInstance = Controller.getControllerInstance();
+	Group group = localControllerInstance.getGroup();
+	
+	private List<Survey> surveysList = currentSurveysList(group);
 
-	/** The list of married females. */
 	private List<Survey> marriedFemalesList = new ArrayList<>();
 
-	/** The list of married females that HAVE children. */
 	private List<Survey> marriedFemalesWithChildrenList = new ArrayList<>();
 
-	/** The list of married women who DO NOT have children */
 	private List<Survey> marriedFemalesWithNoChildrenList = new ArrayList<>();
 
-	/** Used to set male spouse information the same as their wife **/
 	private Survey spouseSurvey;
 
-	/**
-	 * Counters to track number of surveys with/without kids for
-	 * testing/verification
-	 **/
-	private int countKids;
-	private int countNoKids;
+	private float marriedWithChildrenLimitRatio = .5f; // target is 50% or .5
 
-	/** Married with children requirement. */
-	private double marriedWithChildrenLimitRatio = .5; // target is 50% or .5
-
-	/** Used to calculate %'s of women with/without kids **/
-	private double actualChildrenRatio;
-	private double actualNoChildrenRatio;
+	private float actualChildrenRatio;
+	private float actualNoChildrenRatio;
 
 	/**
 	 * Random generators for selecting random surveys and number of children to
@@ -53,11 +42,10 @@ public class ProcessChildren {
 	private int randomKids;
 
 	public List<Survey> doProcess() {
-		
+
+		System.out.println("Entering ProcessChildren.doProcess() method.");
 		// Clear out our list and counters
 		marriedFemalesList.clear();
-		countKids = 0;
-		countNoKids = 0;
 
 		for (Survey survey : surveysList) {
 
@@ -75,8 +63,6 @@ public class ProcessChildren {
 					spouseSurvey = Controller.getControllerInstance().getSurvey("id", 
 							Integer.toString(survey.getSpouse()));
 					spouseSurvey.setChildren(survey.getChildren());
-
-					countKids++;
 				}
 
 				// If survey has NO children add to list married with no
@@ -89,39 +75,29 @@ public class ProcessChildren {
 					spouseSurvey = Controller.getControllerInstance().getSurvey("id",
 									Integer.toString(survey.getSpouse()));
 					spouseSurvey.setChildren(survey.getChildren());
-
-					countNoKids++;
 				}
-
 			}// end if female and married
-
 		} // end for loop
 
-		System.out.println("with kids " + countKids);
-		System.out.println("with NO kids " + countNoKids);
-
 		// Get percentages of married women with and without children
-		actualChildrenRatio = (double) marriedFemalesWithChildrenList.size()
+		actualChildrenRatio = (float) marriedFemalesWithChildrenList.size()
 				/ marriedFemalesList.size();
-		actualNoChildrenRatio = (double) marriedFemalesWithNoChildrenList
+		actualNoChildrenRatio = (float) marriedFemalesWithNoChildrenList
 				.size() / marriedFemalesList.size();
-
-		System.out.println("% with children " + actualChildrenRatio);
-		System.out.println("% withOUt children " + actualNoChildrenRatio);
 
 		// If more than 50% of women have children we need to adjust down
 		if (actualChildrenRatio > marriedWithChildrenLimitRatio) {
-			System.out.println("too many kids");
 			adjustChildrenDown();
 		}
 		// If more than 50% of women have NO children we need to adjust up
 		else {
 			if (actualNoChildrenRatio > marriedWithChildrenLimitRatio) {
-				System.out.println("need MORE kids");
 				adjustChildrenUp();
 			}
 		}// end else
 
+		System.out.println("Leaving ProcessChildren.doProcess() method.");
+		System.out.println("-------------------------\n");
 		return surveysList;
 
 	} // end doProcess()
@@ -130,7 +106,8 @@ public class ProcessChildren {
 
 		/*
 		 * While our percentage of married WITH kids is too high we randomly
-		 * select married women with kids and take her children away
+		 * select married women with kids and take her children away.
+		 * ^Let us know how that works out, huh?  ;-)
 		 */
 		while ((double) marriedFemalesWithChildrenList.size()
 				/ marriedFemalesList.size() > marriedWithChildrenLimitRatio) {
@@ -146,13 +123,7 @@ public class ProcessChildren {
 			spouseSurvey = Controller.getControllerInstance().getSurvey("id",
 					Integer.toString(survey.getSpouse()));
 			spouseSurvey.setChildren(0);
-
-			countKids--;
-			countNoKids++;
-		}
-
-		System.out.println("end with kids " + countKids);
-		System.out.println("end no kids " + countNoKids);
+		} // end while loop
 
 	} // end adjustChildrenDown()
 
@@ -164,10 +135,8 @@ public class ProcessChildren {
 		 */
 		while ((double) marriedFemalesWithNoChildrenList.size()
 				/ marriedFemalesList.size() > marriedWithChildrenLimitRatio) {
-			System.out.println(countNoKids / marriedFemalesList.size());
 			randomInteger = randomGenerator.nextInt(marriedFemalesWithNoChildrenList.size());
 
-			System.out.println("begin "	+ marriedFemalesWithNoChildrenList.size()/* countNoKids */);
 			Survey survey = marriedFemalesWithNoChildrenList.get(randomInteger);
 
 			// Randomly assign 1 or 2 kids
@@ -177,18 +146,18 @@ public class ProcessChildren {
 			marriedFemalesWithNoChildrenList.remove(survey);
 
 			// Make sure her spouse has the same number of children
-			spouseSurvey = Controller.getControllerInstance().getSurvey("id",
-					Integer.toString(survey.getSpouse()));
+			spouseSurvey = localControllerInstance.getSurvey("id", Integer.toString(survey.getSpouse()));
 			spouseSurvey.setChildren(randomKids);
-
-			countNoKids--;
-			countKids++;
-
-		}
-
-		System.out.println("end with kids " + countKids);
-		System.out.println("end no kids " + countNoKids);
-
+		} // end while loop
 	}// end adjustChildrenUp()
+	
+	public List<Survey> currentSurveysList(Group group){
+		
+		List<Survey> surveysList;
+		localControllerInstance.setGroup(group);
+		localControllerInstance.setSQLselectWhereSurveysList(group);
+		surveysList = localControllerInstance.getSurveysList();
+		return surveysList;
+	}
 
 } // end class
