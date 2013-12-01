@@ -1,4 +1,4 @@
-package lib.print;
+package print;
 
 import java.awt.Color;
 import java.awt.Component;

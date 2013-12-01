@@ -42,10 +42,13 @@ public class ToolBar extends JToolBar implements GuiInterface {
 		// Set buttons' background colors
 		newGroupButton.setOpaque(true);
 		newGroupButton.setBackground(Color.CYAN);
+		newGroupButton.setFont(FNT_BIG_AND_BOLD);
 		openGroupButton.setOpaque(true);
 		openGroupButton.setBackground(Color.GREEN);
+		openGroupButton.setFont(FNT_BIG_AND_BOLD);
 		editJobsButton.setOpaque(true);
 		editJobsButton.setBackground(Color.YELLOW);
+		editJobsButton.setFont(FNT_BIG_AND_BOLD);
 		
 		// Set toolbar background
 		this.setOpaque(true);

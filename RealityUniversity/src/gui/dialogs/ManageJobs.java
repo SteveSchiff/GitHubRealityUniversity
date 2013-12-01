@@ -36,9 +36,11 @@ import ctrl.Controller;
 
 public class ManageJobs extends JDialog implements GuiInterface {
 
+	Controller localControllerInstance = Controller.getControllerInstance();
+	
 	/** An instance of ManageJobs. */
 	private static ManageJobs manageJobsInstance = null;
-	private List<Job> listOfJobs = Controller.getControllerInstance()
+	private List<Job> listOfJobs = localControllerInstance
 			.getJobsList();
 
 	// private List<Job> jobRows = new ArrayList<>();
@@ -62,7 +64,7 @@ public class ManageJobs extends JDialog implements GuiInterface {
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		setSize(new Dimension(SETTINGS_WIDTH, SETTINGS_HEIGHT));
 		setTitle("Manage Jobs");
-		setLocationRelativeTo(Controller.getControllerInstance().getFrame());
+		setLocationRelativeTo(localControllerInstance.getFrame());
 		setSize(new Dimension(SETTINGS_WIDTH, SETTINGS_HEIGHT));
 
 		getContentPane().add(drawHeader(), BorderLayout.NORTH);
@@ -185,12 +187,8 @@ public class ManageJobs extends JDialog implements GuiInterface {
 							.getHeaderValue().toString();
 
 					// Get the job from the selected row and remove it
-					Controller.getControllerInstance()
-							.removeJobFromListOfNewJobs(
-									Controller.getControllerInstance().getJob(
-											columnName,
-											String.valueOf(getCellData(target,
-													row, 0))));
+					localControllerInstance.deleteSQLJob(localControllerInstance.getJob(
+								columnName,	String.valueOf(getCellData(target, row, 0))));
 					btnApply.setEnabled(true);
 					mdlJobs.removeRow(row);
 					mdlJobs.fireTableDataChanged();
@@ -208,13 +206,9 @@ public class ManageJobs extends JDialog implements GuiInterface {
 					int row = target.getSelectedRow();
 					String columnName = target.getColumnModel().getColumn(0)
 							.getHeaderValue().toString();
-
-					// Get the job from the selected row and open it for editing
-					Controller.getControllerInstance().openEditJob(
-							Controller.getControllerInstance()
-									.getJob(columnName,
-											String.valueOf(getCellData(target,
-													row, 0))));
+					
+					new EditJob(localControllerInstance.getJob(
+							columnName,	String.valueOf(getCellData(target, row, 0))));
 
 					setVisible(false);
 				}
@@ -252,15 +246,18 @@ public class ManageJobs extends JDialog implements GuiInterface {
 		gbc_pnlAddJob.gridx = 0;
 		gbc_pnlAddJob.gridy = 1;
 		pnlFooter.add(pnlAddJob, gbc_pnlAddJob);
-		JButton btnAddJob = new JButton("New Job");
-		pnlAddJob.add(btnAddJob);
+		JButton newJobButton = new JButton("New Job");
+		newJobButton.setFont(FNT_BIG_AND_BOLD);
+		pnlAddJob.add(newJobButton);
 		JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JButton btnOk = new JButton("OK");
-		JButton btnCancel = new JButton("Cancel");
+		JButton doneButton = new JButton("Done");
+		doneButton.setFont(FNT_BIG_AND_BOLD);
+//		JButton btnCancel = new JButton("Cancel");
+//		btnCancel.setFont(FNT_BIG_AND_BOLD);
 
-		pnlButtons.add(btnOk);
-		pnlButtons.add(btnCancel);
-		pnlButtons.add(btnApply);
+		pnlButtons.add(doneButton);
+//		pnlButtons.add(btnCancel);
+//		pnlButtons.add(btnApply);
 		GridBagConstraints gbc_pnlButtons = new GridBagConstraints();
 		gbc_pnlButtons.anchor = GridBagConstraints.EAST;
 		gbc_pnlButtons.gridx = 1;
@@ -269,55 +266,39 @@ public class ManageJobs extends JDialog implements GuiInterface {
 		btnApply.setEnabled(false);
 
 		// Apply Changes
-		btnApply.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				Controller.getControllerInstance().saveJobs(true);
-				btnApply.setEnabled(false);
-				mdlJobs.fireTableDataChanged();
-
-			} // -- end actionPerformed() method
-		});
+//		btnApply.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//
+//				Controller.getControllerInstance().saveJobs(true);
+//				btnApply.setEnabled(false);
+//				mdlJobs.fireTableDataChanged();
+//
+//			} // -- end actionPerformed() method
+//		});
 
 		// Apply Changes and Close Window
-		btnOk.addActionListener(new ActionListener() {
+		doneButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				Controller.getControllerInstance().saveJobs(true);
-				mdlJobs.fireTableDataChanged();
 				dispose();
 			} // -- end actionPerformed() method
 		});
 
-		// Cancel Changes and Close Window
-		btnCancel.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				Controller.getControllerInstance().saveJobs(false);
-				mdlJobs.fireTableDataChanged();
-				dispose();
-
-			} // -- end actionPerformed() method
-		});
-
-		// Add new Job
-		btnAddJob.addActionListener(new ActionListener() {
+		// ******************** newJobButton listener *******************
+		newJobButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
 				new EditJob(null);
 				setVisible(false);
-
 			} // -- end actionPerformed() method
-
 		});
+		// ********************end of newJobButton listener *******************
 
 		return pnlFooter;
 	} // end drawFooter() method

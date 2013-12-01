@@ -2,9 +2,6 @@ package ctrl;
 
 import gui.GuiInterface;
 import gui.GuiMain;
-import gui.custom.StatusTip;
-import gui.dialogs.EditJob;
-import gui.dialogs.ManageJobs;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -42,13 +39,10 @@ public class Controller implements GuiInterface {
 	/** An instance of the Controller. */
 	private static Controller controllerInstance = null;
 
-	/** The groups D. */
 	protected static GroupsTableDatabaseAccessor groupsTableDatabaseAccessor = new GroupsTableDatabaseAccessor();
 
-	/** The jobs DAO. */
 	protected static JobsTableDatabaseAccessor jobsTableDatabaseAccessor = new JobsTableDatabaseAccessor();
 
-	/** The surveys DAO. */
 	protected static SurveysTableDatabaseAccessor surveysTableDatabaseAccessor = new SurveysTableDatabaseAccessor();
 
 	/** The jobs map. Used to populate jobs and job categories */
@@ -57,35 +51,13 @@ public class Controller implements GuiInterface {
 	/** The current group. */
 	private Group group;
 
-	/** The groups list. */
 	private List<Group> listOfGroups = new ArrayList<>();
 
-	/** The surveys list. */
 	private List<Survey> listOfSurveys = new ArrayList<>();
 
-	/** The jobs list. */
 	private List<Job> listOfJobs = new ArrayList<>();
-
-	/** The deleted jobs list. */
-	private List<Job> listOfDeletedJobs = new ArrayList<>();
-
-	/** The deleted surveys list. */
-	private List<Survey> listOfDeletedSurveys = new ArrayList<>();
-
-	/** The updated jobs list. */
-	private List<Job> listOfUpdatedJobs = new ArrayList<>();
-
-	/** The updated surveys list. */
-	private List<Survey> listOfUpdatedSurveys = new ArrayList<>();
-
-	/** The new jobs list. */
+	
 	private List<Job> listOfNewJobs = new ArrayList<>();
-
-	/** The new surveys list. */
-	private List<Survey> listOfNewSurveys = new ArrayList<>();
-
-	/** The processed boolean to tell if it should be processed or not. */
-	private boolean shouldItBeProcessed;
 
 	/**
 	 * Instantiates a new controller.
@@ -190,62 +162,6 @@ public class Controller implements GuiInterface {
 			eio.printStackTrace();
 		}
 	} // -- end openHelp() method
-
-	/**
-	 * Adds the job in memory.
-	 * 
-	 * @param job
-	 *            the job
-	 */
-	public void addJob(Job job) {
-		listOfNewJobs.add(job);
-		ManageJobs.getManageJobsInstance().addJobToTable(job);
-	} // -- end addJob() method
-
-	/**
-	 * Destroy the delJobs list.
-	 */
-	public void destroyListOfDeletedJobs() {
-
-		listOfDeletedJobs.clear();
-
-	} // -- end destroyListOfDeletedJobs() method
-
-	/**
-	 * Destroy the newJobs list.
-	 */
-	public void destroyListOfNewJobs() {
-
-		listOfNewJobs.clear();
-
-	} // -- end destroyListOfNewJobs() method
-
-	/**
-	 * Destroy updated jobs.
-	 */
-	public void destroyListOfUpdatedJobs() {
-
-		listOfUpdatedJobs.clear();
-
-	} // -- end destroyListOfUpdatedJobs() method
-
-	/**
-	 * Remove job.
-	 * 
-	 * @param job
-	 *            the job
-	 */
-	public void removeJobFromListOfNewJobs(Job job) {
-
-		if (listOfNewJobs.contains(job)) {
-			listOfNewJobs.remove(job);
-		}
-
-		listOfDeletedJobs.add(job);
-		listOfJobs.remove(job);
-		refreshScreen();
-
-	} // -- end removeJobFromListOfNewJobs() method
 
 	/**
 	 * Gets Job categories.
@@ -376,56 +292,6 @@ public class Controller implements GuiInterface {
 
 		return lstJobNames;
 	} // end getJobsListInCategory() method
-
-	/**
-	 * Save jobs.
-	 */
-	public void saveJobs(boolean save) {
-
-		String message = "";
-
-		if (save) { // the big if statement - the outer if
-			if (listOfNewJobs.size() > 0) {
-				for (int i = 0; i < listOfNewJobs.size(); i++) {
-					insertSQLJob(listOfNewJobs.get(i));
-				}
-				message += "\n Added " + listOfNewJobs.size() + " job(s)";
-			}
-			if (listOfDeletedJobs.size() > 0) {
-				for (int i = 0; i < listOfDeletedJobs.size(); i++) {
-					deleteSQLJob(listOfDeletedJobs.get(i));
-				}
-				message += "\n Removed " + listOfDeletedJobs.size() + " job(s)";
-			}
-			if (listOfUpdatedJobs.size() > 0) {
-				for (int i = 0; i < listOfUpdatedJobs.size(); i++) {
-					updateSQLJob(listOfUpdatedJobs.get(i));
-				}
-				message += "\n Updated " + listOfUpdatedJobs.size() + " job(s)";
-			}
-
-			if (listOfNewJobs.size() > 0 || listOfDeletedJobs.size() > 0
-					|| listOfUpdatedJobs.size() > 0)
-				new StatusTip(message, LG_SUCCESS);
-
-			// Reload Jobs
-			listOfJobs.clear();
-			setSQLselectAllJobsList();
-		} // end of outer if
-		else {
-			// Put the jobs back in lstJobs
-			if (listOfDeletedJobs.size() > 0) {
-				for (int i = 0; i < listOfDeletedJobs.size(); i++) {
-					listOfJobs.add(listOfDeletedJobs.get(i));
-				}
-			}
-		}
-		destroyListOfDeletedJobs();
-		destroyListOfNewJobs();
-		destroyListOfUpdatedJobs();
-		refreshScreen();
-
-	} // end saveJobs method
 
 	/**
 	 * Get a job from memory.
@@ -568,35 +434,6 @@ public class Controller implements GuiInterface {
 	} // -- end searchJobsList() method
 
 	/**
-	 * Update job.
-	 * 
-	 * @param oldJob
-	 *            : the old version of the job being updated
-	 * @param newJob
-	 *            : the new version of the job being updated
-	 * 
-	 */
-	public void updateJob(Job job, Job nJob) {
-
-		listOfUpdatedJobs.add(nJob);
-		listOfJobs.remove(job);
-		listOfJobs.add(nJob);
-
-	} // -- end updateJob() method
-
-	/**
-	 * Open edit job.
-	 * 
-	 * @param job
-	 *            : the job being edited
-	 */
-	public void openEditJob(Job job) {
-
-		new EditJob(job);
-
-	} // -- end openEditJob() method
-
-	/**
 	 * Gets the group in memory.
 	 * 
 	 * @return the current Group object.
@@ -663,13 +500,7 @@ public class Controller implements GuiInterface {
 	 */
 	public List<Group> getGroupsList() {
 
-		// try {
-		// listOfGroups.size();
-		// } catch (NullPointerException npe) {
-		// If it doesn't exist, create it
 		setSQLselectGroupsList();
-		// }
-
 		return listOfGroups;
 	} // end getGroupsList() method
 
@@ -719,39 +550,6 @@ public class Controller implements GuiInterface {
 			return 0;
 		}
 	} // -- end addGroup() method
-
-	/**
-	 * Gets surveys that have been deleted, but not yet saved
-	 * 
-	 * @return a List of surveys
-	 */
-
-	/**
-	 * Checks if group has been modified.
-	 * 
-	 * @return true, if is group changed
-	 */
-	public boolean isGroupChanged() {
-
-		if (listOfNewSurveys.size() > 0) {
-
-			return true;
-		}
-		if (listOfDeletedSurveys.size() > 0) {
-
-			return true;
-		}
-		if (listOfUpdatedSurveys.size() > 0) {
-
-			return true;
-		}
-		if (shouldItBeProcessed) {
-
-			return true;
-		}
-
-		return false;
-	} // -- end isGroupChanged() method
 
 	/**
 	 * Get a survey.
@@ -885,6 +683,7 @@ public class Controller implements GuiInterface {
 	 */
 	public void setSQLselectGroupsList() { // SQL accessor caller method
 		listOfGroups = groupsTableDatabaseAccessor.select(null, null);
+		
 	} // -- end setSQLselectGroupsList() method
 
 	/**
@@ -1062,14 +861,6 @@ public class Controller implements GuiInterface {
 
 		return result;
 	} // -- end deleteSQLSurvey() method
-	
-	/**
-	 * Set marital status for the ProcessMarried class
-	 * for marriage ratio resetting of survey groups
-	 */
-	public void setSQLmaritalStatus(int ident, int maritalStatus) {
-		//TODO no references
-	}
 
 	/**
 	 * Check tables.
@@ -1083,13 +874,12 @@ public class Controller implements GuiInterface {
 		if (!jobsTableDatabaseAccessor.doesJobsTableExist())
 			jobsTableDatabaseAccessor.createTable();
 		else
-			// {} // eliminate these brackets after commit 10/01/2013
 			setSQLselectAllJobsList(); // decomment after commit 10/01/2013
 		if (!surveysTableDatabaseAccessor.doesSurveysTableExist())
 			surveysTableDatabaseAccessor.createTable();
 
 		mapJobs = jobsTableDatabaseAccessor.getJobsByCategory();
-
 	} // -- end checkExistenceOfTables() method
+	
 } // end Controller class
 

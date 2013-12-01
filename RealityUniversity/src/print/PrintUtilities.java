@@ -1,4 +1,4 @@
-package lib.print;
+package print;
 
 import java.awt.Component;
 import java.awt.Graphics;

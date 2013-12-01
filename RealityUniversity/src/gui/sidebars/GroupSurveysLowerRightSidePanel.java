@@ -24,9 +24,9 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import lib.print.PrintMultiplePages;
 import obj.Group;
 import obj.Survey;
+import print.PrintMultiplePages;
 import ctrl.Controller;
 
 /**

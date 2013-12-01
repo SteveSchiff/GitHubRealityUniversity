@@ -91,8 +91,6 @@ public class ProcessJobs {
 								survey);
 					}
 				}
-				Job job = Controller.getControllerInstance().getJob("id",
-						Integer.toString(survey.getAssignedJob()));
 			} // end outer else loop
 
 		} // end for loop

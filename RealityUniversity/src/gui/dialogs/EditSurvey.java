@@ -115,11 +115,9 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			headerPanel = drawHeader();
 			SwingValidationGroup svgValSurvey = surveyValidationPanel
 					.getValidationGroup();
-<<<<<<< HEAD
 
 			headerPanel = drawHeader();
-=======
->>>>>>> refs/heads/surveyWindowRedos
+
 			footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			footerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 			mainPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -191,13 +189,8 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			 *  				updateSurveyButton
 			 */
 			footerPanel.add(updateSurveyButton);
-<<<<<<< HEAD
-=======
-			
->>>>>>> refs/heads/surveyWindowRedos
 			contentPanel.add(headerPanel);
 			contentPanel.add(surveyValidationPanel);
-//			contentPanel.add(jobInfoValidationPanel, BorderLayout.EAST);
 			
 			mainPanel.add(contentPanel, BorderLayout.CENTER);
 			contentPanel.add(footerPanel, BorderLayout.SOUTH);

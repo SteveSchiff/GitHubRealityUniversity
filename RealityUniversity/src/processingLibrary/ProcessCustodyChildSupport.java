@@ -46,24 +46,12 @@ public class ProcessCustodyChildSupport {
 		lstDivFemalesWithChild.clear();
 		System.out.println("Entering ProcessCustodyChildSupport.doProcess() method.");
 		
-		int divorcedMaleCount = 0;
-		int divorcedFemaleCount = 0;
 		// This can be uncommented. It will set childSupport to '0' for all
 		// surveys in group
 		for (Survey survey : surveysList) {
-				survey.setChildSupport(0.0);
-				localControllerInstance.updateSQLSurvey(survey);
-				if (survey.getMaritalStatus() == 2) {
-					if (survey.getGender() == 0) {
-						divorcedMaleCount++;
-					} else {
-						divorcedFemaleCount++;
-					}
-				}
-		}
-		System.out.println("Number of males divorced is " + divorcedMaleCount);
-		System.out.println("Number of females divorced is " + divorcedFemaleCount);
-		System.out.println("Reset child support to zero for re-processing");
+			survey.setChildSupport(0.0);
+			localControllerInstance.updateSQLSurvey(survey);
+		} // end for loop
 
 		// Populate the "divorced with children" lists for
 		// both women and men.
@@ -78,8 +66,8 @@ public class ProcessCustodyChildSupport {
 				if (survey.getGender() == 1) {
 					lstDivFemalesWithChild.add(survey);
 				}
-			} // end if
-		} // end for survey
+			} // end outer if code block
+		} // end for loop
 
 		// if the list of divorced men with children
 		// is less than 10, don't even bother trying
@@ -205,7 +193,7 @@ public class ProcessCustodyChildSupport {
 			Job jobInfo = localControllerInstance.getJob("id", Integer.toString(survey.getAssignedJob()));
 			
 			// TODO: do we need to take tax out of this equation?
-			float salary = (float) jobInfo.getMonGrossSal();
+			float salary = (float) jobInfo.getAnnGrossSal();
 			
 			// Assign child support based on income and number of children
 			if (survey.getChildren() == 1) {
@@ -214,10 +202,6 @@ public class ProcessCustodyChildSupport {
 				// write the change directly to the database
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 				listOfFemalesNotReceivingChildSupport.remove(survey);
-				System.out.println("Person is " + survey.getFName());
-				System.out.println("Marital status is " + survey.getMaritalStatus());
-				System.out.println("Child support is " + survey.getChildSupport());
-				System.out.println("-----------------------\n");
 			}
 			if (survey.getChildren() >= 2) {
 				survey.setChildSupport(.0174 * salary);

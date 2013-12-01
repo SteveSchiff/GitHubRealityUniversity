@@ -20,10 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import lib.print.PrintUtilities;
 import obj.Group;
 import obj.Job;
 import obj.Survey;
+import print.PrintUtilities;
 import ctrl.Controller;
 
 public class ViewSurvey extends JDialog implements GuiInterface {

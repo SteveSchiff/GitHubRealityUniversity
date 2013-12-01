@@ -93,8 +93,9 @@ public class EditJob extends JDialog implements GuiInterface {
 		RoundPanel pnlMain = new RoundPanel();
 		JPanel pnlContent = new JPanel();
 		JPanel pnlFooter = new JPanel();
-		JButton btnOK = new JButton("OK");
-		JButton btnReset = new JButton("Reset");
+		JButton saveChangesButton = new JButton("Save Changes");
+		JButton cancelButton = new JButton("Cancel");
+		cancelButton.setFont(FNT_BIG_AND_BOLD);
 
 		pnlFooter.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		pnlFooter.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -108,32 +109,48 @@ public class EditJob extends JDialog implements GuiInterface {
 
 		pnlContent.setLayout(new BoxLayout(pnlContent, BoxLayout.Y_AXIS));
 
-		btnOK.setToolTipText("Confirm Changes");
+		saveChangesButton.setFont(FNT_BIG_AND_BOLD);
+		saveChangesButton.setToolTipText("Confirm Changes");
 
-		btnOK.addActionListener(new ActionListener() {
+		// ****************** saveChangesButton listener ***************
+		
+		saveChangesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (vpnlSurvey.isFatalProblem()) {
 					new StatusTip("Error: Please check form values.",
 							LG_EXCEPTION);
-				} else {
+				} else { // if everything works out ok...
 					Job nJob = getJobForm();
 					if (action.equals("update")) {
-						Controller.getControllerInstance().updateJob(job, nJob);
+						Controller.getControllerInstance().updateSQLJob(nJob);
 					} else {
-						Controller.getControllerInstance().addJob(nJob);
+						Controller.getControllerInstance().insertSQLJob(nJob);
 					}
 					ManageJobs.getManageJobsInstance().setVisible(true);
-					ManageJobs.getManageJobsInstance().btnApply
-							.setEnabled(true);
 					dispose();
 				}
 
 			} // -- end actionPerformed method
 		});
+		// ****************** end of saveChangesButton listener ***************
+		
+		// ********************* cancelButton listener *********************
+		
+		cancelButton.addActionListener(new ActionListener() {
 
-		pnlFooter.add(btnReset);
-		pnlFooter.add(btnOK);
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				ManageJobs.getManageJobsInstance().setVisible(true);
+				dispose();
+			} // -- end actionPerformed() method
+		});
+		
+		// ********************* end of cancelButton listener *********************
+
+		pnlFooter.add(cancelButton);
+		pnlFooter.add(saveChangesButton);
 		pnlContent.add(drawHeader());
 		pnlContent.add(vpnlSurvey);
 		pnlMain.add(pnlContent, BorderLayout.CENTER);
@@ -624,8 +641,7 @@ public class EditJob extends JDialog implements GuiInterface {
 			cboCategory.setSelectedItem("Select Category");
 			cboGPA.setSelectedIndex(0);
 		}
-
-	} // -- end jobForm() method
+	} // -- end setJobForm() method
 
 	/**
 	 * Gets the information currently entered in a job

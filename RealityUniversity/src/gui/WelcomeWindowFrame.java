@@ -119,11 +119,7 @@ public class WelcomeWindowFrame extends RoundPanel implements GuiInterface {
 		});
 
 		openGroupButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {			    
-			    
-			    System.out.println("*************************************");
-			    System.out.println("*   -- Open Group Button Clicked--  *");
-			    System.out.println("*************************************");
+			public void actionPerformed(ActionEvent e) {
 			    
 				new OpenGroup();
 			}
