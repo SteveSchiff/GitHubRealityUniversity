@@ -1,32 +1,41 @@
 
 /* This is the CSS for the Help Bundle*/
-h1 
-{
+h1 {
+text-align: center;
 color:1a4593;
 font-size:30px;
 }
-h2 
-{ 
+
+h2 { 
 color:1a4593; 
 font-size:25px; 
 }
-body 
-{
+
+body {
 background-color:#e6dcc8;    
 } 
-p 
-{
+
+p.r{
 color:1a4593;
 font-size:20px;  
 }
-a 
-{
+
+a {
 color:1a4593;
 } 
-li 
-{ 
-color:1a4593;
-font-size:20px;
+
+li { 
+list-style-position: inside;
 }
 
-/* The Proejct Help Bundle works a bit better on Firefox than IE*/ 
+div.contentsTable {
+float: left;
+color: black;
+width: 20%;
+margin: 20px;
+padding: 10px;
+border: 4px solid #000;
+background-color: yellow;
+}
+
+/* The Project Help Bundle works a bit better on Firefox than IE*/ 
