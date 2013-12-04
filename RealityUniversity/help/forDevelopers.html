@@ -1,0 +1,60 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Message To Developers</title>
+	<link rel="stylesheet" type="text/css" href="helpstyle.css">
+</head>
+
+<body>
+
+	<div class="contentsTable">
+      <p><b>Table of Contents:</b><br/><a href="index.html">Home</a></p>
+      
+      <p>Section I:<br/><a href="install.html">Installation</a></p>
+          
+      <p>Section II:<br/><a href="welcome.html">The Welcome Page</a></p>
+          
+      <p>Section III:<br/><a href="new_surveys.html">The Survey Form and Data Entry</a></p>
+          
+      <p>Section IV:<br/><a href="processing.html">Data Storage and Processing</a></p>
+          
+      <p>Section V:<br/><a href="edit_jobs.html">Settings</a></p>
+            
+      <p>Section VI:<br/><a href="printing.html">Printing</a></p>
+      
+      <p>Section VII:<br/><a href="forDevelopers.html">For Developers</a></p>
+    </div>
+    
+<h1>Message To Developers</h1>
+
+
+	<p>While this application pretty much works out of the box as it is, there is always room for improvement.  For those of you who want to take this application further than I've been able to, I wanted to make some noteworthy comments in a bulleted list form.  Yes, it's worthwhile to read it because it'll tell you some things about the structure of the application that will save you a whole lot of time than if you didn't read them.</p>
+    <br/>
+<ul>
+    	<li>
+        The application consists of six main packages:
+        	<ul style="list-style-position:inside">
+            	<li><strong>ctrl</strong> - The brains and administrator of the application.</li>
+            	<li><strong>databaseAccessors</strong> - The classes and methods that talk directly to the database.</li>
+            	<li><strong>gui</strong> - The package that holds all the gui stuff.  It in itself contains three subpackages - custom, dialogs, and sidebars.</li>
+            	<li><strong>obj</strong> - contains the classes that turn database entities into java objects.</li>
+            	<li><strong>print</strong> - contains print utilities and their methods.</li>
+            	<li><strong>processingLibrary</strong> - consists of seven classes that do the actual processing of the surveys such as determining credit scores, job qualificatios, etc.</li>
+            </ul>
+        </li><hr style="width:50%"/>
+    	<li>The entry into the whole application is the GuiMain class directly underneath the gui package.  This is where it all starts.</li><hr style="width:50%"/>
+    	<li>Many of the names were changed from the first major release in order to clarify their function.  The JobsTableDatabaseAccessor, for example, accesses, well, the jobs table in the database with the usual four main SQL functions - select, update, insert, and delete.  Its name in the first iteration was JobsDAO in the DAO package.  DAO needless to say, is not very descriptive of what it contains.  The databaseAccessors package is a bit more clear on the nature of its classes and what their methods probably do.</li><hr style="width:50%"/>
+    	<li>The obj package just consist of the classes that are used to create objects that hold the information from the three tables in the database - groups, surveys, and jobs.  Whenever the database is accessed, the information that is pulled is put into one of these objects depending on which table in the database was accessed.</li><hr style="width:50%"/>
+    	<li></li>The processingLibrary package is the core behind-the-scenes logic that takes all the survey information and determines job qualifications based on GPA, checks to make sure the single, married, and divorced ratios are to &quot;normal&quot; patterns, checks and sets credit ratings, etc.  In the first major release, it was this part that made the application hang and freeze up.  That has been fixed and some improvements were made in the overall design of the processing logic.<hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    	<li></li><hr style="width:50%"/>
+    </ul>
+  
+    </body>
+</html>

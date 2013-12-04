@@ -22,10 +22,10 @@ font-size:20px;
 
 a {
 color:1a4593;
-} 
+}
 
-li { 
-list-style-position: inside;
+indent {
+margin-left: 2em;
 }
 
 div.contentsTable {
@@ -37,5 +37,6 @@ padding: 10px;
 border: 4px solid #000;
 background-color: yellow;
 }
+
 
 /* The Project Help Bundle works a bit better on Firefox than IE*/ 
