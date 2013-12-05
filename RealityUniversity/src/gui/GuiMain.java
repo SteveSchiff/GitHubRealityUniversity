@@ -37,7 +37,7 @@ public class GuiMain implements GuiInterface {
 																	// MenuBar
 																	// instance
 		bigDaddyFrame.getContentPane().setLayout(new BorderLayout(0, 0));
-		// XXX Make this getInstance for ToolBar! DONE!
+		
 		bigDaddyFrame.getContentPane().add(ToolBar.getToolBarInstance(),
 				BorderLayout.NORTH); // Instantiate ToolBar instance
 		bigDaddyFrame.getContentPane().add(mainWindowPanel);

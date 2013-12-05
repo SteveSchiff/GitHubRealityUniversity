@@ -257,9 +257,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 						}
 					});
 
-					// ==============================================
-					// XXX The second paper print routine
-					// Paper Print option - mouseListener (8) Third if
 					lblPrint.addMouseListener(new MouseListener() {
 						public void mouseClicked(MouseEvent arg0) {
 
@@ -316,10 +313,9 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 											JOptionPane.YES_NO_OPTION);
 
 							if (response == JOptionPane.YES_OPTION) {
-								// Controller.getControllerInstance().removeSurveyFromListOfNewSurveys(survey);
 								Controller.getControllerInstance()
 										.deleteSQLSurvey(survey);
-								// MARK trying out refresh() method
+								
 								Controller.getControllerInstance()
 										.refreshScreen();
 							}
@@ -340,17 +336,9 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 						public void mouseReleased(MouseEvent arg0) {
 						}
 					});
-				} // MARK line 704 end for loop inside inner if statement
-					// The above for loop assigns four icon buttons to each
-					// individual survey
-					// ========================================================================
+				} // end for loop inside inner if statement
 
-				// Push surveys to top of panel (outside for loop, but still
-				// inside inner if statement)
-				// XXX put some text into the lblFiller to see what it does
 				JLabel fillerLabel = new JLabel("");
-				// fillerLabel.setOpaque(true);
-				// fillerLabel.setBackground(SURVEY_SHADOW);
 				GridBagConstraints gbc_lblFiller = new GridBagConstraints();
 				gbc_lblFiller.insets = new Insets(0, 0, 5, 0);
 				gbc_lblFiller.fill = GridBagConstraints.BOTH;
@@ -361,8 +349,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 				gbc_lblFiller.gridy = listOfSurveys.size();
 				surveysPanel.add(fillerLabel, gbc_lblFiller);
 
-				// MARK this is where some code for "Print All" button needs to
-				// be
 				JButton printButton = new JButton("Print All Surveys");
 				printButton.setFont(FNT_BIG_AND_BOLD);
 				printButton.setEnabled(true);
@@ -442,8 +428,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 				add(scrollPane);
 
 			} // end inner if statement
-				// ***********************************************************************************
-				// MARK else if empty group that contains no surveys as yet
 			else {
 				JLabel fillerLabel = new JLabel("");
 				// fillerLabel.setOpaque(true);
@@ -458,8 +442,6 @@ public class GroupSurveysLowerRightSidePanel extends RoundPanel implements
 				gbc_lblFiller.gridy = listOfSurveys.size();
 				surveysPanel.add(fillerLabel, gbc_lblFiller);
 
-				// MARK this is where some code for "Print All" button needs to
-				// be
 				JButton printButton = new JButton("Print All Surveys");
 				printButton.setFont(FNT_BIG_AND_BOLD);
 				printButton.setEnabled(false);

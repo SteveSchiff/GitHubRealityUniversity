@@ -155,7 +155,6 @@ public class EditSurvey extends JDialog implements GuiInterface {
 			updateSurveyButton.setText("Update Survey");
 			updateSurveyButton.setFont(FNT_BIG_AND_BOLD);
 
-			// TODO - DONE! make this work as intended
 			updateSurveyButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 

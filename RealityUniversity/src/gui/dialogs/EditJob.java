@@ -43,7 +43,7 @@ public class EditJob extends JDialog implements GuiInterface {
 	private Job job;
 	private String action;
 
-	private JTextField txtName;
+	private JTextField nameTextField;
 	private JTextField txtAnnGrossSal;
 	private JTextField txtMonGrossSal;
 	private JTextField txtMarAnnualTax;
@@ -224,15 +224,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblJobName.gridy = 0;
 		pnlJob.add(lblJobName, gbc_lblJobName);
 
-		txtName = new JTextField();
+		nameTextField = new JTextField();
 		GridBagConstraints gbc_txtName = new GridBagConstraints();
 		gbc_txtName.insets = new Insets(0, 0, 5, 5);
 		gbc_txtName.anchor = GridBagConstraints.NORTH;
 		gbc_txtName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtName.gridx = 1;
 		gbc_txtName.gridy = 0;
-		pnlJob.add(txtName, gbc_txtName);
-		txtName.setColumns(20);
+		pnlJob.add(nameTextField, gbc_txtName);
+		nameTextField.setColumns(20);
 
 		JLabel lblCategory = new JLabel("Category:");
 		lblCategory.setToolTipText("Category the Job Is In");
@@ -619,7 +619,7 @@ public class EditJob extends JDialog implements GuiInterface {
 	public void setJobForm() {
 
 		try {
-			txtName.setText(job.getName());
+			nameTextField.setText(job.getName());
 			cboType.setSelectedItem(job.getType());
 			cboIndustry.setSelectedItem(job.getIndustry());
 			cboCategory.setSelectedItem(job.getCategory());
@@ -635,7 +635,7 @@ public class EditJob extends JDialog implements GuiInterface {
 			txtLoan.setText(String.valueOf(job.getLoan()));
 		} catch (NullPointerException npe) {
 			// If we are creating a new job
-			txtName.setText("");
+			nameTextField.setText("");
 			cboType.setSelectedItem("Select Type");
 			cboIndustry.setSelectedItem("Select Industry");
 			cboCategory.setSelectedItem("Select Category");
@@ -654,7 +654,7 @@ public class EditJob extends JDialog implements GuiInterface {
 		Job newJob = new Job();
 
 		newJob.setID(job.getID());
-		newJob.setName(txtName.getText());
+		newJob.setName(nameTextField.getText());
 
 		newJob.setType(cboType.getSelectedItem().toString());
 		newJob.setIndustry(cboIndustry.getSelectedItem().toString());

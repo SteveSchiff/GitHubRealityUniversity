@@ -98,7 +98,6 @@ public class ManageJobs extends JDialog implements GuiInterface {
 	public JPanel drawHeader() {
 
 		JPanel pnlHeader = new JPanel();
-		// TODO: Put filters/search options here!
 
 		return pnlHeader;
 	} // -- end drawHeader() method

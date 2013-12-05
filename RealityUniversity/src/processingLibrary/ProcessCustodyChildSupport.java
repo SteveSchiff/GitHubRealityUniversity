@@ -173,7 +173,6 @@ public class ProcessCustodyChildSupport {
 			Survey survey = lstDivFemalesWithChild.get(i);
 			
 			if (survey.getMaritalStatus() !=2) {
-				System.out.println("Marital status was " + survey.getMaritalStatus());
 				survey.setMaritalStatus(2);
 				localControllerInstance.updateSQLSurvey(survey);
 			};			
@@ -209,10 +208,6 @@ public class ProcessCustodyChildSupport {
 				// write the change directly to the database
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 				listOfFemalesNotReceivingChildSupport.remove(survey);
-				System.out.println("Person is " + survey.getFName());
-				System.out.println("Marital status is " + survey.getMaritalStatus());
-				System.out.println("Child support is " + survey.getChildSupport());
-				System.out.println("-----------------------\n");
 			}
 		} // for loop
 		

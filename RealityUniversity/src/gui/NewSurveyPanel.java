@@ -163,11 +163,7 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 					StringValidators.NO_WHITESPACE,
 					StringValidators.MAY_NOT_START_WITH_DIGIT, StringValidators
 							.maxLength(15), StringValidators.minLength(2));
-			// end of validation routine
 			
-			//TODO DONE Construct the reset/clear button here
-			
-			//XXX ******** Button on lower right hand corner **********
 			resetButton.setToolTipText("Clears survey entries");
 			resetButton.setText("Clear");
 			resetButton.setFont(FNT_BIG_AND_BOLD);
@@ -177,9 +173,6 @@ public class NewSurveyPanel extends JPanel implements GuiInterface {
 				} // -- end actionPerformed() method
 			});
 			
-			// end of reset/clear button construction code block
-			
-			//XXX ******** Button on lower right hand corner **********
 			saveSurveyButton.setToolTipText("Add Survey to group: "
 					+ group.getName());
 			saveSurveyButton.setText("Save Survey");

@@ -187,18 +187,13 @@ public class GroupInfoUpperRightSidePanel extends RoundPanel implements
 		processSurveysButton.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent arg0) {
 
-				System.out
-						.println("************************************************************************************************");
+				System.out.println("*************************************");
 				System.out.println("*   Process Surveys Button Clicked  *");
-				System.out
-						.println("************************************************************************************************");
-				System.out
-						.println("************************************************************************************************");
+				System.out.println("*************************************");
 
-				// TODO Figure out why this part uses up so much CPU power!
 				/**************************************
-				 * This is the place where the problems start and make the
-				 * program use almost 30% of my Ivy bridge processor! Wow!
+				 * This is the place where all the 
+				 * "backend" processing happens.
 				 **************************************/
 				Controller.getControllerInstance().processGroup();
 

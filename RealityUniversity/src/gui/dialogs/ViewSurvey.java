@@ -163,7 +163,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		// Sub-panel borders
 		Border blackBorder = BorderFactory.createLineBorder(Color.black, 1);
 
-		// AORD Class Information Panel (1) - 3 sections
+		// Class Information Panel (1) - 3 sections
 		// Class Information Panel (1) ************************************
 		// ****************************************************************
 		classInfoPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -229,7 +229,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		classInfoPanel.add(classPeriodInfoLabel, classPeriodInfoLabelConstraints);
 		// ****************************************************************
 
-		// AORD Student Information Panel (2) - 4 sections
+		// Student Information Panel (2) - 4 sections
 		// Student Information Panel (2) ***********************************
 		// *****************************************************************
 		studentInfoPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -310,7 +310,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		studentInfoPanel.add(studentIDInfoLabel, studentIDLabelInfoConstraints);
 		// ************************************************
 
-		// AORD Family Information Panel (3) - 3 sections
+		// Family Information Panel (3) - 3 sections
 		// Family Information panel *****************************************
 		// ******************************************************************
 		famiyInfoPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -387,7 +387,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		famiyInfoPanel.add(childrenInfoLabel, childrenInfoLabelConstraints);
 		// ****************************************************************
 
-		// AORD Financial Considerations Panel (4) - 4 sections
+		// Financial Considerations Panel (4) - 4 sections
 		// Financial Considerations panel ***********************************
 		// ******************************************************************
 		financialConsiderationsPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
@@ -478,7 +478,7 @@ public class ViewSurvey extends JDialog implements GuiInterface {
 		financialConsiderationsPanel.add(childSupportInfoLabel,	childSupportInfoLabelConstraints);
 		// **********************************************************************
 
-		// AORD Occupation and Income Panel (5) - 7 sections
+		// Occupation and Income Panel (5) - 7 sections
 		// Occupation and Income panel ***************************************
 		// *******************************************************************
 		occupationPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
