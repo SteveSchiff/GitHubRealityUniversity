@@ -8,8 +8,8 @@ import ctrl.Controller;
 
 public class ProcessCreditScore {
 
-	Controller localControllerInstance = Controller.getControllerInstance();
-	Group group = localControllerInstance.getGroup();
+	private Controller localControllerInstance = Controller.getControllerInstance();
+	private Group group = localControllerInstance.getGroup();
 	
 	private List<Survey> surveysList = currentSurveysList(group);
 
@@ -71,8 +71,7 @@ public class ProcessCreditScore {
 				} // end switch statement
 				Controller.getControllerInstance().updateSQLSurvey(survey);
 			
-		} // end big for loop
-		
+		} // end big for loop		
 		
 		System.out.println("Leaving ProcessCreditScore.doProcess() method.");
 		System.out.println("-------------------------\n");

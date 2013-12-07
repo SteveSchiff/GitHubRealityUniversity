@@ -15,8 +15,8 @@ import obj.Survey;
 
 public class ProcessChildrenDivorcedFemales {
 
-	Controller localControllerInstance = Controller.getControllerInstance();
-	Group group = localControllerInstance.getGroup();
+	private Controller localControllerInstance = Controller.getControllerInstance();
+	private Group group = localControllerInstance.getGroup();
 	
 	private List<Survey> surveysList = currentSurveysList(group);
 
