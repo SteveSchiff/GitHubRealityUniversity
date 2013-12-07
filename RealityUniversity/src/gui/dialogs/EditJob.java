@@ -37,37 +37,42 @@ import org.netbeans.validation.api.ui.swing.ValidationPanel;
 import ctrl.Controller;
 
 public class EditJob extends JDialog implements GuiInterface {
-
-	private ValidationPanel vpnlSurvey = new ValidationPanel();
+	
+	Controller localControllerInstance = Controller.getControllerInstance();
+	
+	private ValidationPanel surveyValidationPanel = new ValidationPanel();
 
 	private Job job;
 	private String action;
 
 	private JTextField nameTextField;
-	private JTextField txtAnnGrossSal;
-	private JTextField txtMonGrossSal;
-	private JTextField txtMarAnnualTax;
-	private JTextField txtMarMonthlyTax;
-	private JTextField txtMarAfterTax;
-	private JTextField txtSinAnnualTax;
-	private JTextField txtSinMonthlyTax;
-	private JTextField txtSinAfterTax;
-	private JTextField txtLoan;
+	private JTextField annualGrossSalaryTextField;
+	private JTextField monthlyGrossSalaryTextField;
+	private JTextField marriedAnnualTaxTextField;
+	private JTextField marriedMonthlyTaxTextField;
+	private JTextField marriedAfterTaxTextField; // txtMarAfterTax
+	private JTextField singleAnnualTaxTextField; // txtSinAnnualTax
+	private JTextField singleMonthlyTaxTextField; // txtSinMonthlyTax
+	private JTextField singleAfterTaxTextField; // txtSinAfterTax
+	private JTextField loanTextField; // 
 
-	private List<String> lstTypes = Controller.getControllerInstance()
-			.getJobTypesList();
-	private List<String> lstIndustries = Controller.getControllerInstance()
-			.getJobIndustriesList();
-	private List<String> lstCategories = Controller.getControllerInstance()
-			.getJobCategoriesList();
+	private List<String> jobTypesList = localControllerInstance.getJobTypesList();
+	private List<String> jobIndustriesList = localControllerInstance.getJobIndustriesList();
+	private List<String> jobCategoriesList = localControllerInstance.getJobCategoriesList();
 
-	private JComboBox<String> cboType = new JComboBox<>(
-			new DefaultComboBoxModel(lstTypes.toArray()));
-	private JComboBox<String> cboIndustry = new JComboBox<>(
-			new DefaultComboBoxModel(lstIndustries.toArray()));
-	private JComboBox<String> cboCategory = new JComboBox<>(
-			new DefaultComboBoxModel(lstCategories.toArray()));
-	private JComboBox<String> cboGPA = new JComboBox<>(ARR_GPA);
+	private JComboBox<String> jobTypesComboBox = new JComboBox<>(
+			new DefaultComboBoxModel(jobTypesList.toArray()));
+	private JComboBox<String> jobIndustriesComboBox = new JComboBox<>(
+			new DefaultComboBoxModel(jobIndustriesList.toArray()));
+	private JComboBox<String> jobCategoriesComboBox = new JComboBox<>(
+			new DefaultComboBoxModel(jobCategoriesList.toArray()));
+	private JComboBox<String> gpaComboBox = new JComboBox<>(ARR_GPA);
+
+	private RoundPanel mainPanel = new RoundPanel();
+	private JPanel contentPanel = new JPanel();
+	private JPanel footerPanel = new JPanel();
+	private JButton saveChangesButton = new JButton();
+	private JButton cancelButton = new JButton("Cancel");
 
 	public EditJob(final Job job) {
 
@@ -90,42 +95,45 @@ public class EditJob extends JDialog implements GuiInterface {
 		setModal(true);
 		setAlwaysOnTop(true);
 
-		RoundPanel pnlMain = new RoundPanel();
-		JPanel pnlContent = new JPanel();
-		JPanel pnlFooter = new JPanel();
-		JButton saveChangesButton = new JButton("Save Changes");
-		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setFont(FNT_BIG_AND_BOLD);
 
-		pnlFooter.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		pnlFooter.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		pnlMain.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
-		pnlMain.setLayout(new BorderLayout(0, 0));
-		pnlContent.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
+		footerPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		footerPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
+		mainPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
+		mainPanel.setLayout(new BorderLayout(0, 0));
+		contentPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 
-		vpnlSurvey.setBorder(null);
-		vpnlSurvey.setInnerComponent(drawJob());
-		vpnlSurvey.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
+		surveyValidationPanel.setBorder(null);
+		surveyValidationPanel.setInnerComponent(drawJob());
+		surveyValidationPanel.setBackground(PANEL_BACKGROUNDLIGHTGREEN);
 
-		pnlContent.setLayout(new BoxLayout(pnlContent, BoxLayout.Y_AXIS));
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
 
 		saveChangesButton.setFont(FNT_BIG_AND_BOLD);
-		saveChangesButton.setToolTipText("Confirm Changes");
+		
+		if (action == "update") {
+			saveChangesButton.setText("Save Changes");
+			saveChangesButton.setToolTipText("Confirm changes");
+		}
+		else {
+			saveChangesButton.setToolTipText("Confirm new job addition");
+			saveChangesButton.setText("Add New Job");
+		}
 
 		// ****************** saveChangesButton listener ***************
 		
 		saveChangesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (vpnlSurvey.isFatalProblem()) {
+				if (surveyValidationPanel.isFatalProblem()) {
 					new StatusTip("Error: Please check form values.",
 							LG_EXCEPTION);
 				} else { // if everything works out ok...
 					Job nJob = getJobForm();
 					if (action.equals("update")) {
-						Controller.getControllerInstance().updateSQLJob(nJob);
+						localControllerInstance.updateSQLJob(nJob);
 					} else {
-						Controller.getControllerInstance().insertSQLJob(nJob);
+						localControllerInstance.insertSQLJob(nJob);
 					}
 					ManageJobs.getManageJobsInstance().setVisible(true);
 					dispose();
@@ -149,13 +157,13 @@ public class EditJob extends JDialog implements GuiInterface {
 		
 		// ********************* end of cancelButton listener *********************
 
-		pnlFooter.add(cancelButton);
-		pnlFooter.add(saveChangesButton);
-		pnlContent.add(drawHeader());
-		pnlContent.add(vpnlSurvey);
-		pnlMain.add(pnlContent, BorderLayout.CENTER);
-		pnlContent.add(pnlFooter, BorderLayout.SOUTH);
-		getContentPane().add(pnlMain);
+		footerPanel.add(cancelButton);
+		footerPanel.add(saveChangesButton);
+		contentPanel.add(drawHeader());
+		contentPanel.add(surveyValidationPanel);
+		mainPanel.add(contentPanel, BorderLayout.CENTER);
+		contentPanel.add(footerPanel, BorderLayout.SOUTH);
+		getContentPane().add(mainPanel);
 		setJobForm();
 
 		addWindowListener(new WindowAdapter() {
@@ -242,15 +250,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblCategory.gridx = 3;
 		gbc_lblCategory.gridy = 0;
 		pnlJob.add(lblCategory, gbc_lblCategory);
-		cboCategory.setToolTipText("Category the Job Is In");
+		jobCategoriesComboBox.setToolTipText("Category the Job Is In");
 
-		cboCategory.setEditable(true);
+		jobCategoriesComboBox.setEditable(true);
 		GridBagConstraints gbc_cboCategory = new GridBagConstraints();
 		gbc_cboCategory.insets = new Insets(0, 0, 5, 0);
 		gbc_cboCategory.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cboCategory.gridx = 4;
 		gbc_cboCategory.gridy = 0;
-		pnlJob.add(cboCategory, gbc_cboCategory);
+		pnlJob.add(jobCategoriesComboBox, gbc_cboCategory);
 
 		JLabel lblType = new JLabel("Type:");
 		lblType.setToolTipText("(Used for processing) Type of Job");
@@ -260,13 +268,13 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblType.gridx = 0;
 		gbc_lblType.gridy = 1;
 		pnlJob.add(lblType, gbc_lblType);
-		cboType.setToolTipText("(Used for processing) Type of Job");
+		jobTypesComboBox.setToolTipText("(Used for processing) Type of Job");
 		GridBagConstraints gbc_cboType = new GridBagConstraints();
 		gbc_cboType.insets = new Insets(0, 0, 5, 5);
 		gbc_cboType.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cboType.gridx = 1;
 		gbc_cboType.gridy = 1;
-		pnlJob.add(cboType, gbc_cboType);
+		pnlJob.add(jobTypesComboBox, gbc_cboType);
 
 		JLabel lblIndustry = new JLabel("Industry:");
 		lblIndustry
@@ -277,16 +285,16 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblIndustry.gridx = 3;
 		gbc_lblIndustry.gridy = 1;
 		pnlJob.add(lblIndustry, gbc_lblIndustry);
-		cboIndustry
+		jobIndustriesComboBox
 				.setToolTipText("(Used for processing) Industry the Job Is In");
 
-		cboIndustry.setEditable(true);
+		jobIndustriesComboBox.setEditable(true);
 		GridBagConstraints gbc_cboIndustry = new GridBagConstraints();
 		gbc_cboIndustry.insets = new Insets(0, 0, 5, 0);
 		gbc_cboIndustry.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cboIndustry.gridx = 4;
 		gbc_cboIndustry.gridy = 1;
-		pnlJob.add(cboIndustry, gbc_cboIndustry);
+		pnlJob.add(jobIndustriesComboBox, gbc_cboIndustry);
 
 		JLabel lblAnnGrossSal = new JLabel("Annual Salary:");
 		GridBagConstraints gbc_lblAnnGrossSal = new GridBagConstraints();
@@ -296,14 +304,14 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblAnnGrossSal.gridy = 3;
 		pnlJob.add(lblAnnGrossSal, gbc_lblAnnGrossSal);
 
-		txtAnnGrossSal = new JTextField();
+		annualGrossSalaryTextField = new JTextField();
 		GridBagConstraints gbc_txtAnnGrossSal = new GridBagConstraints();
 		gbc_txtAnnGrossSal.insets = new Insets(0, 0, 5, 5);
 		gbc_txtAnnGrossSal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtAnnGrossSal.gridx = 1;
 		gbc_txtAnnGrossSal.gridy = 3;
-		pnlJob.add(txtAnnGrossSal, gbc_txtAnnGrossSal);
-		txtAnnGrossSal.setColumns(10);
+		pnlJob.add(annualGrossSalaryTextField, gbc_txtAnnGrossSal);
+		annualGrossSalaryTextField.setColumns(10);
 
 		JLabel lblMonGrossSal = new JLabel("Monthly Salary:");
 		GridBagConstraints gbc_lblMonGrossSal = new GridBagConstraints();
@@ -313,14 +321,14 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblMonGrossSal.gridy = 3;
 		pnlJob.add(lblMonGrossSal, gbc_lblMonGrossSal);
 
-		txtMonGrossSal = new JTextField();
-		txtMonGrossSal.setColumns(10);
+		monthlyGrossSalaryTextField = new JTextField();
+		monthlyGrossSalaryTextField.setColumns(10);
 		GridBagConstraints gbc_txtMonGrossSal = new GridBagConstraints();
 		gbc_txtMonGrossSal.insets = new Insets(0, 0, 5, 0);
 		gbc_txtMonGrossSal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMonGrossSal.gridx = 4;
 		gbc_txtMonGrossSal.gridy = 3;
-		pnlJob.add(txtMonGrossSal, gbc_txtMonGrossSal);
+		pnlJob.add(monthlyGrossSalaryTextField, gbc_txtMonGrossSal);
 
 		JLabel lblMarAnnualTax = new JLabel("Married Annual Tax:");
 		lblMarAnnualTax.setToolTipText("Annual Tax if Married");
@@ -331,15 +339,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblMarAnnualTax.gridy = 5;
 		pnlJob.add(lblMarAnnualTax, gbc_lblMarAnnualTax);
 
-		txtMarAnnualTax = new JTextField();
-		txtMarAnnualTax.setToolTipText("Annual Tax if Married");
-		txtMarAnnualTax.setColumns(10);
+		marriedAnnualTaxTextField = new JTextField();
+		marriedAnnualTaxTextField.setToolTipText("Annual Tax if Married");
+		marriedAnnualTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtMarAnnualTax = new GridBagConstraints();
 		gbc_txtMarAnnualTax.insets = new Insets(0, 0, 5, 5);
 		gbc_txtMarAnnualTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMarAnnualTax.gridx = 1;
 		gbc_txtMarAnnualTax.gridy = 5;
-		pnlJob.add(txtMarAnnualTax, gbc_txtMarAnnualTax);
+		pnlJob.add(marriedAnnualTaxTextField, gbc_txtMarAnnualTax);
 
 		JLabel lblSinAnnualTax = new JLabel("Single Annual Tax:");
 		lblSinAnnualTax.setToolTipText("Annual Tax if Single");
@@ -350,15 +358,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblSinAnnualTax.gridy = 5;
 		pnlJob.add(lblSinAnnualTax, gbc_lblSinAnnualTax);
 
-		txtSinAnnualTax = new JTextField();
-		txtSinAnnualTax.setToolTipText("Annual Tax if Single");
-		txtSinAnnualTax.setColumns(10);
+		singleAnnualTaxTextField = new JTextField();
+		singleAnnualTaxTextField.setToolTipText("Annual Tax if Single");
+		singleAnnualTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtSinAnnualTax = new GridBagConstraints();
 		gbc_txtSinAnnualTax.insets = new Insets(0, 0, 5, 0);
 		gbc_txtSinAnnualTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtSinAnnualTax.gridx = 4;
 		gbc_txtSinAnnualTax.gridy = 5;
-		pnlJob.add(txtSinAnnualTax, gbc_txtSinAnnualTax);
+		pnlJob.add(singleAnnualTaxTextField, gbc_txtSinAnnualTax);
 
 		JLabel lblMarMonthlyTax = new JLabel("Married Monthly Tax:");
 		lblMarMonthlyTax.setToolTipText("Monthly Tax if Married");
@@ -369,15 +377,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblMarMonthlyTax.gridy = 6;
 		pnlJob.add(lblMarMonthlyTax, gbc_lblMarMonthlyTax);
 
-		txtMarMonthlyTax = new JTextField();
-		txtMarMonthlyTax.setToolTipText("Monthly Tax if Married");
-		txtMarMonthlyTax.setColumns(10);
+		marriedMonthlyTaxTextField = new JTextField();
+		marriedMonthlyTaxTextField.setToolTipText("Monthly Tax if Married");
+		marriedMonthlyTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtMarMonthlyTax = new GridBagConstraints();
 		gbc_txtMarMonthlyTax.insets = new Insets(0, 0, 5, 5);
 		gbc_txtMarMonthlyTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMarMonthlyTax.gridx = 1;
 		gbc_txtMarMonthlyTax.gridy = 6;
-		pnlJob.add(txtMarMonthlyTax, gbc_txtMarMonthlyTax);
+		pnlJob.add(marriedMonthlyTaxTextField, gbc_txtMarMonthlyTax);
 
 		JLabel lblSinMonthlyTax = new JLabel("Single Monthly Tax:");
 		lblSinMonthlyTax.setToolTipText("Monthly Tax if Single");
@@ -388,15 +396,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblSinMonthlyTax.gridy = 6;
 		pnlJob.add(lblSinMonthlyTax, gbc_lblSinMonthlyTax);
 
-		txtSinMonthlyTax = new JTextField();
-		txtSinMonthlyTax.setToolTipText("Monthly Tax if Single");
-		txtSinMonthlyTax.setColumns(10);
+		singleMonthlyTaxTextField = new JTextField();
+		singleMonthlyTaxTextField.setToolTipText("Monthly Tax if Single");
+		singleMonthlyTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtSinMonthlyTax = new GridBagConstraints();
 		gbc_txtSinMonthlyTax.insets = new Insets(0, 0, 5, 0);
 		gbc_txtSinMonthlyTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtSinMonthlyTax.gridx = 4;
 		gbc_txtSinMonthlyTax.gridy = 6;
-		pnlJob.add(txtSinMonthlyTax, gbc_txtSinMonthlyTax);
+		pnlJob.add(singleMonthlyTaxTextField, gbc_txtSinMonthlyTax);
 
 		JLabel lblMarAfterTax = new JLabel("Married After Tax:");
 		lblMarAfterTax.setToolTipText("Salary After Taxes if Married");
@@ -407,15 +415,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblMarAfterTax.gridy = 7;
 		pnlJob.add(lblMarAfterTax, gbc_lblMarAfterTax);
 
-		txtMarAfterTax = new JTextField();
-		txtMarAfterTax.setToolTipText("Salary After Taxes if Married");
-		txtMarAfterTax.setColumns(10);
+		marriedAfterTaxTextField = new JTextField();
+		marriedAfterTaxTextField.setToolTipText("Salary After Taxes if Married");
+		marriedAfterTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtMarAfterTax = new GridBagConstraints();
 		gbc_txtMarAfterTax.insets = new Insets(0, 0, 5, 5);
 		gbc_txtMarAfterTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMarAfterTax.gridx = 1;
 		gbc_txtMarAfterTax.gridy = 7;
-		pnlJob.add(txtMarAfterTax, gbc_txtMarAfterTax);
+		pnlJob.add(marriedAfterTaxTextField, gbc_txtMarAfterTax);
 
 		JLabel lblSinAfterTax = new JLabel("Single After Tax:");
 		lblSinAfterTax.setToolTipText("Salary After Taxes if Single");
@@ -426,15 +434,15 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblSinAfterTax.gridy = 7;
 		pnlJob.add(lblSinAfterTax, gbc_lblSinAfterTax);
 
-		txtSinAfterTax = new JTextField();
-		txtSinAfterTax.setToolTipText("Salary After Taxes if Single");
-		txtSinAfterTax.setColumns(10);
+		singleAfterTaxTextField = new JTextField();
+		singleAfterTaxTextField.setToolTipText("Salary After Taxes if Single");
+		singleAfterTaxTextField.setColumns(10);
 		GridBagConstraints gbc_txtSinAfterTax = new GridBagConstraints();
 		gbc_txtSinAfterTax.insets = new Insets(0, 0, 5, 0);
 		gbc_txtSinAfterTax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtSinAfterTax.gridx = 4;
 		gbc_txtSinAfterTax.gridy = 7;
-		pnlJob.add(txtSinAfterTax, gbc_txtSinAfterTax);
+		pnlJob.add(singleAfterTaxTextField, gbc_txtSinAfterTax);
 
 		JLabel lblGPA = new JLabel("GPA:");
 		lblGPA.setToolTipText("Minimum GPA for Job");
@@ -445,13 +453,13 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblGPA.gridy = 9;
 		pnlJob.add(lblGPA, gbc_lblGPA);
 
-		cboGPA.setToolTipText("Minimum GPA for Job");
+		gpaComboBox.setToolTipText("Minimum GPA for Job");
 		GridBagConstraints gbc_cboGPA = new GridBagConstraints();
 		gbc_cboGPA.insets = new Insets(0, 0, 5, 5);
 		gbc_cboGPA.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cboGPA.gridx = 1;
 		gbc_cboGPA.gridy = 9;
-		pnlJob.add(cboGPA, gbc_cboGPA);
+		pnlJob.add(gpaComboBox, gbc_cboGPA);
 
 		JLabel lblLoan = new JLabel("Loans:");
 		lblLoan.setToolTipText("College Loans Required for Job");
@@ -462,18 +470,18 @@ public class EditJob extends JDialog implements GuiInterface {
 		gbc_lblLoan.gridy = 9;
 		pnlJob.add(lblLoan, gbc_lblLoan);
 
-		txtLoan = new JTextField();
-		txtLoan.setToolTipText("College Loans Required for Job");
+		loanTextField = new JTextField();
+		loanTextField.setToolTipText("College Loans Required for Job");
 		GridBagConstraints gbc_txtLoans = new GridBagConstraints();
 		gbc_txtLoans.insets = new Insets(0, 0, 5, 0);
 		gbc_txtLoans.anchor = GridBagConstraints.NORTH;
 		gbc_txtLoans.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtLoans.gridx = 4;
 		gbc_txtLoans.gridy = 9;
-		pnlJob.add(txtLoan, gbc_txtLoans);
-		txtLoan.setColumns(10);
+		pnlJob.add(loanTextField, gbc_txtLoans);
+		loanTextField.setColumns(10);
 
-		txtAnnGrossSal.addFocusListener(new FocusListener() {
+		annualGrossSalaryTextField.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 
 			};
@@ -481,7 +489,7 @@ public class EditJob extends JDialog implements GuiInterface {
 			public void focusLost(FocusEvent e) {
 
 				if (!e.isTemporary()) {
-					Double annualSalary = Double.parseDouble(txtAnnGrossSal
+					Double annualSalary = Double.parseDouble(annualGrossSalaryTextField
 							.getText());
 					Double monthlySalary = annualSalary / 12;
 					Double singleAfterTaxes;
@@ -557,24 +565,24 @@ public class EditJob extends JDialog implements GuiInterface {
 					singleAfterTaxes = monthlySalary
 							- (stateTaxSingle + fedTaxSingle);
 
-					txtMonGrossSal.setText(String.valueOf(monthlySalary));
-					txtMarMonthlyTax.setText(String.valueOf(stateTaxMarried
+					monthlyGrossSalaryTextField.setText(String.valueOf(monthlySalary));
+					marriedMonthlyTaxTextField.setText(String.valueOf(stateTaxMarried
 							+ fedTaxMarried));
-					txtMarAnnualTax.setText(String
+					marriedAnnualTaxTextField.setText(String
 							.valueOf((stateTaxMarried + fedTaxMarried) * 12));
-					txtMarAfterTax.setText(String.valueOf(marriedAfterTaxes));
+					marriedAfterTaxTextField.setText(String.valueOf(marriedAfterTaxes));
 
-					txtSinMonthlyTax.setText(String.valueOf(stateTaxSingle
+					singleMonthlyTaxTextField.setText(String.valueOf(stateTaxSingle
 							+ fedTaxSingle));
-					txtSinAnnualTax.setText(String
+					singleAnnualTaxTextField.setText(String
 							.valueOf((stateTaxSingle + fedTaxSingle) * 12));
-					txtSinAfterTax.setText(String.valueOf(singleAfterTaxes));
+					singleAfterTaxTextField.setText(String.valueOf(singleAfterTaxes));
 				}
 
 			} // -- end focusLost() method
 		});
 
-		txtMarAnnualTax.addFocusListener(new FocusListener() {
+		marriedAnnualTaxTextField.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 
 			};
@@ -582,17 +590,17 @@ public class EditJob extends JDialog implements GuiInterface {
 			public void focusLost(FocusEvent e) {
 
 				if (!e.isTemporary()) {
-					Double annualTax = Double.parseDouble(txtMarAnnualTax
+					Double annualTax = Double.parseDouble(marriedAnnualTaxTextField
 							.getText());
 					Double monthlyTax = annualTax / 12;
 
-					txtMarMonthlyTax.setText(String.valueOf(monthlyTax));
+					marriedMonthlyTaxTextField.setText(String.valueOf(monthlyTax));
 				}
 
 			} // -- end focusLost() method
 		});
 
-		txtSinAnnualTax.addFocusListener(new FocusListener() {
+		singleAnnualTaxTextField.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 
 			};
@@ -600,11 +608,11 @@ public class EditJob extends JDialog implements GuiInterface {
 			public void focusLost(FocusEvent e) {
 
 				if (!e.isTemporary()) {
-					Double annualTax = Double.parseDouble(txtSinAnnualTax
+					Double annualTax = Double.parseDouble(singleAnnualTaxTextField
 							.getText());
 					Double monthlyTax = annualTax / 12;
 
-					txtSinMonthlyTax.setText(String.valueOf(monthlyTax));
+					singleMonthlyTaxTextField.setText(String.valueOf(monthlyTax));
 				}
 
 			} // -- end focusLost() method
@@ -620,26 +628,26 @@ public class EditJob extends JDialog implements GuiInterface {
 
 		try {
 			nameTextField.setText(job.getName());
-			cboType.setSelectedItem(job.getType());
-			cboIndustry.setSelectedItem(job.getIndustry());
-			cboCategory.setSelectedItem(job.getCategory());
-			cboGPA.setSelectedIndex(job.getGPA());
-			txtAnnGrossSal.setText(String.valueOf(job.getAnnGrossSal()));
-			txtMonGrossSal.setText(String.valueOf(job.getMonGrossSal()));
-			txtMarAnnualTax.setText(String.valueOf(job.getMarAnnualTax()));
-			txtMarMonthlyTax.setText(String.valueOf(job.getMarMonthlyTax()));
-			txtMarAfterTax.setText(String.valueOf(job.getMarAfterTax()));
-			txtSinAnnualTax.setText(String.valueOf(job.getSinAnnualTax()));
-			txtSinMonthlyTax.setText(String.valueOf(job.getSinMonthlyTax()));
-			txtSinAfterTax.setText(String.valueOf(job.getSinAfterTax()));
-			txtLoan.setText(String.valueOf(job.getLoan()));
+			jobTypesComboBox.setSelectedItem(job.getType());
+			jobIndustriesComboBox.setSelectedItem(job.getIndustry());
+			jobCategoriesComboBox.setSelectedItem(job.getCategory());
+			gpaComboBox.setSelectedIndex(job.getGPA());
+			annualGrossSalaryTextField.setText(String.valueOf(job.getAnnGrossSal()));
+			monthlyGrossSalaryTextField.setText(String.valueOf(job.getMonGrossSal()));
+			marriedAnnualTaxTextField.setText(String.valueOf(job.getMarAnnualTax()));
+			marriedMonthlyTaxTextField.setText(String.valueOf(job.getMarMonthlyTax()));
+			marriedAfterTaxTextField.setText(String.valueOf(job.getMarAfterTax()));
+			singleAnnualTaxTextField.setText(String.valueOf(job.getSinAnnualTax()));
+			singleMonthlyTaxTextField.setText(String.valueOf(job.getSinMonthlyTax()));
+			singleAfterTaxTextField.setText(String.valueOf(job.getSinAfterTax()));
+			loanTextField.setText(String.valueOf(job.getLoan()));
 		} catch (NullPointerException npe) {
 			// If we are creating a new job
 			nameTextField.setText("");
-			cboType.setSelectedItem("Select Type");
-			cboIndustry.setSelectedItem("Select Industry");
-			cboCategory.setSelectedItem("Select Category");
-			cboGPA.setSelectedIndex(0);
+			jobTypesComboBox.setSelectedItem("Select Type");
+			jobIndustriesComboBox.setSelectedItem("Select Industry");
+			jobCategoriesComboBox.setSelectedItem("Select Category");
+			gpaComboBox.setSelectedIndex(0);
 		}
 	} // -- end setJobForm() method
 
@@ -656,20 +664,20 @@ public class EditJob extends JDialog implements GuiInterface {
 		newJob.setID(job.getID());
 		newJob.setName(nameTextField.getText());
 
-		newJob.setType(cboType.getSelectedItem().toString());
-		newJob.setIndustry(cboIndustry.getSelectedItem().toString());
-		newJob.setCategory(cboCategory.getSelectedItem().toString());
-		newJob.setGPA(cboGPA.getSelectedIndex());
+		newJob.setType(jobTypesComboBox.getSelectedItem().toString());
+		newJob.setIndustry(jobIndustriesComboBox.getSelectedItem().toString());
+		newJob.setCategory(jobCategoriesComboBox.getSelectedItem().toString());
+		newJob.setGPA(gpaComboBox.getSelectedIndex());
 
-		newJob.setAnnGrossSal(Double.parseDouble(txtAnnGrossSal.getText()));
-		newJob.setMonGrossSal(Double.parseDouble(txtMonGrossSal.getText()));
-		newJob.setMarAnnualTax(Double.parseDouble(txtMarAnnualTax.getText()));
-		newJob.setMarMonthlyTax(Double.parseDouble(txtMarMonthlyTax.getText()));
-		newJob.setMarAfterTax(Double.parseDouble(txtMarAfterTax.getText()));
-		newJob.setSinAnnualTax(Double.parseDouble(txtSinAnnualTax.getText()));
-		newJob.setSinMonthlyTax(Double.parseDouble(txtSinMonthlyTax.getText()));
-		newJob.setSinAfterTax(Double.parseDouble(txtSinAfterTax.getText()));
-		newJob.setLoan(Double.parseDouble(txtLoan.getText()));
+		newJob.setAnnGrossSal(Double.parseDouble(annualGrossSalaryTextField.getText()));
+		newJob.setMonGrossSal(Double.parseDouble(monthlyGrossSalaryTextField.getText()));
+		newJob.setMarAnnualTax(Double.parseDouble(marriedAnnualTaxTextField.getText()));
+		newJob.setMarMonthlyTax(Double.parseDouble(marriedMonthlyTaxTextField.getText()));
+		newJob.setMarAfterTax(Double.parseDouble(marriedAfterTaxTextField.getText()));
+		newJob.setSinAnnualTax(Double.parseDouble(singleAnnualTaxTextField.getText()));
+		newJob.setSinMonthlyTax(Double.parseDouble(singleMonthlyTaxTextField.getText()));
+		newJob.setSinAfterTax(Double.parseDouble(singleAfterTaxTextField.getText()));
+		newJob.setLoan(Double.parseDouble(loanTextField.getText()));
 
 		return newJob;
 	} // -- end getJobForm() method
