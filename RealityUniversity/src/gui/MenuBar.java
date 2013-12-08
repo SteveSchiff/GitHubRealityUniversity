@@ -214,18 +214,9 @@ public class MenuBar extends JMenuBar implements GuiInterface {
 			}
 		});
 		editJobsMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
-				
-				
-			    
-			    
-			    
+			public void actionPerformed(ActionEvent e) {
 				
 				ManageJobs.getManageJobsInstance();
-				
-				
-			    
-				
 			}
 		});
 //		mnuitmAbout.addActionListener(new ActionListener() {
