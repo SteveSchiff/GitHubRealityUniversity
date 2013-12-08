@@ -14,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -50,11 +48,11 @@ public class EditJob extends JDialog implements GuiInterface {
 	private JTextField monthlyGrossSalaryTextField;
 	private JTextField marriedAnnualTaxTextField;
 	private JTextField marriedMonthlyTaxTextField;
-	private JTextField marriedAfterTaxTextField; // txtMarAfterTax
-	private JTextField singleAnnualTaxTextField; // txtSinAnnualTax
-	private JTextField singleMonthlyTaxTextField; // txtSinMonthlyTax
-	private JTextField singleAfterTaxTextField; // txtSinAfterTax
-	private JTextField loanTextField; // 
+	private JTextField marriedAfterTaxTextField;
+	private JTextField singleAnnualTaxTextField;
+	private JTextField singleMonthlyTaxTextField;
+	private JTextField singleAfterTaxTextField;
+	private JTextField loanTextField; 
 
 	private List<String> jobTypesList = localControllerInstance.getJobTypesList();
 	private List<String> jobIndustriesList = localControllerInstance.getJobIndustriesList();
@@ -161,26 +159,10 @@ public class EditJob extends JDialog implements GuiInterface {
 		footerPanel.add(saveChangesButton);
 		contentPanel.add(drawHeader());
 		contentPanel.add(surveyValidationPanel);
-		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		contentPanel.add(footerPanel, BorderLayout.SOUTH);
+		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		getContentPane().add(mainPanel);
 		setJobForm();
-
-		addWindowListener(new WindowAdapter() {
-			public void windowClosed(WindowEvent e) {
-
-				dispose();
-
-			} // -- end windowClosed() method event
-
-			public void windowClosing(WindowEvent e) {
-
-				dispose();
-				ManageJobs.getManageJobsInstance().setVisible(true);
-
-			} // end windowClosing() method event
-		});
-
 	} // -- end constructor
 
 	public JPanel drawHeader() {
